@@ -203,6 +203,6 @@ def crossValidation(m,n,dataSet):
 # probList = outofplaceMeasureSet(100,5,freqDistSet,testText)
 allTexts = createDataSet("eng_tweets.txt","es_tweets.txt","fr_tweets.txt","pt_tweets.txt")
 cleanedDataSet = cleanDataset(allTexts)
-error = crossValidation(100,50,cleanedDataSet)
+error = crossValidation(80,100,cleanedDataSet)
 print "Error: " + str(error)
 

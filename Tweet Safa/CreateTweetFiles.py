@@ -23,17 +23,20 @@ def writeFile(filename,language):
     file = open(filename, "w")
     lastRow = ''
     for tweet in engTweets:
-        text = cleanTweets(tweet.Text)
+        text = tweet.Text
+        text = text.enconde('utf-8')
+        text = text.lower()
+
         if lastRow != text:
             file.write(text + "\n")
             lastRow = text
 
     file.close()
 
-writeFile("eng_tweets.txt",'en')
-writeFile("es_tweets.txt",'es')
-writeFile("pt_tweets.txt",'pt')
-writeFile("fr_tweets.txt",'fr')
+writeFile("eng_tweets_x.txt",'en')
+writeFile("es_tweets_x.txt",'es')
+writeFile("pt_tweets_x.txt",'pt')
+writeFile("fr_tweets_x.txt",'fr')
     #
     # f = open('a_text_file')
     # raw = f.read()
