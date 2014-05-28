@@ -4,7 +4,8 @@ import matplotlib
 import nltk
 from random import randrange
 from sklearn.cross_validation import LeaveOneOut
-
+import goslate
+from collections import Counter
 langArray = ['en','es','fr','pt']
 
 #Clean set of texts
@@ -39,10 +40,10 @@ def cleanTweets(text):
     # remove urls
     p = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|[^A-Za-z0-9 ]')
     cleanText = re.sub(p, '', text)
-    return cleanText
+    return cleanText.lower()
 
 #Get set of texts and returns their respective set of frequencies
-def returnBigramFreqSet(allTexts,n):
+def returnNgramFreqSet(allTexts,n):
     allFreq = []
     text_string=''
     for textList in allTexts:
@@ -83,11 +84,14 @@ def printBigramObject(freqDist):
 
 def outofplaceMeasureSet(m, n, freqDistSet, testText,ngramSize):
     probList = list()
+    # Get test freq Dist
+    freqDistTest = getBigramFreqForSingleLang(testText,ngramSize)
 
-    n = min(n,len(testText)-ngramSize - 1)
 
     for freqDist in freqDistSet:
-       probList.append(outofplaceMeasure(m, n, freqDist, testText,ngramSize))
+        n = min(n,len(freqDistTest))
+        m = min(m,len(freqDist))
+        probList.append(outofplaceMeasure(m, n, freqDist,freqDistTest, testText,ngramSize))
     listSum=sum(probList)
     if listSum == 0:
         listSum = 1
@@ -96,12 +100,9 @@ def outofplaceMeasureSet(m, n, freqDistSet, testText,ngramSize):
     return probList
 
 
-def outofplaceMeasure(FDLenght, TTLenght, freqDist, testText,n):
+def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest, testText,n):
     outofplaceResult = list()
 
-
-    # Get test freq Dist
-    freqDistTest = getBigramFreqForSingleLang(testText,n)
 
     # Get m x n items
     topFDItems = freqDist.items()[:FDLenght]
@@ -109,7 +110,7 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, testText,n):
 
     totalDistance = 0
     for i  in xrange(0,TTLenght):
-        # print(testText + "\t" + str(TTLenght))
+        # print(testText + "\t" + str(TTLenght) + "\t" +str(len(topTTItems)))
         lp = topTTItems[i]
         distance = FDLenght
         for j  in xrange(0,FDLenght):
@@ -117,6 +118,7 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, testText,n):
             if lp[0] == tp[0]:
                 distance = abs(i-j)
                 totalDistance += distance
+                break
     return totalDistance
 
 def createDataSet(engFilePath,esFilePath,frFilePath,ptFilePath):
@@ -132,25 +134,38 @@ def createDataSet(engFilePath,esFilePath,frFilePath,ptFilePath):
 
     return dataSet
 
-def crossValidation(m,n,dataSet,nGramSize):
+def crossValidation(m,n,dataSet):
+    gs = goslate.Goslate()
     error = 0
     iter = 0
+    predictedLabel = list()
 
     while iter < len(dataSet):
         trainSet = dataSet
 
         testSet = trainSet.pop(iter)
 
-        allTexts = getAllLanguagesSet(trainSet)
-        allFreq = returnBigramFreqSet(allTexts,nGramSize)
-        probList = outofplaceMeasureSet(m,n,allFreq,testSet[0],nGramSize)
-        predictedLabel=probList.index(min(probList))
+        predictedLabel = list()
+        for nGramSize in xrange(2,5):
+            allTexts = getAllLanguagesSet(trainSet)
+            allFreq = returnNgramFreqSet(allTexts,nGramSize)
+            probList = outofplaceMeasureSet(m,n,allFreq,testSet[0],nGramSize)
+            predictedLabel.append(probList.index(max(probList)))
+        k=[]
+        k = [k for k,v in Counter(predictedLabel).items() if v>1]
 
-        print 'predicted: ' + langArray[predictedLabel] + "\ttarget: " + testSet[1]
+        if not k:
+           predictedLabelTotal = predictedLabel[1]
+        else:
+            predictedLabelTotal = k[0]
+
+        # print 'tweet: ' + str(testSet[0])
+        # print 'predicted: ' + langArray[predictedLabelTotal] + "\ttarget: " + testSet[1]
 
         iter += 5
-        if langArray[predictedLabel] == testSet[1]: error += 0
+        if langArray[predictedLabelTotal] == testSet[1]: error += 0
         else: error += 1
+
     iter = (iter - 5)/5
     error = error / iter
     return error
@@ -188,6 +203,6 @@ def crossValidation(m,n,dataSet,nGramSize):
 # probList = outofplaceMeasureSet(100,5,freqDistSet,testText)
 allTexts = createDataSet("eng_tweets.txt","es_tweets.txt","fr_tweets.txt","pt_tweets.txt")
 cleanedDataSet = cleanDataset(allTexts)
-error = crossValidation(50,5,cleanedDataSet,3)
+error = crossValidation(100,50,cleanedDataSet)
 print "Error: " + str(error)
 
