@@ -23,10 +23,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NgramRanking.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="NgramRanking.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NgramRanking.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="20" selection-start="140" selection-end="140" vertical-scroll-proportion="0.17777778" vertical-offset="0" max-vertical-offset="675">
+            <state line="9" column="26" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="removeSubStrings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/removeSubStrings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="153" column="23" selection-start="4233" selection-end="4233" vertical-scroll-proportion="-9.923077" vertical-offset="2037" max-vertical-offset="2985">
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eng_tweets.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eng_tweets.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="605" column="0" selection-start="40105" selection-end="40105" vertical-scroll-proportion="-165.0" vertical-offset="0" max-vertical-offset="9660">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="es_tweets.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/es_tweets.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="451" column="36" selection-start="39765" selection-end="39765" vertical-scroll-proportion="-1.9272727" vertical-offset="6659" max-vertical-offset="7050">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fr_tweets.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fr_tweets.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="477" column="44" selection-start="36996" selection-end="36996" vertical-scroll-proportion="-1.9272727" vertical-offset="7049" max-vertical-offset="7440">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pt_tweets.txt" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pt_tweets.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="313" column="33" selection-start="23089" selection-end="23089" vertical-scroll-proportion="0.37084398" vertical-offset="4550" max-vertical-offset="4965">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pydevd.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1144" column="0" selection-start="47625" selection-end="47625" vertical-scroll-proportion="0.0" vertical-offset="16058" max-vertical-offset="22125">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="probability.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///Library/Python/2.7/site-packages/nltk/probability.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="119" column="0" selection-start="4436" selection-end="4436" vertical-scroll-proportion="0.0" vertical-offset="1579" max-vertical-offset="33750">
               <folding />
             </state>
           </provider>
@@ -51,6 +116,11 @@
         <option value="$PROJECT_DIR$/ParseClient.py" />
         <option value="$PROJECT_DIR$/CreateTweetFiles.py" />
         <option value="$PROJECT_DIR$/NgramRanking.py" />
+        <option value="$PROJECT_DIR$/removeSubStrings.py" />
+        <option value="$PROJECT_DIR$/eng_tweets.txt" />
+        <option value="$PROJECT_DIR$/es_tweets.txt" />
+        <option value="$PROJECT_DIR$/fr_tweets.txt" />
+        <option value="$PROJECT_DIR$/pt_tweets.txt" />
       </list>
     </option>
   </component>
@@ -126,7 +196,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.NgramRanking (1)">
+  <component name="RunManager" selected="Python.removeSubStrings">
     <configuration default="false" name="ParseClient" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -140,26 +210,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Tweet Safa" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ParseClient.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TweeterAPI" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Tweet Safa" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TweeterAPI.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -222,6 +272,26 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NgramRanking.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="removeSubStrings" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Tweet Safa" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/removeSubStrings.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
@@ -348,18 +418,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.ParseClient" />
-      <item index="1" class="java.lang.String" itemvalue="Python.TweeterAPI" />
-      <item index="2" class="java.lang.String" itemvalue="Python.TweeterTest" />
-      <item index="3" class="java.lang.String" itemvalue="Python.NgramRanking" />
-      <item index="4" class="java.lang.String" itemvalue="Python.NgramRanking (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.TweeterTest" />
+      <item index="2" class="java.lang.String" itemvalue="Python.NgramRanking" />
+      <item index="3" class="java.lang.String" itemvalue="Python.NgramRanking (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.removeSubStrings" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.NgramRanking (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.NgramRanking" />
-        <item index="2" class="java.lang.String" itemvalue="Python.ParseClient" />
-        <item index="3" class="java.lang.String" itemvalue="Python.TweeterTest" />
-        <item index="4" class="java.lang.String" itemvalue="Python.TweeterAPI" />
+        <item index="0" class="java.lang.String" itemvalue="Python.removeSubStrings" />
+        <item index="1" class="java.lang.String" itemvalue="Python.NgramRanking (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.NgramRanking" />
+        <item index="3" class="java.lang.String" itemvalue="Python.ParseClient" />
+        <item index="4" class="java.lang.String" itemvalue="Python.TweeterTest" />
       </list>
     </recent_temporary>
   </component>
@@ -379,20 +449,20 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32859176" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39942938" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39829302" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3266762" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3257468" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -426,11 +496,30 @@
           <line>15</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/removeSubStrings.py</url>
+          <line>112</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="36" />
+      <option name="time" value="55" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/NgramRanking.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="20" selection-start="140" selection-end="140" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NgramRanking.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="20" selection-start="140" selection-end="140" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/NgramRanking.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="13" selection-start="299" selection-end="299" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
@@ -449,7 +538,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="37" selection-start="182" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="255">
           <folding>
-            <element signature="e#31#70#0" expanded="true" />
+            <element signature="e#31#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -485,7 +574,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="37" selection-start="182" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="255">
           <folding>
-            <element signature="e#31#70#0" expanded="true" />
+            <element signature="e#31#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -521,7 +610,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="37" selection-start="182" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="255">
           <folding>
-            <element signature="e#31#70#0" expanded="true" />
+            <element signature="e#31#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -557,7 +646,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="15" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="255">
           <folding>
-            <element signature="e#31#70#0" expanded="true" />
+            <element signature="e#31#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -582,11 +671,6 @@
         <state line="193" column="0" selection-start="8492" selection-end="8492" vertical-scroll-proportion="0.33157894" vertical-offset="2604" max-vertical-offset="7500" />
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1144" column="0" selection-start="47625" selection-end="47625" vertical-scroll-proportion="0.0" vertical-offset="16059" max-vertical-offset="22125" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/settings_local.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="27" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="135" />
@@ -606,7 +690,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="0" selection-start="367" selection-end="367" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
           <folding>
-            <element signature="e#31#70#0" expanded="true" />
+            <element signature="e#31#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -618,21 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fr_tweets.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="305" column="49" selection-start="23434" selection-end="23434" vertical-scroll-proportion="0.0" vertical-offset="4320" max-vertical-offset="7440" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eng_tweets.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="5" selection-start="13274" selection-end="13274" vertical-scroll-proportion="0.0" vertical-offset="735" max-vertical-offset="9660" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/es_tweets.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="49" selection-start="1379" selection-end="1379" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7050" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CreateTweetFiles.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="0" selection-start="1010" selection-end="1338" vertical-scroll-proportion="0.0" vertical-offset="389" max-vertical-offset="810" />
@@ -640,7 +709,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NgramRanking.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="20" selection-start="140" selection-end="140" vertical-scroll-proportion="0.17777778" vertical-offset="0" max-vertical-offset="675">
+        <state line="9" column="26" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/nltk/probability.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="119" column="0" selection-start="4436" selection-end="4436" vertical-scroll-proportion="0.0" vertical-offset="1579" max-vertical-offset="33750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1144" column="0" selection-start="47625" selection-end="47625" vertical-scroll-proportion="0.0" vertical-offset="16058" max-vertical-offset="22125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/removeSubStrings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="153" column="23" selection-start="4233" selection-end="4233" vertical-scroll-proportion="-9.923077" vertical-offset="2037" max-vertical-offset="2985">
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eng_tweets.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="605" column="0" selection-start="40105" selection-end="40105" vertical-scroll-proportion="-165.0" vertical-offset="0" max-vertical-offset="9660">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/es_tweets.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="451" column="36" selection-start="39765" selection-end="39765" vertical-scroll-proportion="-1.9272727" vertical-offset="6659" max-vertical-offset="7050">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fr_tweets.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="477" column="44" selection-start="36996" selection-end="36996" vertical-scroll-proportion="-1.9272727" vertical-offset="7049" max-vertical-offset="7440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pt_tweets.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="313" column="33" selection-start="23089" selection-end="23089" vertical-scroll-proportion="0.37084398" vertical-offset="4550" max-vertical-offset="4965">
           <folding />
         </state>
       </provider>
