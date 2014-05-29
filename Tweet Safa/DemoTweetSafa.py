@@ -4,6 +4,7 @@ import UtilsTweetSafa as utils
 import LidstonLanguageClassification as llc
 import sys
 import RankingModelClassification as rmc
+from collections import Counter
 
 
 # sentence = 'Once upon a time there was a cat who wore boots'
@@ -22,7 +23,7 @@ allTexts = utils.formatDataset(allTexts)
 sentence = sys.argv[1]
 sentence = utils.cleanTweets(sentence)
 
-# language = llc.lidstoneLanguageClassification(sentence, allTexts)
+language = llc.lidstoneLanguageClassification(sentence, allTexts)
 
 predictedLabel = list()
 m = 80
@@ -31,24 +32,23 @@ n = 100
 for nGramSize in xrange(2,5):
     # allTexts = utils.getAllLanguagesSet(allTexts)
     allFreq = utils.returnNgramFreqSetRanking(allTexts,nGramSize)
-
-
     probList = rmc.outofplaceMeasureSet(m,n,allFreq,sentence,nGramSize)
-
-
     predictedLabel.append(probList.index(max(probList)))
 
-    print predictedLabel
-# k=[]
-# k = [k for k,v in Counter(predictedLabel).items() if v>1]
-#
-# if not k:
-#     predictedLabelTotal = predictedLabel[1]
-# else:
-#     predictedLabelTotal = k[0]
-#
-# #print 'tweet: ' + str(testSet[0])
+k=[]
+k = [k for k,v in Counter(predictedLabel).items() if v>1]
+
+if not k:
+    predictedLabelTotal = predictedLabel[1]
+else:
+    predictedLabelTotal = k[0]
+
+#print 'tweet: ' + str(testSet[0])
 # print 'predicted: ' + langArray[predictedLabelTotal] + "\ttarget: " + testSet[1]
 
 
 # print language
+
+print 'Language predicted with Lidstone smoothing = '+str(language)
+
+print 'Language predicted with ranking = '+str(predictedLabelTotal)
