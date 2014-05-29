@@ -1,8 +1,8 @@
+from __future__ import division
+
 import re
 import nltk
-import sys
 import time
-
 
 # ________________________________________________________
 #
@@ -107,60 +107,57 @@ cur = {}    # Unigram absolute counts (x)
 ntr = 0     # total observations
 nbr = 0     # total observations
 
-
-def lidstoneLanguageClassification(sentence):
+#_______________________________________________
+#
+# Input:
+#         Sentence = test set
+#         allTexts = training sets.
+#            (format) allTexts = [en_text, es_text,fr_text,pt_text]
+#
+# Output:
+#         Language
+# __________________________________________________________________
+def lidstoneLanguageClassification(sentence, allTexts):
 
     nbr = 0
     ntr = 0
 
-    t0 = time.clock();
-
     # Read tweets files
 
     #English
-
-    file = open("eng_tweets.txt", "r")
-    en_text= file.read()
-    en_text = en_text.lower()
-
-    #Spanish
-
-    file = open("es_tweets.txt", "r")
-    es_text= file.read()
-    es_text = es_text.lower()
-
-    #French
-
-    file = open("fr_tweets.txt", "r")
-    fr_text= file.read()
-    fr_text = fr_text.lower()
-
-    #Portuguese
-
-    file = open("pt_tweets.txt", "r")
-    pt_text= file.read()
-    pt_text = pt_text.lower()
-
-    # Concatenate in a vector
-    allTexts = [en_text, es_text,fr_text,pt_text]
+    #
+    # file = open("eng_tweets.txt", "r")
+    # en_text= file.read()
+    # en_text = en_text.lower()
+    #
+    # #Spanish
+    #
+    # file = open("es_tweets.txt", "r")
+    # es_text= file.read()
+    # es_text = es_text.lower()
+    #
+    # #French
+    #
+    # file = open("fr_tweets.txt", "r")
+    # fr_text= file.read()
+    # fr_text = fr_text.lower()
+    #
+    # #Portuguese
+    #
+    # file = open("pt_tweets.txt", "r")
+    # pt_text= file.read()
+    # pt_text = pt_text.lower()
+    #
+    # # Concatenate in a vector
+    # allTexts = [en_text, es_text,fr_text,pt_text]
 
     #Training
-    allTexts=cleanTraining(allTexts)
+    # allTexts=cleanTraining(allTexts)
     # printBigramObjects(freqDistSet)
 
     freqDistSetUni = returnNgramFreqSet(allTexts, 1)
     freqDistSetBi = returnNgramFreqSet(allTexts, 2)
     freqDistSetTri = returnNgramFreqSet(allTexts, 3)
-
-
-
-    # Different sentences: Real application read tweet.
-
-    #sentence = 'Once upon a time there was a cat who wore boots'
-    #sentence = 'this is a foo bar sentences and i want to ngramize it'
-    #sentence = 'O portugues foi usado, naquela epoca,'
-    # sentence = "una frase en espanol, es una mierda de programa"
-    #sentence = 'La France metropolitaine possede une grande variete de paysages, entre des plaines agricoles ou boisees, des chaines de montagnes plus ou moins erodees, des littoraux diversifies et des vallees melant villes et espaces neo-naturels.'
 
 
     # Language
@@ -172,6 +169,7 @@ def lidstoneLanguageClassification(sentence):
     results = []
     filas = 4
     columnas = 2
+    lamda = 0.0001
 
     for i in range(filas):
         results.append([0]*columnas)
@@ -193,7 +191,7 @@ def lidstoneLanguageClassification(sentence):
         prob = 1.0;
         for i in range(0,len(sentence)-1):
             x = sentence[i]; y=sentence[i+1];
-            pt = plidstone(x+y,cur, cbr,nbr,0.1, 1)
+            pt = plidstone(x+y,cur, cbr,nbr,lamda, 1)
             prob = prob * pt
             #sys.stdout.write((x+y).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
 
@@ -214,7 +212,7 @@ def lidstoneLanguageClassification(sentence):
         prob = 1.0;
         for i in range(0,len(sentence)-2):
             x=sentence[i]; y=sentence[i+1]; z=sentence[i+2]
-            pt = plidstone(x+y+z,cbr, ctr,ntr, 0.1, 0)
+            pt = plidstone(x+y+z,cbr, ctr,ntr, lamda, 0)
             prob = prob * pt
             #sys.stdout.write((x+y+z).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
 
@@ -231,14 +229,11 @@ def lidstoneLanguageClassification(sentence):
                 max = results[i][j]
                 maxi = i
                 maxj = j
-            if j == 0:
-                sys.stdout.write(str(i)+"language Sequence probability bigrams: "+str(results[i][j])+"\n")
-            else:
-                sys.stdout.write(str(i)+"language Sequence probability trigrams: "+str(results[i][j])+"\n")
+            # if j == 0:
+            #     sys.stdout.write(str(i)+"language Sequence probability bigrams: "+str(results[i][j])+"\n")
+            # else:
+            #     sys.stdout.write(str(i)+"language Sequence probability trigrams: "+str(results[i][j])+"\n")
 
-    print results[maxi][maxj]
-
-    print maxi
-    print time.clock()
-
+    # print results[maxi][maxj]
+    # print maxi
     return maxi
