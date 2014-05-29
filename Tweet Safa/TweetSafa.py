@@ -12,10 +12,12 @@ dataSet = utils.createDataSet("datasets/eng_tweets.txt","datasets/es_tweets.txt"
 # error = utils.crossValidationLidstone(dataSet)
 # print 'Lidstone error = ' + str(error)
 
-dataSet = utils.cleanDataset(dataSet)
+cleanDataSet = utils.cleanDataset(dataSet)
 m = 80
 n = 100
-error = utils.crossValidationRanking(m, n, dataSet)
+# dataSet =  cleanTraining(allTexts):
+
+error = utils.crossValidationRanking(m, n, cleanDataSet)
 
 
 print 'Ranking model error = ' + str(error)

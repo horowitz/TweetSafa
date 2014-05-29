@@ -4,6 +4,7 @@ import nltk
 from random import randrange
 from sklearn.cross_validation import LeaveOneOut
 
+import UtilsTweetSafa as utils
 
 langArray = ['en','es','fr','pt']
 
@@ -21,27 +22,10 @@ def getAllLanguagesSet(dataSet):
         langSet.append(getAllItemsByLanguage(dataSet,lang))
     return langSet
 
-#Get set of texts and returns their respective set of frequencies
-def returnNgramFreqSet(allTexts,n):
-    allFreq = []
-    text_string=''
-    for textList in allTexts:
-        for sentence in textList:
-            text_string+=str(sentence[0])
-        allFreq.append(getBigramFreqForSingleLang(text_string,n))
-        text_string=''
-    return allFreq
-
-# Gets text returns ngrams
-def getBigramFreqForSingleLang(text,n):
-    bigramsObject = nltk.ngrams(text,n)
-    freqDist = nltk.FreqDist(bigramsObject)
-    return freqDist
-
 def outofplaceMeasureSet(m, n, freqDistSet, testText,ngramSize):
     probList = list()
     # Get test freq Dist
-    freqDistTest = getBigramFreqForSingleLang(testText,ngramSize)
+    freqDistTest = utils.getBigramFreqForSingleLang(testText,ngramSize)
 
 
     for freqDist in freqDistSet:

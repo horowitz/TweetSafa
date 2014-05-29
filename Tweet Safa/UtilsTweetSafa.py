@@ -131,7 +131,7 @@ def crossValidationRanking(m,n,dataSet):
         predictedLabel = list()
         for nGramSize in xrange(2,5):
             allTexts = getAllLanguagesSet(trainSet)
-            allFreq = returnNgramFreqSet(allTexts,nGramSize)
+            allFreq = returnNgramFreqSetRanking(allTexts,nGramSize)
             probList = rmc.outofplaceMeasureSet(m,n,allFreq,testSet[0],nGramSize)
             predictedLabel.append(probList.index(max(probList)))
         k=[]
@@ -142,8 +142,8 @@ def crossValidationRanking(m,n,dataSet):
         else:
             predictedLabelTotal = k[0]
 
-        # print 'tweet: ' + str(testSet[0])
-        # print 'predicted: ' + langArray[predictedLabelTotal] + "\ttarget: " + testSet[1]
+        #print 'tweet: ' + str(testSet[0])
+        print 'predicted: ' + langArray[predictedLabelTotal] + "\ttarget: " + testSet[1]
 
         iter += 5
         if langArray[predictedLabelTotal] == testSet[1]: error += 0
@@ -174,6 +174,25 @@ def cleanTweets(text):
     p = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|[^A-Za-z0-9 ]')
     cleanText = re.sub(p,'', text)
     return cleanText
+
+
+# Gets text returns ngrams
+def getBigramFreqForSingleLang(text,n):
+    bigramsObject = nltk.ngrams(text,n)
+    freqDist = nltk.FreqDist(bigramsObject)
+    return freqDist
+
+#Get set of texts and returns their respective set of frequencies
+def returnNgramFreqSetRanking(allTexts,n):
+    allFreq = []
+    text_string=''
+    for textList in allTexts:
+        for sentence in textList:
+            text_string+=str(sentence[0])
+        allFreq.append(getBigramFreqForSingleLang(text_string,n))
+        text_string=''
+    return allFreq
+
 
 
 
