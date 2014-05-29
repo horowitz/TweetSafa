@@ -33,10 +33,7 @@ def writeFile(filename,language):
 
     file.close()
 
-writeFile("datasets/eng_tweets_x.txt",'en')
-writeFile("datasets/es_tweets_x.txt",'es')
-writeFile("datasets/pt_tweets_x.txt",'pt')
-writeFile("datasets/fr_tweets_x.txt",'fr')
+
     #
     # f = open('a_text_file')
     # raw = f.read()
