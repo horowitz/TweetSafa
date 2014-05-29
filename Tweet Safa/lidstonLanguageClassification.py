@@ -1,5 +1,6 @@
 from __future__ import division
 
+import sys
 import UtilsTweetSafa as utils
 
 # ________________________________________________________
@@ -60,7 +61,7 @@ nbr = 0     # total observations
 # Output:
 #         Language
 # __________________________________________________________________
-def lidstoneLanguageClassification(sentence, allTexts):
+def lidstoneLanguageClassification(sentence,allTexts):
 
     nbr = 0
     ntr = 0
@@ -78,7 +79,7 @@ def lidstoneLanguageClassification(sentence, allTexts):
     results = []
     filas = 4
     columnas = 2
-    lamda = 0.01
+    lamda = 0.1
 
     for i in range(filas):
         results.append([0]*columnas)
@@ -102,8 +103,8 @@ def lidstoneLanguageClassification(sentence, allTexts):
             x = sentence[i]; y=sentence[i+1];
             pt = plidstone(x+y,cur, cbr,nbr,lamda, 1)
             prob = prob * pt
-            #sys.stdout.write((x+y).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
-        #sys.stdout.write(str(language)+"language Sequence probability: "+str(prob)+"\n")
+            # sys.stdout.write((x+y).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
+        # sys.stdout.write(str(language)+"language Sequence probability: "+str(prob)+"\n")
 
         results[language][0] = float(prob)
 
@@ -117,14 +118,13 @@ def lidstoneLanguageClassification(sentence, allTexts):
 
         ## Compute input probability Trigram
 
-        prob = 1.0;
+        prob = 1.0
         for i in range(0,len(sentence)-2):
             x=sentence[i]; y=sentence[i+1]; z=sentence[i+2]
             pt = plidstone(x+y+z,cbr, ctr,ntr, lamda, 0)
             prob = prob * pt
-            #sys.stdout.write((x+y+z).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
-        #sys.stdout.write(str(language)+"language Sequence probability: "+str(prob)+"\n")
-
+            # sys.stdout.write((x+y+z).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
+        #  sys.stdout.write(str(language)+"language Sequence probability: "+str(prob)+"\n")
         results[language][1] = float(prob)
 
     max = results[0][0]
@@ -136,11 +136,11 @@ def lidstoneLanguageClassification(sentence, allTexts):
                 max = results[i][j]
                 maxi = i
                 maxj = j
-            # if j == 0:
-            #     sys.stdout.write(str(i)+"language Sequence probability bigrams: "+str(results[i][j])+"\n")
-            # else:
-            #     sys.stdout.write(str(i)+"language Sequence probability trigrams: "+str(results[i][j])+"\n")
+            if j == 0:
+                sys.stdout.write(str(i)+"language Sequence probability bigrams: "+str(results[i][j])+"\n")
+            else:
+                sys.stdout.write(str(i)+"language Sequence probability trigrams: "+str(results[i][j])+"\n")
 
-    # print results[maxi][maxj]
-    # print maxi
+    print results[maxi][maxj]
+    print maxi
     return maxi

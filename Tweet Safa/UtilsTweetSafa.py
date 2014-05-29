@@ -92,7 +92,7 @@ def crossValidationLidstone(dataSet):
 
         t0 = time.time()
 
-        preditectedLang = llc.lidstoneLanguageClassification(testSet[0],allTexts)
+        preditectedLang = llc.lidstoneLanguageClassification(testSet[0], allTexts)
 
         print time.time()-t0
 
@@ -200,11 +200,11 @@ def returnNgramFreqSetRanking(allTexts,n):
 def returnNgramFreqSet(allTexts, n):
     allFreq=[]
     for text in allTexts:
-        allFreq.append(returnNgramList(text, n, 20))
+        allFreq.append(returnNgramList(text, n))
     return allFreq
 
 # Gets text returns n-grams
-def returnNgramList(text, grams, numElements):
+def returnNgramList(text, grams):
     grams = nltk.ngrams(text, grams)
     freqDist=nltk.FreqDist(grams)
     return freqDist
