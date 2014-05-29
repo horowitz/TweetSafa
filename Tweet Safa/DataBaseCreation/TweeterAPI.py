@@ -1,6 +1,4 @@
 
-__author__ = 'danielhorowitz'
-
 BURGOS = ('42.333333', '-3.7','40mi')
 VIC = ('41.930278', '2.254722','40mi')
 LIVERPOOL = ('53.4', '-3','40mi')
@@ -8,10 +6,11 @@ TOULOUSE = ('43.605278','1.442778','40mi')
 COIMBRA = ('40.25', '-8.45','40mi')
 
 from parse_rest.datatypes import Object
-from settings_local import APPLICATION_ID, REST_API_KEY, MASTER_KEY
 from parse_rest.connection import register
-import twitter
 import goslate
+
+import twitter
+
 
 register(APPLICATION_ID,REST_API_KEY)
 

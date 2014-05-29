@@ -6,6 +6,8 @@ from random import randrange
 from sklearn.cross_validation import LeaveOneOut
 import goslate
 from collections import Counter
+
+
 langArray = ['en','es','fr','pt']
 
 #Clean set of texts
@@ -170,38 +172,7 @@ def crossValidation(m,n,dataSet):
     error = error / iter
     return error
 
-# file = open("eng_tweets.txt", "r")
-# en_text = file.readline()
-# en_text = en_text.lower()
-#
-# file = open("es_tweets.txt", "r")
-# es_text = file.read()
-# es_text = es_text.lower()
-#
-# file = open("fr_tweets.txt", "r")
-# fr_text = file.read()
-# fr_text = fr_text.lower()
-#
-# file = open("pt_tweets.txt", "r")
-# pt_text = file.read()
-# pt_text = pt_text.lower()
-
-# allTexts = [en_text, es_text, fr_text, pt_text]
-
-# tweet = allTexts.pop(randrange(len(allTexts)))
-#
-# #Training
-# allTexts = cleanTraining(allTexts)
-# freqDistSet = returnBigramFreqSet(allTexts)
-# # printBigramObjects(freqDistSet)
-# # Testing
-# testText = cleanTweets(tweet.lower())
-# freqDistEN = freqDistSet[0]
-#
-# items = freqDistEN.items()
-#
-# probList = outofplaceMeasureSet(100,5,freqDistSet,testText)
-allTexts = createDataSet("eng_tweets.txt","es_tweets.txt","fr_tweets.txt","pt_tweets.txt")
+allTexts = createDataSet("datasets/eng_tweets.txt","datasets/es_tweets.txt","datasets/fr_tweets.txt","datasets/pt_tweets.txt")
 cleanedDataSet = cleanDataset(allTexts)
 error = crossValidation(80,100,cleanedDataSet)
 print "Error: " + str(error)

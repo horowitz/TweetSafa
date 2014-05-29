@@ -22,25 +22,25 @@ def returnNgramList(text, grams, numElements):
 
 #English
 
-file = open("eng_tweets.txt", "r")
+file = open("datasets\eng_tweets.txt", "r")
 en_text= file.read()
 en_text = en_text.lower()
 
 #Spanish
 
-file = open("es_tweets.txt", "r")
+file = open("datasets\es_tweets.txt", "r")
 es_text= file.read()
 es_text = es_text.lower()
 
 #French
 
-file = open("fr_tweets.txt", "r")
+file = open("datasets\fr_tweets.txt", "r")
 fr_text= file.read()
 fr_text = fr_text.lower()
 
 #Portuguese
 
-file = open("pt_tweets.txt", "r")
+file = open("datasets\pt_tweets.txt", "r")
 pt_text= file.read()
 pt_text = pt_text.lower()
 

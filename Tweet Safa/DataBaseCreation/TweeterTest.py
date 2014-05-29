@@ -1,17 +1,16 @@
-from PyRSS2Gen import Enclosure
-
-__author__ = 'danielhorowitz'
-
 FRENCH = 'lang%3Afr'
 ENGLISH = 'lang%3Aen'
 PORTUGUESE = 'lang%3Apt'
 SPANISH = 'lang%3Aes'
 CATALAN = 'lang%3Acat'
+
+
 from parse_rest.datatypes import Object
-from settings_local import APPLICATION_ID, REST_API_KEY, MASTER_KEY
 from parse_rest.connection import register
-from twython import Twython
 import goslate
+
+from twython import Twython
+
 consumer_key=""
 consumer_secret=""
 
@@ -50,16 +49,6 @@ def inRange(geo):
     else:
         return False;
 
-
-# for city in cities:
-# # tweets = api.GetSearch(geocode=("41.263611", "1.773611", "40mi"), count=1000)
-#     tweets = api.GetSearch(geocode=city, count=10000)
-#
-#     for item in tweets:
-#         if(item._geo):
-#             print 'id = ' + str(item._id) + '\ntext = ' + item._text + "\n\n"
-#             newTweet = Tweet(Text=item._text, Language=gs.detect(item._text),tweetId=str(item._id))
-#             newTweet.save()
 
 for language in languages:
     maxId = 999999999999999999999999

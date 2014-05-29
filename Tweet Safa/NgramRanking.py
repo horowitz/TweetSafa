@@ -1,7 +1,6 @@
-__author__ = 'danielhorowitz'
 import nltk
 
-f = open('eng_tweets.txt')
+f = open('datasets/eng_tweets.txt')
 raw = f.read()
 
 tokens = nltk.word_tokenize(raw)

@@ -122,35 +122,6 @@ def lidstoneLanguageClassification(sentence, allTexts):
     nbr = 0
     ntr = 0
 
-    # Read tweets files
-
-    #English
-    #
-    # file = open("eng_tweets.txt", "r")
-    # en_text= file.read()
-    # en_text = en_text.lower()
-    #
-    # #Spanish
-    #
-    # file = open("es_tweets.txt", "r")
-    # es_text= file.read()
-    # es_text = es_text.lower()
-    #
-    # #French
-    #
-    # file = open("fr_tweets.txt", "r")
-    # fr_text= file.read()
-    # fr_text = fr_text.lower()
-    #
-    # #Portuguese
-    #
-    # file = open("pt_tweets.txt", "r")
-    # pt_text= file.read()
-    # pt_text = pt_text.lower()
-    #
-    # # Concatenate in a vector
-    # allTexts = [en_text, es_text,fr_text,pt_text]
-
     #Training
     # allTexts=cleanTraining(allTexts)
     # printBigramObjects(freqDistSet)
@@ -169,7 +140,7 @@ def lidstoneLanguageClassification(sentence, allTexts):
     results = []
     filas = 4
     columnas = 2
-    lamda = 0.0001
+    lamda = 0.01
 
     for i in range(filas):
         results.append([0]*columnas)
