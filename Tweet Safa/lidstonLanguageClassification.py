@@ -1,8 +1,6 @@
 from __future__ import division
 
-import re
-import nltk
-import time
+import UtilsTweetSafa as utils
 
 # ________________________________________________________
 #
@@ -11,59 +9,6 @@ import time
 #
 # ________________________________________________________
 
-
-#Clean set of texts
-def cleanTraining(allTexts):
-    for i in xrange(1,len(allTexts)):
-        allTexts[i]=cleanTweets(allTexts[i])
-    return allTexts
-
-# Gets string, removes URLs and returns the string
-def cleanTweets(text):
-    # remove urls
-    p = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|[^A-Za-z0-9 ]')
-    cleanText = re.sub(p,'', text)
-    return cleanText
-
-#Get set of texts and returns their respective set of frequencies
-def returnBigramFreqSet(allTexts):
-    allFreq=[]
-    for text in allTexts:
-        allFreq.append(returnBigramList(text,20))
-    return allFreq
-
-# Gets text returns bigrams
-def returnBigramList(text, numElements):
-    bigramsObject = nltk.bigrams(text)
-    freqDist=nltk.FreqDist(bigramsObject)
-    return freqDist
-
-#print a SET of freqDist objects
-def printBigramObjects(freqDist):
-    for elem in freqDist:
-        printBigramObject(elem)
-#print ONE freqDist object
-def printBigramObject(freqDist):
-    freqDist.plot( 10,cumulative=False)
-    for k,v in freqDist.items():
-        big=''
-        for i in k:
-            big=big+i
-        print big,v
-
-
-#Get set of texts and returns their respective set of frequencies
-def returnNgramFreqSet(allTexts, n):
-    allFreq=[]
-    for text in allTexts:
-        allFreq.append(returnNgramList(text, n, 20))
-    return allFreq
-
-# Gets text returns n-grams
-def returnNgramList(text, grams, numElements):
-    grams = nltk.ngrams(text, grams)
-    freqDist=nltk.FreqDist(grams)
-    return freqDist
 
 ## --------------------------
 ## Lidstone probabilities
@@ -87,8 +32,6 @@ def lidstone(ngram,counts,B,N,l) :
         c = 0.0
 
     return (c+l)/(N+B*l)
-
-
 
 
 # _____________________________________________________
@@ -121,14 +64,9 @@ def lidstoneLanguageClassification(sentence, allTexts):
 
     nbr = 0
     ntr = 0
-
-    #Training
-    # allTexts=cleanTraining(allTexts)
-    # printBigramObjects(freqDistSet)
-
-    freqDistSetUni = returnNgramFreqSet(allTexts, 1)
-    freqDistSetBi = returnNgramFreqSet(allTexts, 2)
-    freqDistSetTri = returnNgramFreqSet(allTexts, 3)
+    freqDistSetUni = utils.returnNgramFreqSet(allTexts, 1)
+    freqDistSetBi = utils.returnNgramFreqSet(allTexts, 2)
+    freqDistSetTri = utils.returnNgramFreqSet(allTexts, 3)
 
 
     # Language
@@ -165,7 +103,6 @@ def lidstoneLanguageClassification(sentence, allTexts):
             pt = plidstone(x+y,cur, cbr,nbr,lamda, 1)
             prob = prob * pt
             #sys.stdout.write((x+y).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
-
         #sys.stdout.write(str(language)+"language Sequence probability: "+str(prob)+"\n")
 
         results[language][0] = float(prob)
@@ -186,7 +123,6 @@ def lidstoneLanguageClassification(sentence, allTexts):
             pt = plidstone(x+y+z,cbr, ctr,ntr, lamda, 0)
             prob = prob * pt
             #sys.stdout.write((x+y+z).encode("utf-8")+" "+str(pt)+" "+str(prob)+"\n")
-
         #sys.stdout.write(str(language)+"language Sequence probability: "+str(prob)+"\n")
 
         results[language][1] = float(prob)

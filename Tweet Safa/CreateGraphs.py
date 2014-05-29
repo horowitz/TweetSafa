@@ -47,9 +47,6 @@ pt_text = pt_text.lower()
 # Concatenate in a vector
 allTexts = [en_text, es_text,fr_text,pt_text]
 
-#Training
-# allTexts=cleanTraining(allTexts)
-# printBigramObjects(freqDistSet)
 
 freqDistSetUni = returnNgramFreqSet(allTexts, 1)
 freqDistSetBi = returnNgramFreqSet(allTexts, 2)
@@ -69,7 +66,7 @@ nbr = 0     # total observations
 #         ctr[freqDistSetTri[language].items()[j][0][0] + freqDistSetTri[language].items()[j][0][1] + freqDistSetTri[language].items()[j][0][2]] = freqDistSetTri[language].items()[j][1]
 #         ntr = ntr + freqDistSetTri[language].items()[j][1]
 
-alphab = list()
+bars = list()
 frequencies = list()
 
 language  = 0
@@ -78,62 +75,34 @@ n = 3
 if n == 2:
     for a in freqDistSetTri[language].items()[0:9]:
         if(a[0][0] == ' '):
-            alphab.append('#'+a[0][1])
+            bars.append('#'+a[0][1])
         elif(a[0][1] == ' '):
-            alphab.append(a[0][0]+'#')
+            bars.append(a[0][0]+'#')
         else:
-            alphab.append(a[0][0]+a[0][1])
+            bars.append(a[0][0]+a[0][1])
 
     for a in freqDistSetTri[language].items()[0:9]:
         frequencies.append(a[1])
 elif n == 3:
     for a in freqDistSetTri[language].items()[0:9]:
         if(a[0][0] == ' '):
-            alphab.append('#'+a[0][1]+a[0][2])
+            bars.append('#'+a[0][1]+a[0][2])
         elif(a[0][2] == ' '):
-            alphab.append(a[0][0]+a[0][1]+'#')
+            bars.append(a[0][0]+a[0][1]+'#')
         elif(a[0][1] == ' '):
-            alphab.append(a[0][0]+'#'+a[0][2])
+            bars.append(a[0][0]+'#'+a[0][2])
         else:
-            alphab.append(a[0][0]+a[0][1]+a[0][2])
+            bars.append(a[0][0]+a[0][1]+a[0][2])
 
     for a in freqDistSetTri[language].items()[0:9]:
         frequencies.append(a[1])
 
-pos = np.arange(len(alphab))
+pos = np.arange(len(bars))
 width = 1.0     # gives histogram aspect to the bar diagram
 
 ax = plt.axes()
 ax.set_xticks(pos + (width / 2))
-ax.set_xticklabels(alphab)
+ax.set_xticklabels(bars)
 
 plt.bar(pos, frequencies, width, color='r')
 plt.show()
-
-
-
-
-
-
-# import nltk
-#
-# f = open('eng_tweets.txt')
-# raw = f.read()
-# en_text = raw.lower()
-#
-# print en_text
-# #Create your bigrams
-# ugs = nltk.ngrams(en_text,1)
-# bgs = nltk.ngrams(en_text,2)
-# tgs = nltk.ngrams(en_text,3)
-# fgs = nltk.ngrams(en_text,4)
-#
-# #compute frequency distribution for all the bigrams in the text
-# fdist = nltk.FreqDist(bgs)
-#
-#
-# for k,v in fdist.items():
-#     ngrams = ''
-#     for i in k:
-#         ngrams= ngrams + i
-#     print ngrams + '\t' + str(v)

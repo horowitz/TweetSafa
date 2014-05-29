@@ -2,33 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1915f6b-368e-434b-aacc-441e20b35432" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/TweetSafa.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Iosu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tweet Safa/UtilsTweetSafa.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Tweet Safa/Archive.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Tweet Safa/detectLanguage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Tweet Safa/removeSubStrings.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/CreateTweetFiles.py" afterPath="$PROJECT_DIR$/Tweet Safa/DataBaseCreation/CreateTweetFiles.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/ParseClient.py" afterPath="$PROJECT_DIR$/Tweet Safa/DataBaseCreation/ParseClient.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/Tweet.py" afterPath="$PROJECT_DIR$/Tweet Safa/DataBaseCreation/Tweet.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/TweeterAPI.py" afterPath="$PROJECT_DIR$/Tweet Safa/DataBaseCreation/TweeterAPI.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/TweeterTest.py" afterPath="$PROJECT_DIR$/Tweet Safa/DataBaseCreation/TweeterTest.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/eng_tweets.txt" afterPath="$PROJECT_DIR$/Tweet Safa/datasets/eng_tweets.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/eng_tweets_x.txt" afterPath="$PROJECT_DIR$/Tweet Safa/datasets/eng_tweets_x.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/es_tweets.txt" afterPath="$PROJECT_DIR$/Tweet Safa/datasets/es_tweets.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/fr_tweets.txt" afterPath="$PROJECT_DIR$/Tweet Safa/datasets/fr_tweets.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/pt_tweets.txt" afterPath="$PROJECT_DIR$/Tweet Safa/datasets/pt_tweets.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/settings_local.py" afterPath="$PROJECT_DIR$/Tweet Safa/DataBaseCreation/settings_local.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tweet Safa/NgramRanking.py" afterPath="$PROJECT_DIR$/Tweet Safa/NgramRanking.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Tweet Safa/NgramRanking.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Tweet Safa/rankingModel.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/LidstonLanguageClassification.py" afterPath="$PROJECT_DIR$/Tweet Safa/LidstonLanguageClassification.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Tweet Safa/graphs.py" afterPath="$PROJECT_DIR$/Tweet Safa/CreateGraphs.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tweet Safa/TweetSafa.py" afterPath="$PROJECT_DIR$/Tweet Safa/TweetSafa.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tweet Safa/graphs.py" afterPath="$PROJECT_DIR$/Tweet Safa/graphs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tweet Safa/lidstonLanguageClassification.py" afterPath="$PROJECT_DIR$/Tweet Safa/lidstonLanguageClassification.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tweet Safa/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Tweet Safa/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tweet Safa/UtilsTweetSafa.py" afterPath="$PROJECT_DIR$/Tweet Safa/UtilsTweetSafa.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TweetSafa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,29 +43,61 @@
       <file leaf-file-name="TweetSafa.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tweet Safa/TweetSafa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="523" selection-end="523" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+            <state line="14" column="13" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UtilsTweetSafa.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CreateGraphs.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tweet Safa/CreateGraphs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="104" column="23" selection-start="2812" selection-end="2812" vertical-scroll-proportion="0.0" vertical-offset="1197" max-vertical-offset="1680">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UtilsTweetSafa.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tweet Safa/UtilsTweetSafa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="16" selection-start="497" selection-end="497" vertical-scroll-proportion="-1.6612903" vertical-offset="1169" max-vertical-offset="1665">
+            <state line="178" column="0" selection-start="4194" selection-end="4194" vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1410">
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#723#1061#0" expanded="false" />
+                <element signature="e#1097#1298#0" expanded="false" />
+                <element signature="e#1367#1486#0" expanded="false" />
+                <element signature="e#1526#1646#0" expanded="false" />
+                <element signature="e#1691#2534#0" expanded="false" />
+                <element signature="e#2581#3603#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rankingModel.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tweet Safa/rankingModel.py">
+      <file leaf-file-name="RankingModelClassification.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Tweet Safa/RankingModelClassification.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="174" column="111" selection-start="4952" selection-end="4952" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2775">
+            <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="496">
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#226#345#0" expanded="false" />
+                <element signature="e#384#504#0" expanded="false" />
+                <element signature="e#612#857#0" expanded="false" />
+                <element signature="e#930#1029#0" expanded="false" />
+                <element signature="e#1100#1572#0" expanded="false" />
+                <element signature="e#1656#2214#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LidstonLanguageClassification.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tweet Safa/LidstonLanguageClassification.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="8" selection-start="33" selection-end="64" vertical-scroll-proportion="0.0" vertical-offset="507" max-vertical-offset="2055">
+              <folding>
+                <element signature="e#327#728#0" expanded="false" />
+                <element signature="e#826#927#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -105,19 +117,21 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/Tweet Safa/graphs.py" />
-        <option value="$PROJECT_DIR$/Tweet Safa/lidstonLanguageClassification.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/ParseClient.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/settings_local.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/Tweet.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/TweeterAPI.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/TweeterTest.py" />
-        <option value="$PROJECT_DIR$/Tweet Safa/rankingModel.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/NgramRanking.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/CreateTweetFiles.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/DataBaseCreation/TweeterTest.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/tweetSafaMain.py" />
+        <option value="$PROJECT_DIR$/Tweet Safa/lidstonLanguageClassification.py" />
+        <option value="$PROJECT_DIR$/Tweet Safa/rankingModel.py" />
+        <option value="$PROJECT_DIR$/Tweet Safa/CreateGraphs.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/TweetSafa.py" />
         <option value="$PROJECT_DIR$/Tweet Safa/UtilsTweetSafa.py" />
+        <option value="$PROJECT_DIR$/Tweet Safa/RankingModelClassification.py" />
       </list>
     </option>
   </component>
@@ -393,33 +407,10 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Tweet Safa/graphs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="22" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0" vertical-offset="1389" max-vertical-offset="2130">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tweet Safa/datasets/pt_tweets.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="38" selection-start="556" selection-end="556" vertical-scroll-proportion="0.1193634" vertical-offset="0" max-vertical-offset="4965">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tweet Safa/NgramRanking.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="19" selection-start="32" selection-end="32" vertical-scroll-proportion="0.06048387" vertical-offset="0" max-vertical-offset="496">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tweet Safa/lidstonLanguageClassification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="15" selection-start="3689" selection-end="3689" vertical-scroll-proportion="4.409938" vertical-offset="0" max-vertical-offset="3225">
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -450,7 +441,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="0" selection-start="222" selection-end="222" vertical-scroll-proportion="0.27217743" vertical-offset="0" max-vertical-offset="496">
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -462,15 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tweet Safa/rankingModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="111" selection-start="4952" selection-end="4952" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2775">
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tweet Safa/DataBaseCreation/TweeterTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="10" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1170">
@@ -478,18 +460,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tweet Safa/CreateGraphs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="23" selection-start="2812" selection-end="2812" vertical-scroll-proportion="0.0" vertical-offset="1197" max-vertical-offset="1680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tweet Safa/LidstonLanguageClassification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="8" selection-start="33" selection-end="64" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2055">
+          <folding>
+            <element signature="e#327#728#0" expanded="false" />
+            <element signature="e#826#927#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tweet Safa/TweetSafa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="523" selection-end="523" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+        <state line="14" column="13" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tweet Safa/UtilsTweetSafa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="16" selection-start="497" selection-end="497" vertical-scroll-proportion="-1.6612903" vertical-offset="1169" max-vertical-offset="1665">
+        <state line="178" column="0" selection-start="4194" selection-end="4194" vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1410">
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#723#1061#0" expanded="false" />
+            <element signature="e#1097#1298#0" expanded="false" />
+            <element signature="e#1367#1486#0" expanded="false" />
+            <element signature="e#1526#1646#0" expanded="false" />
+            <element signature="e#1691#2534#0" expanded="false" />
+            <element signature="e#2581#3603#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tweet Safa/RankingModelClassification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="496">
+          <folding>
+            <element signature="e#226#345#0" expanded="false" />
+            <element signature="e#384#504#0" expanded="false" />
+            <element signature="e#612#857#0" expanded="false" />
+            <element signature="e#930#1029#0" expanded="false" />
+            <element signature="e#1100#1572#0" expanded="false" />
+            <element signature="e#1656#2214#0" expanded="false" />
           </folding>
         </state>
       </provider>

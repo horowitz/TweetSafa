@@ -1,5 +1,17 @@
-import lidstonLanguageClassification as llc
+from __future__ import division
+
+import LidstonLanguageClassification as llc
+import RankingModelClassification as rmc
+
+import re
+import nltk
 import time
+import goslate
+
+
+from collections import Counter
+
+
 
 
 #_____________________________________________________
@@ -21,7 +33,7 @@ langArray = ['en','es','fr','pt']
 #              frFilePath = French dataset path.
 #              ptFilePath = Portuguese dataset path.
 #
-#       Output: 
+#       Output: dataSet
 
 def createDataSet(engFilePath,esFilePath,frFilePath,ptFilePath):
     dataSet =  list()
@@ -104,3 +116,76 @@ def crossValidationLidstone(dataSet):
     error = error/iter
     print error
     return error
+
+def crossValidationRanking(m,n,dataSet):
+    gs = goslate.Goslate()
+    error = 0
+    iter = 0
+    predictedLabel = list()
+
+    while iter < len(dataSet):
+        trainSet = dataSet
+
+        testSet = trainSet.pop(iter)
+
+        predictedLabel = list()
+        for nGramSize in xrange(2,5):
+            allTexts = getAllLanguagesSet(trainSet)
+            allFreq = returnNgramFreqSet(allTexts,nGramSize)
+            probList = rmc.outofplaceMeasureSet(m,n,allFreq,testSet[0],nGramSize)
+            predictedLabel.append(probList.index(max(probList)))
+        k=[]
+        k = [k for k,v in Counter(predictedLabel).items() if v>1]
+
+        if not k:
+           predictedLabelTotal = predictedLabel[1]
+        else:
+            predictedLabelTotal = k[0]
+
+        # print 'tweet: ' + str(testSet[0])
+        # print 'predicted: ' + langArray[predictedLabelTotal] + "\ttarget: " + testSet[1]
+
+        iter += 5
+        if langArray[predictedLabelTotal] == testSet[1]: error += 0
+        else: error += 1
+
+    iter = (iter - 5)/5
+    error = error / iter
+    return error
+
+
+
+# Gets string, removes URLs and returns the string
+def cleanDataset(dataSet):
+    for dsItem in dataSet:
+        dsItem[0] = cleanTweets(dsItem[0])
+    return dataSet
+
+
+#Clean set of texts
+def cleanTraining(allTexts):
+    for i in xrange(1,len(allTexts)):
+        allTexts[i]=cleanTweets(allTexts[i])
+    return allTexts
+
+# Gets string, removes URLs and returns the string
+def cleanTweets(text):
+    # remove urls
+    p = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|[^A-Za-z0-9 ]')
+    cleanText = re.sub(p,'', text)
+    return cleanText
+
+
+
+#Get set of texts and returns their respective set of frequencies
+def returnNgramFreqSet(allTexts, n):
+    allFreq=[]
+    for text in allTexts:
+        allFreq.append(returnNgramList(text, n, 20))
+    return allFreq
+
+# Gets text returns n-grams
+def returnNgramList(text, grams, numElements):
+    grams = nltk.ngrams(text, grams)
+    freqDist=nltk.FreqDist(grams)
+    return freqDist
