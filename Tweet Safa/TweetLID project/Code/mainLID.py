@@ -2,14 +2,9 @@
 import ReadData as read
 import PreprocessTweets as preprocess
 
-
-<<<<<<< HEAD
 # 1-. Read dataset
 dataset = "../Dataset/output.txt"
-=======
-# Read dataset
-dataset = "..\Dataset\output.txt"
->>>>>>> FETCH_HEAD
+
 tweetList = read.read_tweets_dataset(dataset)
 
 # Print tweets and the quantity of tweets
