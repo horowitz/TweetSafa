@@ -14,6 +14,7 @@ tweetList = read.read_tweets_dataset(dataset)
 
 
 # 2-. Pre-process state
-
 tweetListPreProcessed = preprocess.main(tweetList)
+
+print tweetListPreProcessed[650].text
 # Clean data ->
