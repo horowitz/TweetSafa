@@ -1,5 +1,12 @@
 import csv
 
+# Create Tweet object to save all the necessary arguments of the tweets:
+#   Arguments:
+#       + id = username id
+#       + name = username name
+#       + languange = language of the tweet
+#       + text = tweet text
+
 class Tweet(object):
     id = 0
     name = ""
@@ -17,6 +24,8 @@ def make_tweet(id, name, language, text):
     tweet = Tweet(id, name, language, text)
     return tweet
 
+
+# Read the tweet from the input dataset and get the values separated by the tab
 
 def read_tweets_dataset(dataset):
     # Read TweetLID dataset
