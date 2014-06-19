@@ -3,7 +3,7 @@ import ReadData as read
 
 
 # Read dataset
-dataset = "../Dataset/output.txt"
+dataset = "..\Dataset\output.txt"
 tweetList = read.read_tweets_dataset(dataset)
 
 for tweet in tweetList:
