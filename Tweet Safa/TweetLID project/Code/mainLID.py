@@ -16,9 +16,42 @@ tweetList = read.read_tweets_dataset(dataset)
 # 2-. Pre-process state
 tweetListPreProcessed = preprocess.main(tweetList)
 
-for tweet in tweetListPreProcessed:
-    print tweet.text
-print tweetList.__len__()
+# for tweet in tweetListPreProcessed:
+#     print tweet.text
+# print tweetList.__len__()
 
 
 # Clean data ->
+
+# 3-. Algorithms OBTAIN N-GRAMS
+
+# Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
+individualLanguage=True
+
+# Join all the tweets in one language. Return one dictionary of languages
+corpus=dict()
+for tweet in tweetListPreProcessed:
+    if ~corpus.has_key(tweet.language) & (corpus.get(tweet.language) is None):
+        corpus[tweet.language]= tweet.text
+    else:
+        corpus[tweet.language] = corpus.get(tweet.language) + tweet.text
+
+# clean dictionary of double spaces from concatenation
+
+if individualLanguage==True:
+    for key in corpus.keys():
+        if 
+
+for key in corpus.keys():
+    corpus[key]=preprocess.remove_multiple_spaces(corpus.get(key))
+
+print(corpus)
+
+
+
+# 3-1. Algorithms: Bayesian Networks
+
+
+# 3-2. Algorithms: Ranking Methods
+# 3-2-1. Out-of-place Measure
+
