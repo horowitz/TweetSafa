@@ -19,13 +19,22 @@ def format_puntuation(tweet):
     return reduce(lambda tweet, c: tweet.replace(c, ' ' + c + ' '), punctuation, tweet)
 
 def remove_url(tweet):
-    return re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
+
+    URLless_string = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
+
+    return URLless_string
 
 def remove_usernames(tweet):
-    return re.sub('@[^\s]+', '', tweet)
+
+    usernameLess_string = re.sub('@[^\s]+', '', tweet)
+
+    return usernameLess_string
 
 def remove_pic_twitter(tweet):
-    return re.sub('pic.twitter[^\s]+', '', tweet)
+
+    result = re.sub('pic.twitter[^\s]+', '', tweet)
+
+    return result
 
 def main(tweetList):
     tweetListPreprocessed = []
