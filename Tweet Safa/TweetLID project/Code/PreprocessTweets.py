@@ -27,12 +27,8 @@ def remove_usernames(tweet):
 def remove_pic_twitter(tweet):
     return re.sub('pic.twitter[^\s|,]+', '', tweet)
 
-
 def remove_vowel_repetitions(tweet):
-    result = re.sub(r'(.)\1\1+', r'\1\1', tweet)
-
-    return result
-
+    return re.sub(r'(.)\1\1+', r'\1\1', tweet)
 
 def main(tweetList):
     tweetListPreprocessed = []
