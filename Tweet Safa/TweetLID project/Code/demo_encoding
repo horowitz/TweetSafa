@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 import nltk as nk
+import ReadData as read
+
+
+# Read dataset
+dataset = "../Dataset/output.txt"
+tweetList = read.read_tweets_dataset(dataset)
+
 v = u'abab.ssd*56ò/93+94+34ñcdé'
 print(v)
 big=nk.bigrams(v)
