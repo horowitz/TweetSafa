@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+import nltk as nk
+v = u'abab.ssd*56ò/93+94+34ñcdé'
+print(v)
+big=nk.bigrams(v)
+freqbig=nk.FreqDist(big)
+print(freqbig)
+print(big)
+print(unicode(v))
+
