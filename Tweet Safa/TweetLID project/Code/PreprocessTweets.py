@@ -32,7 +32,7 @@ def remove_usernames(tweet):
 
 def remove_pic_twitter(tweet):
 
-    result = re.sub('pic.twitter[^\s]+', '', tweet)
+    result = re.sub('pic.twitter[^\s|,]+', '', tweet)
 
     return result
 
