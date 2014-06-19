@@ -36,6 +36,13 @@ def remove_pic_twitter(tweet):
 
     return result
 
+
+def remove_vowel_repetitions(tweet):
+    result = re.sub(r'(.)\1\1+', r'\1\1', tweet)
+
+    return result
+
+
 def main(tweetList):
     tweetListPreprocessed = []
 
@@ -49,6 +56,7 @@ def main(tweetList):
         tweetPreprocessed = remove_usernames(tweetPreprocessed)
         tweetPreprocessed = remove_puntuation(tweetPreprocessed)
         tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
+        tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
 
         # Save in new object
         tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
