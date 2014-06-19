@@ -1,15 +1,18 @@
-import copy
+import ReadData as read
 
 def lower_case(tweet):
-    return tweet.lower()
+    return tweet.decode('utf-8').lower()
 
 
 def main(tweetList):
     tweetListPreprocessed = []
-    counter = 0
+    tweetPreprocessed = ""
+
     for tweet in tweetList:
-        counter = counter + 1
         tweetPreprocessed = lower_case(tweet.text)
-        tweetList[counter].text = tweetPreprocessed
-        print counter
-        print tweetList[counter].text
+
+        # Save in new object
+        tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
+        tweetListPreprocessed.append(tweetPre)
+
+    return tweetListPreprocessed
