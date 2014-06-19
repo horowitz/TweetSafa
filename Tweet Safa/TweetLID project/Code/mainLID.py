@@ -20,4 +20,5 @@ for tweet in tweetListPreProcessed:
     print tweet.text
 print tweetList.__len__()
 
+
 # Clean data ->
