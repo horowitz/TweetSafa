@@ -23,6 +23,12 @@ def remove_url(tweet):
 
     #return re.sub(p,'', tweet)
 
+def remove_usernames(tweet):
+    p = re.compile(r'/@(.*)/i', re.IGNORECASE)
+    tweet = re.sub(p,'',tweet)
+    print tweet
+    return tweet
+
 def main(tweetList):
     tweetListPreprocessed = []
     tweetPreprocessed = ""
@@ -30,6 +36,7 @@ def main(tweetList):
     for tweet in tweetList:
         tweetPreprocessed = lower_case(tweet.text)
         tweetPreprocessed = remove_url(tweetPreprocessed)
+        tweetPreprocessed = remove_usernames(tweetPreprocessed)
         tweetPreprocessed = remove_puntuation(tweetPreprocessed)
         tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
 
