@@ -19,28 +19,13 @@ def format_puntuation(tweet):
     return reduce(lambda tweet, c: tweet.replace(c, ' ' + c + ' '), punctuation, tweet)
 
 def remove_url(tweet):
-
-    URLless_string = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
-
-    return URLless_string
+    return re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
 
 def remove_usernames(tweet):
-
-    usernameLess_string = re.sub('@[^\s]+', '', tweet)
-
-    return usernameLess_string
+    return re.sub('@[^\s]+', '', tweet)
 
 def remove_pic_twitter(tweet):
-
-    result = re.sub('pic.twitter[^\s]+', '', tweet)
-
-    return result
-
-def remove_usernames(tweet):
-    p = re.compile(r'/@(.*)/i', re.IGNORECASE)
-    tweet = re.sub(p,'',tweet)
-    print tweet
-    return tweet
+    return re.sub('pic.twitter[^\s]+', '', tweet)
 
 def main(tweetList):
     tweetListPreprocessed = []
@@ -51,10 +36,7 @@ def main(tweetList):
         tweetPreprocessed = lower_case(tweet.text)
         tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
         tweetPreprocessed = remove_url(tweetPreprocessed)
-<<<<<<< HEAD
-=======
         tweetPreprocessed = format_puntuation(tweetPreprocessed)
->>>>>>> FETCH_HEAD
         tweetPreprocessed = remove_usernames(tweetPreprocessed)
         tweetPreprocessed = remove_puntuation(tweetPreprocessed)
         tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
