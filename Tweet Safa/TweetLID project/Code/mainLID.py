@@ -1,17 +1,19 @@
 
 import ReadData as read
+import PreprocessTweets as preprocess
 
 
-# Read dataset
+# 1-. Read dataset
 dataset = "../Dataset/output.txt"
 tweetList = read.read_tweets_dataset(dataset)
 
-for tweet in tweetList:
-    print tweet.text
+# Print tweets and the quantity of tweets
+#for tweet in tweetList:
+    #print tweet.text
+#print tweetList.__len__()
 
 
-print tweetList.__len__()
-# Pre-process state
+# 2-. Pre-process state
 
-
+tweetListPreProcessed = preprocess.main(tweetList)
 # Clean data ->
