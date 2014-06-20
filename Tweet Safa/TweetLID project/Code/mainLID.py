@@ -1,6 +1,7 @@
 
 import ReadData as read
 import PreprocessTweets as preprocess
+import nltk as nk
 
 # 1-. Read dataset
 dataset = "../Dataset/output.txt"
@@ -25,6 +26,8 @@ tweetListPreProcessed = preprocess.main(tweetList)
 
 # 3-. Algorithms OBTAIN N-GRAMS
 
+
+############################ ESTO VA AL UTILSTWEETSAFA??
 # This method concatenates tweets
 def concatenateLanguageTweets(List):
     corpus=dict()
@@ -37,7 +40,7 @@ def concatenateLanguageTweets(List):
 
 # Separate by individual languages(en,es,eu,ca,gl,pt,und,other). Return a dictionary of individual languages
 def separateIndividualLanguages(List):
-    individualCopus={}
+    individualCopus=dict()
     for key in List.keys():
         if (not '+' in key) and (not '/' in key):
             individualCopus[key]=List.get(key)
@@ -46,9 +49,18 @@ def separateIndividualLanguages(List):
                     individualCopus[key]=individualCopus[key] + List.get(subKey)
     return individualCopus
 
+#   N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
+def freqDistributions(corpus,maxNgram):
+    corpusNgrams=dict()
+    for N in xrange(1,maxNgram):
+        auxCorpus=dict()
+        for key in corpus.keys():
+            nGaux=nk.ngrams(corpus.get(key),N)
+            auxCorpus[key]=nGaux
+        corpusNgrams[str(N)]=auxCorpus
+    return corpusNgrams
 
-
-
+############################
 
 # Join all the tweets in one language. Return one dictionary of languages
 corpus=concatenateLanguageTweets(tweetListPreProcessed)
@@ -62,13 +74,15 @@ if individualLanguage==True:
 for key in corpus.keys():
     corpus[key]=preprocess.remove_multiple_spaces(corpus.get(key))
 
-
+maxNgram=5
+# N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
+corpusNgrams=freqDistributions(corpus,maxNgram)
+# Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
 # Clean data -> Algorithm
 
 # 3-1. Algorithms: Bayesian Networks
 
-
 # 3-2. Algorithms: Ranking Methods
-# 3-2-1. Out-of-place Measure
 
+# 3-2-1. Out-of-place Measure
