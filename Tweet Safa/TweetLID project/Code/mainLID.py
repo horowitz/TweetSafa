@@ -77,6 +77,7 @@ for key in corpus.keys():
 maxNgram=5
 # N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
 corpusNgrams=freqDistributions(corpus,maxNgram)
+print(corpusNgrams.get(str(4)).get('pt'))
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
 # Clean data -> Algorithm

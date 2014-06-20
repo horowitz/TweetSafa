@@ -45,6 +45,11 @@ def main(tweetList):
         tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
         tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
 
+
+        #TODO
+        #remove not available tweets....
+
+
         # Save in new object
         tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
         tweetListPreprocessed.append(tweetPre)
