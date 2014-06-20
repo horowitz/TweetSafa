@@ -25,29 +25,43 @@ tweetListPreProcessed = preprocess.main(tweetList)
 
 # 3-. Algorithms OBTAIN N-GRAMS
 
-# Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
-individualLanguage=True
+# This method concatenates tweets
+def concatenateLanguageTweets(List):
+    corpus=dict()
+    for tweet in List:
+        if ~corpus.has_key(tweet.language) & (corpus.get(tweet.language) is None):
+            corpus[tweet.language]= tweet.text
+        else:
+            corpus[tweet.language] = corpus.get(tweet.language) + tweet.text
+    return corpus
+
+# Separate by individual languages(en,es,eu,ca,gl,pt,und,other). Return a dictionary of individual languages
+def separateIndividualLanguages(List):
+    individualCopus={}
+    for key in List.keys():
+        if (not '+' in key) and (not '/' in key):
+            individualCopus[key]=List.get(key)
+            for subKey in List.keys():
+                if key in subKey and not key is subKey:
+                    individualCopus[key]=individualCopus[key] + List.get(subKey)
+    return individualCopus
+
+
+
+
 
 # Join all the tweets in one language. Return one dictionary of languages
-corpus=dict()
-for tweet in tweetListPreProcessed:
-    if ~corpus.has_key(tweet.language) & (corpus.get(tweet.language) is None):
-        corpus[tweet.language]= tweet.text
-    else:
-        corpus[tweet.language] = corpus.get(tweet.language) + tweet.text
+corpus=concatenateLanguageTweets(tweetListPreProcessed)
+
+# Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
+individualLanguage=True
+if individualLanguage==True:
+    corpus=separateIndividualLanguages(corpus)
 
 # clean dictionary of double spaces from concatenation
-individualCopus={}
-if individualLanguage==True:
-    for key in corpus.keys():
-        if not "+" in corpus.keys():
-            individualCopus[key]=corpus.get(key)
-
-print (len(individualCopus))
 for key in corpus.keys():
     corpus[key]=preprocess.remove_multiple_spaces(corpus.get(key))
 
-print(corpus)
 
 
 # Clean data -> Algorithm
