@@ -2,6 +2,8 @@ import ReadData as read
 import re
 import string
 
+punctuation = '!\"#$%&()*+,-./:;<=>?[\]^`{|}~'
+
 def lower_case(tweet):
     return tweet.decode('utf-8').lower()
 
@@ -11,27 +13,37 @@ def remove_multiple_spaces(tweet):
     return tweet
 
 def remove_puntuation(tweet):
-    return reduce(lambda tweet, c: tweet.replace(c, ' '), string.punctuation, tweet)
+    return reduce(lambda tweet, c: tweet.replace(c, ' '), punctuation, tweet)
+
+def format_puntuation(tweet):
+    return reduce(lambda tweet, c: tweet.replace(c, ' ' + c + ' '), punctuation, tweet)
 
 def remove_url(tweet):
-    #p = re.compile('/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i')
+    return re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
 
-    #a = re.compile('/(pic.twitter+.# *)/i')
-    #tweet = re.sub(a,'',tweet)
+def remove_usernames(tweet):
+    return re.sub('@[^\s]+', '', tweet)
 
-    return re.sub(r'^https?:\/\/.*[\r\n]*', '', tweet, flags=re.MULTILINE)
+def remove_pic_twitter(tweet):
+    return re.sub('pic.twitter[^\s|,]+', '', tweet)
 
-    #return re.sub(p,'', tweet)
+def remove_vowel_repetitions(tweet):
+    return re.sub(r'(.)\1\1+', r'\1\1', tweet)
 
 def main(tweetList):
     tweetListPreprocessed = []
+
     tweetPreprocessed = ""
 
     for tweet in tweetList:
         tweetPreprocessed = lower_case(tweet.text)
+        tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
         tweetPreprocessed = remove_url(tweetPreprocessed)
+        tweetPreprocessed = format_puntuation(tweetPreprocessed)
+        tweetPreprocessed = remove_usernames(tweetPreprocessed)
         tweetPreprocessed = remove_puntuation(tweetPreprocessed)
         tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
+        tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
 
         # Save in new object
         tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)

@@ -37,17 +37,20 @@ for tweet in tweetListPreProcessed:
         corpus[tweet.language] = corpus.get(tweet.language) + tweet.text
 
 # clean dictionary of double spaces from concatenation
-
+individualCopus={}
 if individualLanguage==True:
     for key in corpus.keys():
-        if 
+        if not "+" in corpus.keys():
+            individualCopus[key]=corpus.get(key)
 
+print (len(individualCopus))
 for key in corpus.keys():
     corpus[key]=preprocess.remove_multiple_spaces(corpus.get(key))
 
 print(corpus)
 
 
+# Clean data -> Algorithm
 
 # 3-1. Algorithms: Bayesian Networks
 
