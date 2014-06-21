@@ -3,16 +3,10 @@ import ReadData as read
 import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
 
-# 1-. Read dataset
+# 1-. Read dataset and create tweetList fullfilled of Tweet object
 dataset = "../Dataset/output.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
-
-# Print tweets and the quantity of tweets
-#for tweet in tweetList:
-    #print tweet.text
-#print tweetList.__len__()
-
 
 # 2-. Pre-process state
 tweetListPreProcessed = preprocess.main(tweetList)
