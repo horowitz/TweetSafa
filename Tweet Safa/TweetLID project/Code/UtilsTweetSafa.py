@@ -1,6 +1,6 @@
 
 import nltk as nk
-
+import PreprocessTweets as preprocess
 
 # This method concatenates tweets
 
@@ -54,3 +54,24 @@ def getFreqDist(text,n):
 def printTweets(tweetList):
     for tweet in tweetList:
         print tweet.text
+
+def obtainNgrams(tweetListPreProcessed):
+
+    # Join all the tweets in one language. Return one dictionary of languages
+    corpus,arrayLanguages = concatenateLanguageTweets(tweetListPreProcessed)
+
+    # Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
+    individualLanguage = True
+
+    if individualLanguage:
+        corpus,arrayLanguages = separateIndividualLanguages(corpus)
+
+    # clean dictionary of double spaces from concatenation
+    for key in corpus.keys():
+        corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
+
+    maxNgram=5
+
+    corpusNgrams = freqDistributions(corpus, maxNgram)
+
+    return corpusNgrams
