@@ -4,7 +4,7 @@ import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
 
 # 1-. Read dataset
-dataset = "../Dataset/output.txt"
+dataset = "../Dataset/output_complete.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
 
@@ -17,8 +17,8 @@ tweetList = read.read_tweets_dataset(dataset)
 # 2-. Pre-process state
 tweetListPreProcessed = preprocess.main(tweetList)
 
-# for tweet in tweetListPreProcessed:
-#     print tweet.text
+for tweet in tweetListPreProcessed:
+     print tweet.text
 # print tweetList.__len__()
 
 
@@ -43,7 +43,7 @@ maxNgram = 5
 # Returns Dictionary of maxNgrams dictionaries of each language.
 # corpus.get(str(number)).get('language')
 corpusNgrams = utils.freqDistributions(corpus, maxNgram)
-print(corpusNgrams.get(str(4)).get('pt'))
+#print(corpusNgrams.get(str(4)).get('pt'))
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
 # Clean data -> Algorithm

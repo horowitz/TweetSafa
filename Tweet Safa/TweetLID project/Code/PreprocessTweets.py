@@ -48,9 +48,7 @@ def main(tweetList):
 
 
             #TODO
-            #remove 'not available' tweets....
             #remove emoticons
-
 
             # Save in new object
             tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
