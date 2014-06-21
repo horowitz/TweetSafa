@@ -31,16 +31,18 @@ corpus = utils.concatenateLanguageTweets(tweetListPreProcessed)
 
 # Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
 individualLanguage = True
-if individualLanguage == True:
+if individualLanguage:
     corpus = utils.separateIndividualLanguages(corpus)
 
 # clean dictionary of double spaces from concatenation
 for key in corpus.keys():
-    corpus[key]=preprocess.remove_multiple_spaces(corpus.get(key))
+    corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
 
-maxNgram=5
-# N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
-corpusNgrams = utils.freqDistributions(corpus,maxNgram)
+maxNgram = 5
+# N-gram Frequency distributions for all N and for all Languages.
+# Returns Dictionary of maxNgrams dictionaries of each language.
+# corpus.get(str(number)).get('language')
+corpusNgrams = utils.freqDistributions(corpus, maxNgram)
 print(corpusNgrams.get(str(4)).get('pt'))
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 

@@ -47,7 +47,8 @@ def main(tweetList):
 
 
         #TODO
-        #remove not available tweets....
+        #remove 'not available' tweets....
+        #remove emoticons
 
 
         # Save in new object
