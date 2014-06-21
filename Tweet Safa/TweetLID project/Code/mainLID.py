@@ -36,16 +36,14 @@ for key in corpus.keys():
 maxNgram=5
 
 corpusNgrams = utils.freqDistributions(corpus, maxNgram)
-print(corpusNgrams.get(str(4)).get('pt'))
+#print(corpusNgrams.get(str(4)).get('pt'))
 
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
 # Clean data -> Algorithm
 
 # 3-1. Algorithms: Bayesian Networks
-# testSet
-# validationSet
-# trainSet
+
 # 3-2. Algorithms: Ranking Methods
 
 
