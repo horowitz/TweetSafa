@@ -3,26 +3,20 @@ import ReadData as read
 import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
 
-# 1-. Read dataset
-dataset = "../Dataset/output.txt"
+# 1-. Read dataset and create tweetList fullfilled of Tweet object
+dataset = "../Dataset/emoticons.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
-
-# Print tweets and the quantity of tweets
-#for tweet in tweetList:
-    #print tweet.text
-#print tweetList.__len__()
-
 
 # 2-. Pre-process state
 tweetListPreProcessed = preprocess.main(tweetList)
 
-# for tweet in tweetListPreProcessed:
-#     print tweet.text
+#for tweet in tweetListPreProcessed:
+    # print tweet.text
 # print tweetList.__len__()
 
 
-# Clean data ->
+# Clean data -> tweetListPreProcessed
 
 # 3-. Algorithms OBTAIN N-GRAMS
 
@@ -31,6 +25,7 @@ corpus,arrayLanguages = utils.concatenateLanguageTweets(tweetListPreProcessed)
 
 # Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
 individualLanguage = True
+
 if individualLanguage == True:
     corpus,arrayLanguages = utils.separateIndividualLanguages(corpus)
 
@@ -39,9 +34,12 @@ for key in corpus.keys():
     corpus[key]=preprocess.remove_multiple_spaces(corpus.get(key))
 
 maxNgram=5
-# N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
-corpusNgrams = utils.freqDistributions(corpus,maxNgram)
-print(corpusNgrams.get(str(3)).get('pt'))
+# N-gram Frequency distributions for all N and for all Languages.
+# Returns Dictionary of maxNgrams dictionaries of each language.
+# corpus.get(str(number)).get('language')
+corpusNgrams = utils.freqDistributions(corpus, maxNgram)
+#print(corpusNgrams.get(str(4)).get('pt'))
+
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
 # Clean data -> Algorithm

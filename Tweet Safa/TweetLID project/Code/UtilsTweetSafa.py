@@ -3,6 +3,7 @@ import nltk as nk
 
 
 # This method concatenates tweets
+
 def concatenateLanguageTweets(List):
     corpus=dict()
     languageArray=list()
@@ -15,6 +16,7 @@ def concatenateLanguageTweets(List):
     return corpus,languageArray
 
 # Separate by individual languages(en,es,eu,ca,gl,pt,und,other). Return a dictionary of individual languages
+
 def separateIndividualLanguages(List):
     individualCopus=dict()
     languageArray=list()
@@ -27,7 +29,10 @@ def separateIndividualLanguages(List):
                     individualCopus[key]=individualCopus[key] + List.get(subKey)
     return individualCopus, languageArray
 
-#   N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
+# N-gram Frequency distributions for all N and for all Languages.
+# Returns Dictionary of maxNgrams dictionaries of each language.
+# corpus.get(str(number)).get('language')
+
 def freqDistributions(corpus,maxNgram):
     corpusNgrams=dict()
     for N in xrange(1,maxNgram):

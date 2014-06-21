@@ -22,7 +22,7 @@ def remove_url(tweet):
     return re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
 
 def remove_usernames(tweet):
-    return re.sub('@[^\s]+', '', tweet)
+    return re.sub('@\s*\w+\s*', '', tweet)
 
 def remove_pic_twitter(tweet):
     return re.sub('pic.twitter[^\s|,]+', '', tweet)
@@ -30,28 +30,39 @@ def remove_pic_twitter(tweet):
 def remove_vowel_repetitions(tweet):
     return re.sub(r'(.)\1\1+', r'\1\1', tweet)
 
+def remove_numbers(tweet):
+    return re.sub('[0-9]', '', tweet)
+
+def remove_emoticons(tweet):
+    return tweet
+
+
 def main(tweetList):
     tweetListPreprocessed = []
 
     tweetPreprocessed = ""
 
     for tweet in tweetList:
-        tweetPreprocessed = lower_case(tweet.text)
-        tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
-        tweetPreprocessed = remove_url(tweetPreprocessed)
-        tweetPreprocessed = format_puntuation(tweetPreprocessed)
-        tweetPreprocessed = remove_usernames(tweetPreprocessed)
-        tweetPreprocessed = remove_puntuation(tweetPreprocessed)
-        tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
-        tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
+        if (tweet.text != 'Not Available'):
+            tweetPreprocessed = lower_case(tweet.text)
+            tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
+            tweetPreprocessed = remove_url(tweetPreprocessed)
+            tweetPreprocessed = format_puntuation(tweetPreprocessed)
+            tweetPreprocessed = remove_usernames(tweetPreprocessed)
+            tweetPreprocessed = remove_puntuation(tweetPreprocessed)
+            tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
+            tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
+            #tweetPreprocessed = remove_emoticons(tweetPreprocessed)
 
+            tweetPreprocessed = remove_numbers(tweetPreprocessed)
+            tweetPreprocessed = remove_emoticons(tweetPreprocessed)
 
-        #TODO
-        #remove not available tweets....
+            #TODO
+            #remove emoticons
+            #remove numbers
 
-
-        # Save in new object
-        tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
-        tweetListPreprocessed.append(tweetPre)
+            # Save in new object
+            tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
+            tweetListPreprocessed.append(tweetPre)
 
     return tweetListPreprocessed
