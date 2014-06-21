@@ -36,23 +36,24 @@ def main(tweetList):
     tweetPreprocessed = ""
 
     for tweet in tweetList:
-        tweetPreprocessed = lower_case(tweet.text)
-        tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
-        tweetPreprocessed = remove_url(tweetPreprocessed)
-        tweetPreprocessed = format_puntuation(tweetPreprocessed)
-        tweetPreprocessed = remove_usernames(tweetPreprocessed)
-        tweetPreprocessed = remove_puntuation(tweetPreprocessed)
-        tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
-        tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
+        if (tweet.text != 'Not Available'):
+            tweetPreprocessed = lower_case(tweet.text)
+            tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
+            tweetPreprocessed = remove_url(tweetPreprocessed)
+            tweetPreprocessed = format_puntuation(tweetPreprocessed)
+            tweetPreprocessed = remove_usernames(tweetPreprocessed)
+            tweetPreprocessed = remove_puntuation(tweetPreprocessed)
+            tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
+            tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
 
 
-        #TODO
-        #remove 'not available' tweets....
-        #remove emoticons
+            #TODO
+            #remove 'not available' tweets....
+            #remove emoticons
 
 
-        # Save in new object
-        tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
-        tweetListPreprocessed.append(tweetPre)
+            # Save in new object
+            tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
+            tweetListPreprocessed.append(tweetPre)
 
     return tweetListPreprocessed

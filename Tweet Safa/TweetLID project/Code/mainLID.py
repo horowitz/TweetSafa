@@ -22,7 +22,7 @@ tweetListPreProcessed = preprocess.main(tweetList)
 # print tweetList.__len__()
 
 
-# Clean data ->
+# Clean data -> tweetListPreProcessed
 
 # 3-. Algorithms OBTAIN N-GRAMS
 
