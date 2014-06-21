@@ -204,7 +204,7 @@ def returnNgramFreqSet(allTexts, n):
     return allFreq
 
 # Gets text returns n-grams
-def returnNgramList(text, grams):
-    grams = nltk.ngrams(text, grams)
+def returnNgramList(text, n):
+    grams = nltk.ngrams(text, n)
     freqDist=nltk.FreqDist(grams)
     return freqDist

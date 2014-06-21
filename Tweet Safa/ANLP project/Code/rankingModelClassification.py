@@ -26,8 +26,6 @@ def outofplaceMeasureSet(m, n, freqDistSet, testText,ngramSize):
     probList = list()
     # Get test freq Dist
     freqDistTest = utils.getBigramFreqForSingleLang(testText,ngramSize)
-
-
     for freqDist in freqDistSet:
         n = min(n,len(freqDistTest))
         m = min(m,len(freqDist))

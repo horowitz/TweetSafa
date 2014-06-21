@@ -27,12 +27,12 @@ tweetListPreProcessed = preprocess.main(tweetList)
 # 3-. Algorithms OBTAIN N-GRAMS
 
 # Join all the tweets in one language. Return one dictionary of languages
-corpus = utils.concatenateLanguageTweets(tweetListPreProcessed)
+corpus,arrayLanguages = utils.concatenateLanguageTweets(tweetListPreProcessed)
 
 # Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
 individualLanguage = True
 if individualLanguage == True:
-    corpus = utils.separateIndividualLanguages(corpus)
+    corpus,arrayLanguages = utils.separateIndividualLanguages(corpus)
 
 # clean dictionary of double spaces from concatenation
 for key in corpus.keys():
@@ -41,7 +41,7 @@ for key in corpus.keys():
 maxNgram=5
 # N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
 corpusNgrams = utils.freqDistributions(corpus,maxNgram)
-print(corpusNgrams.get(str(4)).get('pt'))
+print(corpusNgrams.get(str(3)).get('pt'))
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
 # Clean data -> Algorithm
@@ -49,5 +49,6 @@ print(corpusNgrams.get(str(4)).get('pt'))
 # 3-1. Algorithms: Bayesian Networks
 
 # 3-2. Algorithms: Ranking Methods
+
 
 # 3-2-1. Out-of-place Measure
