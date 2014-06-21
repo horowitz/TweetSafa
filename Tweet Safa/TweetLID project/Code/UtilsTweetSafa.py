@@ -43,7 +43,14 @@ def freqDistributions(corpus,maxNgram):
     return corpusNgrams
 
 # returns N-gram distribution given a text
+
 def getFreqDist(text,n):
     ngramsObject = nk.ngrams(text,n)
     freqDist = nk.FreqDist(ngramsObject)
     return freqDist
+
+# Print tweets from an input list
+
+def printTweets(tweetList):
+    for tweet in tweetList:
+        print tweet.text

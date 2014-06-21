@@ -11,12 +11,10 @@ tweetList = read.read_tweets_dataset(dataset)
 # 2-. Pre-process state
 tweetListPreProcessed = preprocess.main(tweetList)
 
-for tweet in tweetListPreProcessed:
-    print tweet.text
-# print tweetList.__len__()
+    # Raw data -> tweetList
+    # Clean data -> tweetListPreProcessed
 
-
-# Clean data -> tweetListPreProcessed
+utils.printTweets(tweetListPreProcessed)
 
 # 3-. Algorithms OBTAIN N-GRAMS
 
