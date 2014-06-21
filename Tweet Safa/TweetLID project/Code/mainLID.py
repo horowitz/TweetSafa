@@ -1,7 +1,7 @@
 
 import ReadData as read
 import PreprocessTweets as preprocess
-import nltk as nk
+import UtilsTweetSafa as utils
 
 # 1-. Read dataset
 dataset = "../Dataset/output.txt"
@@ -26,49 +26,13 @@ tweetListPreProcessed = preprocess.main(tweetList)
 
 # 3-. Algorithms OBTAIN N-GRAMS
 
-
-############################ ESTO VA AL UTILSTWEETSAFA??
-# This method concatenates tweets
-def concatenateLanguageTweets(List):
-    corpus=dict()
-    for tweet in List:
-        if ~corpus.has_key(tweet.language) & (corpus.get(tweet.language) is None):
-            corpus[tweet.language]= tweet.text
-        else:
-            corpus[tweet.language] = corpus.get(tweet.language) + tweet.text
-    return corpus
-
-# Separate by individual languages(en,es,eu,ca,gl,pt,und,other). Return a dictionary of individual languages
-def separateIndividualLanguages(List):
-    individualCopus=dict()
-    for key in List.keys():
-        if (not '+' in key) and (not '/' in key):
-            individualCopus[key]=List.get(key)
-            for subKey in List.keys():
-                if key in subKey and not key is subKey:
-                    individualCopus[key]=individualCopus[key] + List.get(subKey)
-    return individualCopus
-
-#   N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
-def freqDistributions(corpus,maxNgram):
-    corpusNgrams=dict()
-    for N in xrange(1,maxNgram):
-        auxCorpus=dict()
-        for key in corpus.keys():
-            nGaux=nk.ngrams(corpus.get(key),N)
-            auxCorpus[key]=nGaux
-        corpusNgrams[str(N)]=auxCorpus
-    return corpusNgrams
-
-############################
-
 # Join all the tweets in one language. Return one dictionary of languages
-corpus=concatenateLanguageTweets(tweetListPreProcessed)
+corpus = utils.concatenateLanguageTweets(tweetListPreProcessed)
 
 # Only individual languages(en,es,..): individualLanguage=true, mixed languages(en+es,pt+gl,..): individualLanguage=false
-individualLanguage=True
-if individualLanguage==True:
-    corpus=separateIndividualLanguages(corpus)
+individualLanguage = True
+if individualLanguage == True:
+    corpus = utils.separateIndividualLanguages(corpus)
 
 # clean dictionary of double spaces from concatenation
 for key in corpus.keys():
@@ -76,7 +40,7 @@ for key in corpus.keys():
 
 maxNgram=5
 # N-gram Frequency distributions for all N and for all Languages. Returns Dictionary of maxNgrams dictionaries of each language. corpus.get(str(number)).get('language')
-corpusNgrams=freqDistributions(corpus,maxNgram)
+corpusNgrams = utils.freqDistributions(corpus,maxNgram)
 print(corpusNgrams.get(str(4)).get('pt'))
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
