@@ -4,19 +4,17 @@ import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object
-dataset = "../Dataset/emoticons.txt"
+dataset = "../Dataset/output.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
 
 # 2-. Pre-process state
 tweetListPreProcessed = preprocess.main(tweetList)
 
-#for tweet in tweetListPreProcessed:
-    # print tweet.text
-# print tweetList.__len__()
+    # Raw data -> tweetList
+    # Clean data -> tweetListPreProcessed
 
-
-# Clean data -> tweetListPreProcessed
+utils.printTweets(tweetListPreProcessed)
 
 # 3-. Algorithms OBTAIN N-GRAMS
 
