@@ -30,16 +30,11 @@ def remove_pic_twitter(tweet):
 def remove_vowel_repetitions(tweet):
     return re.sub(r'(.)\1\1+', r'\1\1', tweet)
 
-<<<<<<< HEAD
-=======
-
 def remove_numbers(tweet):
     return re.sub('[0-9]', '', tweet)
 
->>>>>>> FETCH_HEAD
 def remove_emoticons(tweet):
     return tweet
-
 
 def main(tweetList):
     tweetListPreprocessed = []
@@ -56,17 +51,12 @@ def main(tweetList):
             tweetPreprocessed = remove_puntuation(tweetPreprocessed)
             tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
             tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
-<<<<<<< HEAD
             #tweetPreprocessed = remove_emoticons(tweetPreprocessed)
-=======
             tweetPreprocessed = remove_numbers(tweetPreprocessed)
             tweetPreprocessed = remove_emoticons(tweetPreprocessed)
->>>>>>> FETCH_HEAD
-
 
             #TODO
             #remove emoticons
-            #remove numbers
 
             # Save in new object
             tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)
