@@ -47,3 +47,45 @@ def getFreqDist(text,n):
     ngramsObject = nk.ngrams(text,n)
     freqDist = nk.FreqDist(ngramsObject)
     return freqDist
+
+
+#############################   ALGORITMS   ########################
+
+# Out of place measure of two distributions
+
+def outofplaceMeasure(firstDistLenght, SecondDistLenght, fistFreqDist,secondFreqDist):
+
+    # Get m x n items
+    firstTopRankDist = fistFreqDist.items()[:firstDistLenght]
+    secondTopRankDist = secondFreqDist.items()[:SecondDistLenght]
+
+    totalDistance = 0
+    for i in xrange(0,SecondDistLenght):
+        lp = secondTopRankDist[i]
+        distance = firstDistLenght
+        for j  in xrange(0,firstDistLenght):
+            tp = firstTopRankDist[j]
+            if lp[0] == tp[0]:
+                distance = abs(i-j)
+                totalDistance += distance
+                break
+    return totalDistance
+
+# Returns out-of-place measure of two distributions
+def outofplaceMeasure(firstDistLenght, SecondDistLenght, fistFreqDist,secondFreqDist):
+
+    # Get m x n items
+    firstTopRankDist = fistFreqDist.items()[:firstDistLenght]
+    secondTopRankDist = secondFreqDist.items()[:SecondDistLenght]
+
+    totalDistance = 0
+    for i in xrange(0,SecondDistLenght):
+        lp = secondTopRankDist[i]
+        distance = firstDistLenght
+        for j  in xrange(0,firstDistLenght):
+            tp = firstTopRankDist[j]
+            if lp[0] == tp[0]:
+                distance = abs(i-j)
+                totalDistance += distance
+                break
+    return totalDistance
