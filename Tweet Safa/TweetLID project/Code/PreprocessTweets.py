@@ -22,13 +22,16 @@ def remove_url(tweet):
     return re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
 
 def remove_usernames(tweet):
-    return re.sub('@[^\s]+', '', tweet)
+    return re.sub('@\s*\w+\s*', '', tweet)
 
 def remove_pic_twitter(tweet):
     return re.sub('pic.twitter[^\s|,]+', '', tweet)
 
 def remove_vowel_repetitions(tweet):
     return re.sub(r'(.)\1\1+', r'\1\1', tweet)
+
+def remove_numbers(tweet):
+    return re.sub('[0-9]', '', tweet)
 
 def main(tweetList):
     tweetListPreprocessed = []
@@ -45,6 +48,7 @@ def main(tweetList):
             tweetPreprocessed = remove_puntuation(tweetPreprocessed)
             tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
             tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
+            tweetPreprocessed = remove_numbers(tweetPreprocessed)
 
 
             #TODO
