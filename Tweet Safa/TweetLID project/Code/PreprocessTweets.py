@@ -46,7 +46,6 @@ def main(tweetList):
             tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
             tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
 
-
             #TODO
             #remove emoticons
 

@@ -4,7 +4,7 @@ import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
 
 # 1-. Read dataset
-dataset = "../Dataset/output_complete.txt"
+dataset = "../Dataset/output.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
 
