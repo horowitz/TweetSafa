@@ -26,37 +26,27 @@
       <file leaf-file-name="mainLID.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/mainLID.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="810">
+            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="825">
               <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="output.txt" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="output.txt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dataset/output.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="9840">
-              <caret line="34" column="56" selection-start-line="34" selection-start-column="56" selection-end-line="39" selection-end-column="95" />
+            <state vertical-scroll-proportion="0.52577317" vertical-offset="300" max-vertical-offset="9840">
+              <caret line="37" column="53" selection-start-line="37" selection-start-column="53" selection-end-line="37" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emoticons.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dataset/emoticons.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="495">
-              <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PreprocessTweets.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PreprocessTweets.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/PreprocessTweets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5180723" vertical-offset="537" max-vertical-offset="1035">
+            <state vertical-scroll-proportion="0.0" vertical-offset="258" max-vertical-offset="1035">
               <caret line="55" column="67" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
               <folding />
             </state>
@@ -80,9 +70,10 @@
         <option value="$PROJECT_DIR$/Code/download_tweets.py" />
         <option value="$PROJECT_DIR$/Code/UtilsTweetSafa" />
         <option value="$PROJECT_DIR$/Code/UtilsTweetSafa.py" />
-        <option value="$PROJECT_DIR$/Dataset/emoticons.txt" />
         <option value="$PROJECT_DIR$/Code/mainLID.py" />
         <option value="$PROJECT_DIR$/Code/PreprocessTweets.py" />
+        <option value="$PROJECT_DIR$/Dataset/emoticons.txt" />
+        <option value="$PROJECT_DIR$/Dataset/output.txt" />
       </list>
     </option>
   </component>
@@ -117,6 +108,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -165,7 +157,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -372,7 +363,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Code/mainLID.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="810">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="825">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
@@ -386,10 +377,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dataset/emoticons.txt">
+    <entry file="file://$PROJECT_DIR$/Code/PreprocessTweets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="495">
-          <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="537" max-vertical-offset="1035">
+          <caret line="55" column="67" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/mainLID.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="810">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dataset/output.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="9840">
+          <caret line="34" column="56" selection-start-line="34" selection-start-column="56" selection-end-line="39" selection-end-column="95" />
           <folding />
         </state>
       </provider>
@@ -520,14 +527,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dataset/output.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="9840">
-          <caret line="34" column="56" selection-start-line="34" selection-start-column="56" selection-end-line="39" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/mainLID.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="810">
@@ -536,18 +535,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dataset/emoticons.txt">
+    <entry file="file://$PROJECT_DIR$/Code/PreprocessTweets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
-          <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="258" max-vertical-offset="1035">
+          <caret line="55" column="67" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/PreprocessTweets.py">
+    <entry file="file://$PROJECT_DIR$/Dataset/output.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5180723" vertical-offset="537" max-vertical-offset="1035">
-          <caret line="55" column="67" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.52577317" vertical-offset="300" max-vertical-offset="9840">
+          <caret line="37" column="53" selection-start-line="37" selection-start-column="53" selection-end-line="37" selection-end-column="53" />
           <folding />
         </state>
       </provider>
