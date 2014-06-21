@@ -9,6 +9,7 @@ dataset = "../Dataset/output.txt"
 tweetList = read.read_tweets_dataset(dataset)
 
 # 2-. Pre-process state
+
 tweetListPreProcessed = preprocess.main(tweetList)
 
     # Raw data -> tweetList
