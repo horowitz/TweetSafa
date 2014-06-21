@@ -26,8 +26,8 @@
       <file leaf-file-name="mainLID.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/mainLID.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="810">
-              <caret line="5" column="53" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="810">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
                 <element signature="e#1#24#0" expanded="true" />
               </folding>
@@ -45,21 +45,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emoticons.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="emoticons.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dataset/emoticons.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30927834" vertical-offset="0" max-vertical-offset="525">
-              <caret line="10" column="99" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+              <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PreprocessTweets.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PreprocessTweets.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/PreprocessTweets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="462" max-vertical-offset="1005">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.05421687" vertical-offset="477" max-vertical-offset="975">
+              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -82,9 +82,9 @@
         <option value="$PROJECT_DIR$/Code/download_tweets.py" />
         <option value="$PROJECT_DIR$/Code/UtilsTweetSafa" />
         <option value="$PROJECT_DIR$/Code/UtilsTweetSafa.py" />
+        <option value="$PROJECT_DIR$/Dataset/emoticons.txt" />
         <option value="$PROJECT_DIR$/Code/mainLID.py" />
         <option value="$PROJECT_DIR$/Code/PreprocessTweets.py" />
-        <option value="$PROJECT_DIR$/Dataset/emoticons.txt" />
       </list>
     </option>
   </component>
@@ -334,7 +334,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32908162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32908162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908162" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24947146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -510,18 +510,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/PreprocessTweets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="462" max-vertical-offset="1005">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/mainLID.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="810">
-          <caret line="5" column="53" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="810">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding>
             <element signature="e#1#24#0" expanded="true" />
           </folding>
@@ -530,8 +522,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dataset/emoticons.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30927834" vertical-offset="0" max-vertical-offset="525">
-          <caret line="10" column="99" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/PreprocessTweets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.05421687" vertical-offset="477" max-vertical-offset="975">
+          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
           <folding />
         </state>
       </provider>
