@@ -21,13 +21,20 @@ tweetListPreProcessed = preprocess.main(tweetList)
 #
 # 3.1-. OBTAIN N-GRAMS
 
-corpusNgrams = utils.obtainNgrams(tweetListPreProcessed)
+corpusNgrams, arrayLanguages = utils.obtainNgrams(tweetListPreProcessed)
 
-print(corpusNgrams.get(str(4)).get('es'))
+
+#print(corpusNgrams.get(str(4)).get('es'))
 
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
 # Clean data -> Algorithm
+
+# 3.2-. Linear interpolation
+#   Generate linear coefficients: input (n-grams and language)
+#   Smooth data
+
+
 
 # 3.2-. Algorithms: Bayesian Networks
 
