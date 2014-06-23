@@ -46,7 +46,7 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest, testText,n):
     topTTItems = freqDistTest.items()[:TTLenght]
 
     totalDistance = 0
-    for i  in xrange(0,TTLenght):
+    for i in xrange(0,TTLenght):
         # print(testText + "\t" + str(TTLenght) + "\t" +str(len(topTTItems)))
         lp = topTTItems[i]
         distance = FDLenght

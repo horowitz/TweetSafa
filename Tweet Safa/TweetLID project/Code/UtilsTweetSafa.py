@@ -55,7 +55,6 @@ def freqDistributions(corpus, maxNgram):
 def getFreqDist(text, n):
     ngramsObject = nk.ngrams(text, n)
     freqDist = nk.FreqDist(ngramsObject)
-
     return freqDist
 
 # Print tweets from an input list

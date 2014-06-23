@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import ReadData as read
 import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
@@ -42,17 +42,47 @@ linearCoefficients = linear.getlinearcoefficients(corpusNgrams)
 
 print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2])+"\n"
 
-text = "my name is james"
+text = "my name is james és portugués"
 prob = 1.0;
-for i in range(0,len(text)-3):
-    x = text[i]; y = text[i+1]; z = text[i+2]
-    probability = linear.probability(corpusNgrams, linearCoefficients, x, y, z)
-    prob = prob * probability
-
-sys.stdout.write("Sequence probability: "+str(prob)+"\n")
+# for i in range(0,len(text)-3):
+#     x = text[i]; y = text[i+1]; z = text[i+2]
+#     probability = linear.probability(corpusNgrams, linearCoefficients, x, y, z)
+#     prob = prob * probability
+#
+# sys.stdout.write("Sequence probability: "+str(prob)+"\n")
 
 # 3.2-. Algorithms: Bayesian Networks
 
 # 3.3-. Algorithms: Ranking Methods
 
 # 3.4-.. Out-of-place Measure
+
+
+def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
+    outofplaceResult = list()
+
+    FDLenght=min(len(freqDist),FDLenght)
+    TTLenght=min(len(freqDistTest),TTLenght)
+    # Get m x n items
+    topFDItems = freqDist.items()[:FDLenght]
+    topTTItems = freqDistTest.items()[:TTLenght]
+
+    totalDistance = 0
+    for i in xrange(0,TTLenght):
+        # print(testText + "\t" + str(TTLenght) + "\t" +str(len(topTTItems)))
+        lp = topTTItems[i]
+        distance = FDLenght
+        for j in xrange(0,FDLenght):
+            tp = topFDItems[j]
+            if lp[0] == tp[0] or j==FDLenght-1:
+                distance = abs(i-j)
+                totalDistance += distance
+                break
+    return totalDistance
+
+
+
+for key in corpusNgrams.keys():
+    for subkey in corpusNgrams.get(key).keys():
+        print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
+        print outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(text,int(float(key))))
