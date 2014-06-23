@@ -25,10 +25,10 @@ def separateIndividualLanguages(List):
     for key in List.keys():
         if (not '+' in key) and (not '/' in key):
             individualCorpus[key] = List.get(key)
-
+            languageArray.append(key)
             for subKey in List.keys():
                 if key in subKey and not key is subKey:
-                    languageArray.append(key)
+
                     individualCorpus[key] = individualCorpus[key] + List.get(subKey)
 
     return individualCorpus, languageArray
