@@ -45,13 +45,13 @@ for language in arrayLanguages:
     linearCoefficients.append(linear.getlinearcoefficients(language, unigrams, bigrams, trigrams))
 
 max = 0;
+tweet = "Mañana hará un dia muy bueno, como para ir a la playa"
+text = preprocess.preprocessText(tweet)
+
+print text
+
 for linearCoefficients in linearCoefficients:
     # print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2]) + " " + str(linearCoefficients[3])+"\n"
-
-    text = "Mañana hará un dia muy bueno, como para ir a la playa"
-    text = preprocess.preprocessText(text)
-
-    print text
 
     prob = 1.0;
     for i in range(0,len(text)-3):
@@ -67,8 +67,10 @@ for linearCoefficients in linearCoefficients:
 
     sys.stdout.write("Sequence probability in "+str(linearCoefficients[0])+": "+str(prob)+"\n")
 
-print language
-print max
+
+sys.stdout.write("\n    Tweet:  "+str(tweet))
+sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:  "+str(max)+"\n")
+
 
 # 3.2-. Algorithms: Bayesian Networks
 
