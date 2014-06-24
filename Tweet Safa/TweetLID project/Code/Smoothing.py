@@ -1,12 +1,12 @@
 from __future__ import division
 
-def getlinearcoefficients(corpusNgrams):
+def getlinearcoefficients(language, unigrams, bigrams, trigrams):
     lambda1 = 0; lambda2 = 0; lambda3 = 0;
     linearCoefficients = list()
 
-    trigrams = corpusNgrams.get('3').get('en')
-    bigrams = corpusNgrams.get('2').get('en')
-    unigrams = corpusNgrams.get('1').get('en')
+    # trigrams = corpusNgrams.get('3').get('en')
+    # bigrams = corpusNgrams.get('2').get('en')
+    # unigrams = corpusNgrams.get('1').get('en')
 
     for tg in trigrams.items():
         unigram = tg[0][0]
@@ -59,9 +59,9 @@ def getlinearcoefficients(corpusNgrams):
                 lambda3 = lambda3 + count_tg;
 
 
-    print unigrams.N()  #samples
-    print unigrams.B()  #outcomes
-    print unigrams.items
+    # print unigrams.N()  #samples
+    # print unigrams.B()  #outcomes
+    # print unigrams.items
 
     normLambda1 = 0; normLambda2 = 0; normLambda3 = 0;
 
@@ -71,6 +71,7 @@ def getlinearcoefficients(corpusNgrams):
     normLambda2 = lambda2/lambdaSum;
     normLambda3 = lambda3/lambdaSum;
 
+    linearCoefficients.append(language)
     linearCoefficients.append(normLambda1)
     linearCoefficients.append(normLambda2)
     linearCoefficients.append(normLambda3)
@@ -83,13 +84,11 @@ def probability(corpusNgrams, lic, x, y, z):
     bigrams = corpusNgrams.get('2').get('en')
     unigrams = corpusNgrams.get('1').get('en')
 
-    print x+y+z
-
     for ug in unigrams.items():
         if z == ug[0][0]:
             count_ug = ug[1]
     try:
-        px = (lic[0] * count_ug) / unigrams.N();
+        px = (lic[1] * count_ug) / unigrams.N();
     except ZeroDivisionError:
         px = 0;
     except UnboundLocalError:
@@ -99,7 +98,7 @@ def probability(corpusNgrams, lic, x, y, z):
         if y+z == bg[0][0] + bg[0][1]:
             count_bg = bg[1]
     try:
-        pxy = (lic[1] * count_bg) / count_ug ;
+        pxy = (lic[2] * count_bg) / count_ug ;
     except ZeroDivisionError:
         pxy = 0;
     except UnboundLocalError:
@@ -109,7 +108,7 @@ def probability(corpusNgrams, lic, x, y, z):
         if x+y+z == tg[0][0] + tg[0][1] + tg[0][2]:
             count_tg = tg[1]
     try:
-        pxyz = (lic[2] * count_tg) / count_bg
+        pxyz = (lic[3] * count_tg) / count_bg
     except ZeroDivisionError:
         pxyz = 0;
     except UnboundLocalError:

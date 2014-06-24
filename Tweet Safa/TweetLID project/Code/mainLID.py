@@ -36,21 +36,42 @@ corpusNgrams, arrayLanguages = utils.obtainNgrams(tweetListPreProcessed)
 #   Generate linear coefficients: input (n-grams and language)
 #   Smooth data
 
-# print corpusNgrams.get('3').get('en')
+linearCoefficients = list()
 
-linearCoefficients = linear.getlinearcoefficients(corpusNgrams)
+for language in arrayLanguages:
+    unigrams = corpusNgrams.get('1').get(language)
+    bigrams = corpusNgrams.get('2').get(language)
+    trigrams = corpusNgrams.get('3').get(language)
+    linearCoefficients.append(linear.getlinearcoefficients(language, unigrams, bigrams, trigrams))
+#
+#
+# trigrams = corpusNgrams.get('3').get('en')
+# bigrams = corpusNgrams.get('2').get('en')
+# unigrams = corpusNgrams.get('1').get('en')
+#
+# linearCoefficients = linear.getlinearcoefficients(corpusNgrams)
 
-print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2])+"\n"
+max = 0;
+for linearCoefficients in linearCoefficients:
+    # print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2]) + " " + str(linearCoefficients[3])+"\n"
 
-text = "my name is james es portugues"
-prob = 1.0;
-for i in range(0,len(text)-3):
-    x = text[i]; y = text[i+1]; z = text[i+2]
-    probability = linear.probability(corpusNgrams, linearCoefficients, x, y, z)
-    print probability
-    prob = prob * probability
+    text = "esto es una frase en castellano"
+    prob = 1.0;
+    for i in range(0,len(text)-3):
+        x = text[i]; y = text[i+1]; z = text[i+2]
+        probability = linear.probability(corpusNgrams, linearCoefficients, x, y, z)
+        # print probability
+        prob = prob * probability
 
-sys.stdout.write("Sequence probability: "+str(prob)+"\n")
+    if prob >= max:
+        language = linearCoefficients[0]
+        max = prob
+
+
+    sys.stdout.write("Sequence probability in "+str(linearCoefficients[0])+": "+str(prob)+"\n")
+
+print language
+print max
 
 # 3.2-. Algorithms: Bayesian Networks
 
@@ -67,6 +88,7 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
     # Get m x n items
     topFDItems = freqDist.items()[:FDLenght]
     topTTItems = freqDistTest.items()[:TTLenght]
+
 
     totalDistance = 0
     for i in xrange(0,TTLenght):
