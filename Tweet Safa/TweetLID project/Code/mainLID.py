@@ -43,19 +43,16 @@ for language in arrayLanguages:
     bigrams = corpusNgrams.get('2').get(language)
     trigrams = corpusNgrams.get('3').get(language)
     linearCoefficients.append(linear.getlinearcoefficients(language, unigrams, bigrams, trigrams))
-#
-#
-# trigrams = corpusNgrams.get('3').get('en')
-# bigrams = corpusNgrams.get('2').get('en')
-# unigrams = corpusNgrams.get('1').get('en')
-#
-# linearCoefficients = linear.getlinearcoefficients(corpusNgrams)
 
 max = 0;
 for linearCoefficients in linearCoefficients:
     # print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2]) + " " + str(linearCoefficients[3])+"\n"
 
-    text = "esto es una frase en castellano"
+    text = "Mañana hará un dia muy bueno, como para ir a la playa"
+    text = preprocess.preprocessText(text)
+
+    print text
+
     prob = 1.0;
     for i in range(0,len(text)-3):
         x = text[i]; y = text[i+1]; z = text[i+2]

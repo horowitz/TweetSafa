@@ -36,6 +36,20 @@ def remove_numbers(tweet):
 def remove_emoticons(tweet):
     return tweet
 
+def preprocessText(tweet):
+    tweetPreprocessed = lower_case(tweet)
+    tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
+    tweetPreprocessed = remove_url(tweetPreprocessed)
+    tweetPreprocessed = format_puntuation(tweetPreprocessed)
+    tweetPreprocessed = remove_usernames(tweetPreprocessed)
+    tweetPreprocessed = remove_puntuation(tweetPreprocessed)
+    tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
+    tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
+    #tweetPreprocessed = remove_emoticons(tweetPreprocessed)
+    tweetPreprocessed = remove_numbers(tweetPreprocessed)
+    tweetPreprocessed = remove_emoticons(tweetPreprocessed)
+    return tweetPreprocessed
+
 def main(tweetList):
     tweetListPreprocessed = []
 
@@ -43,17 +57,8 @@ def main(tweetList):
 
     for tweet in tweetList:
         if (tweet.text != 'Not Available'):
-            tweetPreprocessed = lower_case(tweet.text)
-            tweetPreprocessed = remove_pic_twitter(tweetPreprocessed)
-            tweetPreprocessed = remove_url(tweetPreprocessed)
-            tweetPreprocessed = format_puntuation(tweetPreprocessed)
-            tweetPreprocessed = remove_usernames(tweetPreprocessed)
-            tweetPreprocessed = remove_puntuation(tweetPreprocessed)
-            tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
-            tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
-            #tweetPreprocessed = remove_emoticons(tweetPreprocessed)
-            tweetPreprocessed = remove_numbers(tweetPreprocessed)
-            tweetPreprocessed = remove_emoticons(tweetPreprocessed)
+            tweetPreprocessed = preprocessText(tweet.text)
+
 
             #TODO
             #remove emoticons

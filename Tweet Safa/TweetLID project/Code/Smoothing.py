@@ -80,9 +80,9 @@ def getlinearcoefficients(language, unigrams, bigrams, trigrams):
 
 
 def probability(corpusNgrams, lic, x, y, z):
-    trigrams = corpusNgrams.get('3').get('en')
-    bigrams = corpusNgrams.get('2').get('en')
-    unigrams = corpusNgrams.get('1').get('en')
+    trigrams = corpusNgrams.get('3').get(str(lic[0]))
+    bigrams = corpusNgrams.get('2').get(str(lic[0]))
+    unigrams = corpusNgrams.get('1').get(str(lic[0]))
 
     for ug in unigrams.items():
         if z == ug[0][0]:
