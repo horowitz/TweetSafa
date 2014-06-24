@@ -45,8 +45,14 @@ for language in arrayLanguages:
     linearCoefficients.append(linear.getlinearcoefficients(language, unigrams, bigrams, trigrams))
 
 max = 0;
-tweet = "Mañana hará un dia muy bueno, como para ir a la playa"
-text = preprocess.preprocessText(tweet)
+tweetEN = "Tomorrow is going to be a good day to go to the beach"
+tweetPT = "Amanhã será um dia muito bom, como ir para a praia."
+tweetCA = "Demà farà un dia molt bo, com per anar a la platja."
+tweetEU = "Bihar egun oso ona egingo du, hondartzara joateko modukoa."
+tweetGL = "Mañá será un día moi bo, como ir á praia."
+tweetES = "Mañana hará un dia muy bueno, como para ir a la playa."
+
+text = preprocess.preprocessText(tweetEU)
 
 print text
 
@@ -68,7 +74,7 @@ for linearCoefficients in linearCoefficients:
     sys.stdout.write("Sequence probability in "+str(linearCoefficients[0])+": "+str(prob)+"\n")
 
 
-sys.stdout.write("\n    Tweet:  "+str(tweet))
+sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
 sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:  "+str(max)+"\n")
 
 
