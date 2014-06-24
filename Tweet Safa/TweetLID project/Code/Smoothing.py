@@ -83,25 +83,37 @@ def probability(corpusNgrams, lic, x, y, z):
     bigrams = corpusNgrams.get('2').get('en')
     unigrams = corpusNgrams.get('1').get('en')
 
-    # try:
-    #     px = (lic[0] * cur[z]) / unigrams.N();
-    # except ZeroDivisionError:
-    #     px = 0;
-    # except KeyError:
-    #     px = 0;
-    # try:
-    #     pxy = (lic[1] * cbr[x+z]) / cur[y] ;
-    # except ZeroDivisionError:
-    #     pxy = 0;
-    # except KeyError:
-    #     pxy = 0;
-    #
-    # try:
-    #     pxyz = (lic[2] * ctr[x+y+z]) / cbr[y+z];
-    # except ZeroDivisionError:
-    #     pxyz = 0;
-    # except KeyError:
-    #     pxyz = 0;
-    #
+    print x+y+z
 
-    # return px + pxy + pxyz;
+    for ug in unigrams.items():
+        if z == ug[0][0]:
+            count_ug = ug[1]
+    try:
+        px = (lic[0] * count_ug) / unigrams.N();
+    except ZeroDivisionError:
+        px = 0;
+    except UnboundLocalError:
+        px = 0;
+
+    for bg in bigrams.items():
+        if y+z == bg[0][0] + bg[0][1]:
+            count_bg = bg[1]
+    try:
+        pxy = (lic[1] * count_bg) / count_ug ;
+    except ZeroDivisionError:
+        pxy = 0;
+    except UnboundLocalError:
+        pxy = 0;
+
+    for tg in trigrams.items():
+        if x+y+z == tg[0][0] + tg[0][1] + tg[0][2]:
+            count_tg = tg[1]
+    try:
+        pxyz = (lic[2] * count_tg) / count_bg
+    except ZeroDivisionError:
+        pxyz = 0;
+    except UnboundLocalError:
+        pxyz = 0;
+
+
+    return px + pxy + pxyz;
