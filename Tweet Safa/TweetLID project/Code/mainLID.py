@@ -118,4 +118,3 @@ for key in corpusNgrams.keys():
     tot=tot+1
     print('True: '+label+' Predicted: '+predicted)
 print(str(acc/tot))
-
