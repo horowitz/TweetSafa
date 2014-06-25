@@ -95,28 +95,35 @@ prob = 1.0;
 # 3.2-. Algorithms: Bayesian Networks
 
 # 3.3-. Algorithms: Ranking Methods
-
+def learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n):
+    acc=0
+    tot=0
+    ngramPredictedLanguage=list()
+    for key in corpusNgrams.keys():
+        predictedLanguage=list()
+        languagesList= None
+        print('N: '+ key)
+        languagesList=corpusNgrams.get(key).keys()
+        for subkey in languagesList:
+            # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
+            predictedLanguage.append(utils.outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),testFreq))
+        predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
+        if label == predicted:
+            confidenceDict[key]=confidenceDict[key]+1
+            acc=acc+1
+        tot=tot+1
+        print('True: '+label+' Predicted: '+predicted)
+    print(str(acc/tot))
+    return confidenceDict,tot
 # 3.4-. Out-of-place Measure
 textHOLA = "més val que sigui bó"
 label='ca'
+testFreq = utils.getFreqDist(textHOLA,int(float(key)))
 
-acc=0
-tot=0
 confidenceDict=dict((el,0) for el in corpusNgrams.keys())
-ngramPredictedLanguage=list()
-for key in corpusNgrams.keys():
-    predictedLanguage=list()
-    languagesList= None
-    print('N: '+ key)
-    languagesList=corpusNgrams.get(key).keys()
-    for subkey in languagesList:
-        # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
-        predictedLanguage.append(utils.outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(textHOLA,int(float(key)))))
-    predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
-    if label == predicted:
-        confidenceDict[key]=confidenceDict[key]+1
-        acc=acc+1
-    tot=tot+1
-    print('True: '+label+' Predicted: '+predicted)
-print(str(acc/tot))
-print (confidenceDict)
+m=80
+n=50
+confidenceDict,tot = learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n)
+confidenceDict,tot = learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n)
+
+confidenceProbabilityDict=dict((el,confidenceDict[el]/tot) for el in corpusNgrams.keys())
