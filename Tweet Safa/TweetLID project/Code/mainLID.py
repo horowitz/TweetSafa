@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import ReadData as read
 import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
 import Smoothing as linear
+import numpy as np
+
 import sys
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object
@@ -42,7 +45,8 @@ linearCoefficients = linear.getlinearcoefficients(corpusNgrams)
 
 print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2])+"\n"
 
-text = "my name is james és portugués"
+text = "més val que sigui bó"
+label='ca'
 prob = 1.0;
 # for i in range(0,len(text)-3):
 #     x = text[i]; y = text[i+1]; z = text[i+2]
@@ -74,15 +78,29 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
         distance = FDLenght
         for j in xrange(0,FDLenght):
             tp = topFDItems[j]
-            if lp[0] == tp[0] or j==FDLenght-1:
+            if lp[0] == tp[0] or j == FDLenght-1:
                 distance = abs(i-j)
                 totalDistance += distance
                 break
-    return totalDistance
+    return totalDistance/(FDLenght*TTLenght)
 
-
-
+acc=0
+tot=0
+ngramPredictedLanguage=list()
 for key in corpusNgrams.keys():
+    predictedLanguage=list()
+    languagesList=list()
+    print('N: '+ key)
+    languagesList=corpusNgrams.get(key).keys()
     for subkey in corpusNgrams.get(key).keys():
-        print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
-        print outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(text,int(float(key))))
+        languagesList.append(subkey)
+        # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
+        if key == '1':
+            print(subkey)
+        predictedLanguage.append(outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(text,int(float(key)))))
+    predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
+    if label == predicted:
+        acc=acc+1
+    tot=tot+1
+    print('True: '+label+' Predicted: '+predicted)
+print(str(acc/tot))
