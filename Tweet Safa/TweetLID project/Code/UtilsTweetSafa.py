@@ -65,7 +65,7 @@ def printTweets(tweetList):
 
 # Obtain N-Grams from the tweet list
 
-def obtainNgrams(tweetListPreProcessed):
+def obtainNgrams(tweetListPreProcessed,maxNgram):
     # Join all the tweets in one language. Return one dictionary of languages
     corpus, arrayLanguages = concatenateLanguageTweets(tweetListPreProcessed)
 
@@ -84,7 +84,7 @@ def obtainNgrams(tweetListPreProcessed):
     for key in corpus.keys():
         corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
 
-    maxNgram = 5
+
 
     corpusNgrams = freqDistributions(corpus, maxNgram)
 
@@ -114,9 +114,10 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
     return totalDistance / (FDLenght * TTLenght)
 
 # returns confidence of each N-gram to be a good guesser.
-def learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n):
+def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
     acc=0
     tot=0
+    label=tweet.language
     ngramPredictedLanguage=list()
     for key in corpusNgrams.keys():
         predictedLanguage=list()
@@ -125,7 +126,7 @@ def learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n):
         languagesList=corpusNgrams.get(key).keys()
         for subkey in languagesList:
             # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
-            predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),testFreq))
+            predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),getFreqDist(tweet.text,int(float(key)))))
         predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
         if label == predicted:
             confidenceDict[key]=confidenceDict[key]+1
