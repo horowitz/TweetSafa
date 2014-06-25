@@ -115,4 +115,4 @@ def probability(corpusNgrams, lic, x, y, z):
         pxyz = 0;
 
 
-    return px + pxy + pxyz;
+    return px + pxy + pxyz + 0.000000000001;
