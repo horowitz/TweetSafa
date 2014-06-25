@@ -97,24 +97,26 @@ prob = 1.0;
 # 3.3-. Algorithms: Ranking Methods
 
 # 3.4-. Out-of-place Measure
-text = "més val que sigui bó"
+textHOLA = "més val que sigui bó"
 label='ca'
 
 acc=0
 tot=0
+confidenceDict=dict((el,0) for el in corpusNgrams.keys())
 ngramPredictedLanguage=list()
 for key in corpusNgrams.keys():
     predictedLanguage=list()
-    languagesList=list()
+    languagesList= None
     print('N: '+ key)
     languagesList=corpusNgrams.get(key).keys()
-    for subkey in corpusNgrams.get(key).keys():
-        languagesList.append(subkey)
+    for subkey in languagesList:
         # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
-        predictedLanguage.append(utils.outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(text,int(float(key)))))
+        predictedLanguage.append(utils.outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(textHOLA,int(float(key)))))
     predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
     if label == predicted:
+        confidenceDict[key]=confidenceDict[key]+1
         acc=acc+1
     tot=tot+1
     print('True: '+label+' Predicted: '+predicted)
 print(str(acc/tot))
+print (confidenceDict)

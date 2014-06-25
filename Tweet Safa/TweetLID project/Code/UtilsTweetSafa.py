@@ -1,4 +1,5 @@
-
+from __future__ import division
+from __future__ import division
 import nltk as nk
 import PreprocessTweets as preprocess
 
@@ -28,7 +29,6 @@ def separateIndividualLanguages(List):
             languageArray.append(key)
             for subKey in List.keys():
                 if key in subKey and not key is subKey:
-
                     individualCorpus[key] = individualCorpus[key] + List.get(subKey)
 
     return individualCorpus, languageArray
@@ -66,7 +66,6 @@ def printTweets(tweetList):
 # Obtain N-Grams from the tweet list
 
 def obtainNgrams(tweetListPreProcessed):
-
     # Join all the tweets in one language. Return one dictionary of languages
     corpus, arrayLanguages = concatenateLanguageTweets(tweetListPreProcessed)
 
@@ -91,25 +90,25 @@ def obtainNgrams(tweetListPreProcessed):
 
     return corpusNgrams, arrayLanguages
 
-def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
+
+def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
     outofplaceResult = list()
 
-    FDLenght=min(len(freqDist),FDLenght)
-    TTLenght=min(len(freqDistTest),TTLenght)
+    FDLenght = min(len(freqDist), FDLenght)
+    TTLenght = min(len(freqDistTest), TTLenght)
     # Get m x n items
     topFDItems = freqDist.items()[:FDLenght]
     topTTItems = freqDistTest.items()[:TTLenght]
 
-
     totalDistance = 0
-    for i in xrange(0,TTLenght):
+    for i in xrange(0, TTLenght):
         # print(testText + "\t" + str(TTLenght) + "\t" +str(len(topTTItems)))
         lp = topTTItems[i]
         distance = FDLenght
-        for j in xrange(0,FDLenght):
+        for j in xrange(0, FDLenght):
             tp = topFDItems[j]
-            if lp[0] == tp[0] or j == FDLenght-1:
-                distance = abs(i-j)
+            if lp[0] == tp[0] or j == FDLenght - 1:
+                distance = abs(i - j)
                 totalDistance += distance
                 break
-    return totalDistance/(FDLenght*TTLenght)
+    return totalDistance / (FDLenght * TTLenght)
