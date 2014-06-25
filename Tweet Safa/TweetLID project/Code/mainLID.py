@@ -82,8 +82,7 @@ sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
 sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:  "+str(max)+"\n")
 
 
-text = "més val que sigui bó"
-label='ca'
+
 prob = 1.0;
 # for i in range(0,len(text)-3):
 #     x = text[i]; y = text[i+1]; z = text[i+2]
@@ -98,30 +97,8 @@ prob = 1.0;
 # 3.3-. Algorithms: Ranking Methods
 
 # 3.4-. Out-of-place Measure
-
-
-def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
-    outofplaceResult = list()
-
-    FDLenght=min(len(freqDist),FDLenght)
-    TTLenght=min(len(freqDistTest),TTLenght)
-    # Get m x n items
-    topFDItems = freqDist.items()[:FDLenght]
-    topTTItems = freqDistTest.items()[:TTLenght]
-
-
-    totalDistance = 0
-    for i in xrange(0,TTLenght):
-        # print(testText + "\t" + str(TTLenght) + "\t" +str(len(topTTItems)))
-        lp = topTTItems[i]
-        distance = FDLenght
-        for j in xrange(0,FDLenght):
-            tp = topFDItems[j]
-            if lp[0] == tp[0] or j == FDLenght-1:
-                distance = abs(i-j)
-                totalDistance += distance
-                break
-    return totalDistance/(FDLenght*TTLenght)
+text = "més val que sigui bó"
+label='ca'
 
 acc=0
 tot=0
@@ -134,9 +111,7 @@ for key in corpusNgrams.keys():
     for subkey in corpusNgrams.get(key).keys():
         languagesList.append(subkey)
         # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
-        if key == '1':
-            print(subkey)
-        predictedLanguage.append(outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(text,int(float(key)))))
+        predictedLanguage.append(utils.outofplaceMeasure(80,50,corpusNgrams.get(key).get(subkey),utils.getFreqDist(text,int(float(key)))))
     predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
     if label == predicted:
         acc=acc+1

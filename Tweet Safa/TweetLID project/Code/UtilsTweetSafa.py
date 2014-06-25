@@ -90,3 +90,26 @@ def obtainNgrams(tweetListPreProcessed):
     corpusNgrams = freqDistributions(corpus, maxNgram)
 
     return corpusNgrams, arrayLanguages
+
+def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
+    outofplaceResult = list()
+
+    FDLenght=min(len(freqDist),FDLenght)
+    TTLenght=min(len(freqDistTest),TTLenght)
+    # Get m x n items
+    topFDItems = freqDist.items()[:FDLenght]
+    topTTItems = freqDistTest.items()[:TTLenght]
+
+
+    totalDistance = 0
+    for i in xrange(0,TTLenght):
+        # print(testText + "\t" + str(TTLenght) + "\t" +str(len(topTTItems)))
+        lp = topTTItems[i]
+        distance = FDLenght
+        for j in xrange(0,FDLenght):
+            tp = topFDItems[j]
+            if lp[0] == tp[0] or j == FDLenght-1:
+                distance = abs(i-j)
+                totalDistance += distance
+                break
+    return totalDistance/(FDLenght*TTLenght)
