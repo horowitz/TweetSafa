@@ -4,10 +4,6 @@ def getlinearcoefficients(language, unigrams, bigrams, trigrams):
     lambda1 = 0; lambda2 = 0; lambda3 = 0;
     linearCoefficients = list()
 
-    # trigrams = corpusNgrams.get('3').get('en')
-    # bigrams = corpusNgrams.get('2').get('en')
-    # unigrams = corpusNgrams.get('1').get('en')
-
     for tg in trigrams.items():
         unigram = tg[0][0]
         bigram = tg[0][0] + tg[0][1]

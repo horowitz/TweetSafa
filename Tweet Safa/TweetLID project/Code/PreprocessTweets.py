@@ -59,7 +59,6 @@ def main(tweetList):
         if (tweet.text != 'Not Available'):
             tweetPreprocessed = preprocessText(tweet.text)
 
-
             #TODO
             #remove emoticons
 
