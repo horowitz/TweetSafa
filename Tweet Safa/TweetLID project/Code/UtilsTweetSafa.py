@@ -78,12 +78,8 @@ def obtainNgrams(tweetListPreProcessed):
 
     individualLanguage = True
 
-    print 'antes ' + str(arrayLanguages)
-
     if individualLanguage:
         corpus, arrayLanguages = separateIndividualLanguages(corpus)
-
-    print 'despues ' + str(arrayLanguages)
 
     # clean dictionary of double spaces from concatenation
     for key in corpus.keys():

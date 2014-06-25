@@ -39,11 +39,47 @@ corpusNgrams, arrayLanguages = utils.obtainNgrams(tweetListPreProcessed)
 #   Generate linear coefficients: input (n-grams and language)
 #   Smooth data
 
-# print corpusNgrams.get('3').get('en')
+linearCoefficients = list()
 
-linearCoefficients = linear.getlinearcoefficients(corpusNgrams)
+for language in arrayLanguages:
+    unigrams = corpusNgrams.get('1').get(language)
+    bigrams = corpusNgrams.get('2').get(language)
+    trigrams = corpusNgrams.get('3').get(language)
+    linearCoefficients.append(linear.getlinearcoefficients(language, unigrams, bigrams, trigrams))
 
-print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2])+"\n"
+max = 0;
+tweetEN = "Tomorrow is going to be a good day to go to the beach"
+tweetPT = "Amanhã será um dia muito bom, como ir para a praia."
+tweetCA = "Demà farà un dia molt bo, com per anar a la platja."
+tweetEU = "Bihar egun oso ona egingo du, hondartzara joateko modukoa."
+tweetGL = "Mañá será un día moi bo, como ir á praia."
+tweetES = "Mañana hará un dia muy bueno, como para ir a la playa."
+
+text = preprocess.preprocessText(tweetEU)
+
+print text
+
+for linearCoefficients in linearCoefficients:
+    # print str(linearCoefficients[0])+" "+str(linearCoefficients[1])+" "+str(linearCoefficients[2]) + " " + str(linearCoefficients[3])+"\n"
+
+    prob = 1.0;
+    for i in range(0,len(text)-3):
+        x = text[i]; y = text[i+1]; z = text[i+2]
+        probability = linear.probability(corpusNgrams, linearCoefficients, x, y, z)
+        # print probability
+        prob = prob * probability
+
+    if prob >= max:
+        language = linearCoefficients[0]
+        max = prob
+
+
+    sys.stdout.write("Sequence probability in "+str(linearCoefficients[0])+": "+str(prob)+"\n")
+
+
+sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
+sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:  "+str(max)+"\n")
+
 
 text = "més val que sigui bó"
 label='ca'
@@ -55,11 +91,12 @@ prob = 1.0;
 #
 # sys.stdout.write("Sequence probability: "+str(prob)+"\n")
 
+
 # 3.2-. Algorithms: Bayesian Networks
 
 # 3.3-. Algorithms: Ranking Methods
 
-# 3.4-.. Out-of-place Measure
+# 3.4-. Out-of-place Measure
 
 
 def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
@@ -70,6 +107,7 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist,freqDistTest):
     # Get m x n items
     topFDItems = freqDist.items()[:FDLenght]
     topTTItems = freqDistTest.items()[:TTLenght]
+
 
     totalDistance = 0
     for i in xrange(0,TTLenght):
@@ -104,3 +142,4 @@ for key in corpusNgrams.keys():
     tot=tot+1
     print('True: '+label+' Predicted: '+predicted)
 print(str(acc/tot))
+
