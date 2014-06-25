@@ -90,7 +90,7 @@ def obtainNgrams(tweetListPreProcessed):
 
     return corpusNgrams, arrayLanguages
 
-
+# Calculates out of place measure
 def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
     outofplaceResult = list()
 
@@ -112,3 +112,25 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
                 totalDistance += distance
                 break
     return totalDistance / (FDLenght * TTLenght)
+
+# returns confidence of each N-gram to be a good guesser.
+def learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n):
+    acc=0
+    tot=0
+    ngramPredictedLanguage=list()
+    for key in corpusNgrams.keys():
+        predictedLanguage=list()
+        languagesList= None
+        print('N: '+ key)
+        languagesList=corpusNgrams.get(key).keys()
+        for subkey in languagesList:
+            # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
+            predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),testFreq))
+        predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
+        if label == predicted:
+            confidenceDict[key]=confidenceDict[key]+1
+            acc=acc+1
+        tot=tot+1
+        print('True: '+label+' Predicted: '+predicted)
+    print(str(acc/tot))
+    return confidenceDict,tot
