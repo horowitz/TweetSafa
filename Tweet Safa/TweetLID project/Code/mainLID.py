@@ -9,6 +9,7 @@ import numpy as np
 import sys
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
+
 dataset = "../Dataset/output_complete.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
@@ -55,7 +56,7 @@ tweetEU = "Bihar egun oso ona egingo du, hondartzara joateko modukoa."
 tweetGL = "Mañá será un día moi bo, como ir á praia."
 tweetES = "Mañana hará un dia muy bueno, como para ir a la playa."
 
-text = preprocess.preprocessText(tweetEU)
+text = preprocess.preprocessText(tweetES)
 
 print text
 
