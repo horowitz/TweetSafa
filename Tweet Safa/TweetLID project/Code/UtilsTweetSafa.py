@@ -40,7 +40,7 @@ def separateIndividualLanguages(List):
 def freqDistributions(corpus, maxNgram):
     corpusNgrams = dict()
 
-    for N in xrange(1, maxNgram):
+    for N in xrange(1, maxNgram+1):
         auxCorpus = dict()
 
         for key in corpus.keys():
@@ -83,7 +83,6 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
     # clean dictionary of double spaces from concatenation
     for key in corpus.keys():
         corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
-
 
 
     corpusNgrams = freqDistributions(corpus, maxNgram)

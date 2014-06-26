@@ -26,8 +26,9 @@ tweetListPreProcessed = preprocess.main(tweetList)
 # 3-. Algorithms
 #
 # 3.1-. OBTAIN N-GRAMS
+ngrams = 4
 
-corpusNgrams, arrayLanguages = utils.obtainNgrams(tweetListPreProcessed)
+corpusNgrams, arrayLanguages = utils.obtainNgrams(tweetListPreProcessed, ngrams)
 
 
 #print(corpusNgrams.get(str(4)).get('es'))
@@ -36,9 +37,21 @@ corpusNgrams, arrayLanguages = utils.obtainNgrams(tweetListPreProcessed)
 
 # Clean data -> Algorithm
 
-# 3.2-. Linear interpolation
-#   Generate linear coefficients: input (n-grams and language)
-#   Smooth data
+
+
+prob = 1.0;
+# for i in range(0,len(text)-3):
+#     x = text[i]; y = text[i+1]; z = text[i+2]
+#     probability = linear.probability(corpusNgrams, linearCoefficients, x, y, z)
+#     prob = prob * probability
+#
+# sys.stdout.write("Sequence probability: "+str(prob)+"\n")
+
+
+# 3.2-. Algorithms: Bayesian Networks
+#   3.2.1-. Linear interpolation
+#       Generate linear coefficients: input (n-grams and language)
+#       Smooth data
 
 linearCoefficients = list()
 
@@ -83,28 +96,6 @@ sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:
 
 
 
-prob = 1.0;
-# for i in range(0,len(text)-3):
-#     x = text[i]; y = text[i+1]; z = text[i+2]
-#     probability = linear.probability(corpusNgrams, linearCoefficients, x, y, z)
-#     prob = prob * probability
-#
-# sys.stdout.write("Sequence probability: "+str(prob)+"\n")
-
-
-# 3.2-. Algorithms: Bayesian Networks
-
 # 3.3-. Algorithms: Ranking Methods
 
 # 3.4-. Out-of-place Measure
-textHOLA = "més val que sigui bó"
-label='ca'
-testFreq = utils.getFreqDist(textHOLA,int(float(key)))
-
-confidenceDict=dict((el,0) for el in corpusNgrams.keys())
-m=80
-n=50
-confidenceDict,tot = learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n)
-confidenceDict,tot = learnNgramConfidences(confidenceDict,corpusNgrams,testFreq,m,n)
-
-confidenceProbabilityDict=dict((el,confidenceDict[el]/tot) for el in corpusNgrams.keys())
