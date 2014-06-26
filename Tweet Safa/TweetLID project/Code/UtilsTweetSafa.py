@@ -48,16 +48,14 @@ def getFreqDist(text, n):
     return freqDist
 
 # Print tweets from an input list
-
 def printTweets(tweetList):
     for tweet in tweetList:
         print tweet.text
 
 # Obtain N-Grams from the tweet list
-
 def obtainNgrams(tweetListPreProcessed,maxNgram):
     # Join all the tweets in one language. Return one dictionary of languages
-    corpus, arrayLanguages = concatenateLanguageTweets(tweetListPreProcessed)
+    corpus, arrayLanguagesFull = concatenateLanguageTweets(tweetListPreProcessed)
     # individualLanguage=true:
     #       Only individual languages(en,es,..)
     # individualLanguage=false:
@@ -69,7 +67,7 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
     for key in corpus.keys():
         corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
     corpusNgrams = freqDistributions(corpus, maxNgram)
-    return corpusNgrams, arrayLanguages
+    return corpusNgrams, arrayLanguages,arrayLanguagesFull
 
 # Calculates out of place measure
 def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
@@ -156,7 +154,7 @@ def chooseLanguages(predictedDict,threshold):
     items = [(k, v) for v, k in items]
     language,value = items.pop(0)
     count = 0
-    if not language=='other' and not language=='und':
+    if not language=='other' or not language=='und':
         for k,v in items:
             count += 1
             if count == 1:
@@ -168,3 +166,19 @@ def chooseLanguages(predictedDict,threshold):
                 else:
                     break
     return language
+
+# order vector
+def orderVector(arrayLanguagesFull):
+    orderedVector=list()
+    for el in arrayLanguagesFull:
+        if(not '+' in el and not '/' in el and not 'other' in el and not 'und' in el):
+            orderedVector.append(el)
+    orderedVector.append('other')
+    orderedVector.append('und')
+    for el in arrayLanguagesFull:
+        if('+' in el):
+            orderedVector.append(el)
+    for el in arrayLanguagesFull:
+        if('/' in el):
+            orderedVector.append(el)
+    return orderedVector

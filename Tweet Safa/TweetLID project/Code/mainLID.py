@@ -8,7 +8,7 @@ import Smoothing as linear
 import numpy as np
 
 import sys
-
+maxNgram=5
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
 dataset = "../Dataset/output.txt"
@@ -18,7 +18,8 @@ tweetList = read.read_tweets_dataset(dataset)
 # 2-. Pre-process state
 
 tweetListPreProcessed = preprocess.main(tweetList)
-
+corpusNgrams, arrayLanguages,arrayLanguagesFull=utils.obtainNgrams(tweetList,maxNgram)
+arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
     # Raw data -> tweetList
     # Clean data -> tweetListPreProcessed
 
@@ -96,5 +97,6 @@ tweetListPreProcessed = preprocess.main(tweetList)
 # 3.2-. Algorithms: Bayesian Networks
 
 # 3.3-. Algorithms: Ranking Methods
-cv.nestedCrossValidation(tweetListPreProcessed,10,10,[0,0,0])
+print(arrayLanguagesFull)
+cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
 # 3.4-. Out-of-place Measure
