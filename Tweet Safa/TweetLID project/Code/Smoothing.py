@@ -77,4 +77,4 @@ def probability(grams, lic, text, maxNgrams):
         except ZeroDivisionError:
             prob = 0.0
         probabilities[contador-1] = prob
-    return sum(probabilities)+0.000000000000000000001
+    return sum(probabilities)+0.0000000001

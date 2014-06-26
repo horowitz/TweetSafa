@@ -9,11 +9,11 @@ import CrossValidation as cv
 
 import sys
 
-maxNgram = 5
+maxNgram = 3
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
-dataset = "../Dataset/output.txt"
+dataset = "../Dataset/output_complete.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
 
@@ -60,8 +60,17 @@ tweetCA = "Demà farà un dia molt bo, com per anar a la platja."
 tweetEU = "Bihar egun oso ona egingo du, hondartzara joateko modukoa."
 tweetGL = "Mañá será un día moi bo, como ir á praia."
 tweetES = "Mañana hará un dia muy bueno, como para ir a la playa."
-tweet = "hola caracola"
-text = preprocess.preprocessText(tweetEN)
+
+realEN = "'Where is the moment when we need it the most' @ Salvador de Bahía, Brasil http://instagram.com/p/lX9he2CrnF/ "
+realPT = "Faltam 11 dias para fazer anos, hmm"
+realCA = "Comença al Centre Fraternal la Jornada de Cooperaciò i defensa dels DDHH al Sàhara Occidental pic.twitter.com/lmOEAfww7K"
+realEU = "@ErrealaAle @rnrjukebox hori ere pentsatu det, km mordoxka zegoen bukaera arte bakarrik juteko,... bestela oso erraz jun da,..."
+realGL = "Pouco frío tiña eu logo no carnaval en Abadín"
+realES = "#Lugo #a6 (amarillo) obras en #PedrafitaDoCebreiro carril izquierdo cerrado km431,3~430 decreciente #dgt #trafico http://tuitrafico.com/estado-del-trafico/galicia/lugo/pedrafita-do-cebreiro/199833/ …"
+realUND = "Hhhhhhhhhhhhjjhhhhhhhhhhhh"
+realOTHER = "Buongiorno ai nostri ascoltatori in Italia :)) pic.twitter.com/zfGpYc3oxo"
+
+text = preprocess.preprocessText(realOTHER)
 
 print text
 
