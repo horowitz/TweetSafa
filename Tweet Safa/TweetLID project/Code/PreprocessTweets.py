@@ -45,7 +45,7 @@ def preprocessText(tweet):
     tweetPreprocessed = remove_puntuation(tweetPreprocessed)
     tweetPreprocessed = remove_multiple_spaces(tweetPreprocessed)
     tweetPreprocessed = remove_vowel_repetitions(tweetPreprocessed)
-    #tweetPreprocessed = remove_emoticons(tweetPreprocessed)
+    #tweetPreprocessed = remove_emoticons(tweetPreprocessed) #TODO
     tweetPreprocessed = remove_numbers(tweetPreprocessed)
     tweetPreprocessed = remove_emoticons(tweetPreprocessed)
     return tweetPreprocessed
@@ -56,11 +56,8 @@ def main(tweetList):
     tweetPreprocessed = ""
 
     for tweet in tweetList:
-        if (tweet.text != 'Not Available'):
+        # if (tweet.text != 'Not Available'):
             tweetPreprocessed = preprocessText(tweet.text)
-
-            #TODO
-            #remove emoticons
 
             # Save in new object
             tweetPre = read.make_tweet(tweet.id, tweet.name, tweet.language, tweetPreprocessed)

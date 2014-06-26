@@ -9,7 +9,7 @@ import CrossValidation as cv
 import numpy as np
 
 import sys
-maxNgram = 5
+maxNgram = 3
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
 dataset = "../Dataset/output.txt"
@@ -50,7 +50,7 @@ for language in arrayLanguages:
     bigrams = corpusNgrams.get('2').get(language)
     trigrams = corpusNgrams.get('3').get(language)
     linearCoefficients.append(linear.getlinearcoefficients(language, unigrams, bigrams, trigrams))
-
+print linearCoefficients
 max = 0;
 tweetEN = "Tomorrow is going to be a good day to go to the beach"
 tweetPT = "Amanhã será um dia muito bom, como ir para a praia."
@@ -59,6 +59,7 @@ tweetEU = "Bihar egun oso ona egingo du, hondartzara joateko modukoa."
 tweetGL = "Mañá será un día moi bo, como ir á praia."
 tweetES = "Mañana hará un dia muy bueno, como para ir a la playa."
 
+tweet = "hola caracola"
 text = preprocess.preprocessText(tweetEN)
 
 print text

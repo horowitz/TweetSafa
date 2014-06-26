@@ -9,11 +9,11 @@ import CrossValidation as cv
 
 import sys
 
-maxNgram = 3
+maxNgram = 5
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
-dataset = "../Dataset/output_complete.txt"
+dataset = "../Dataset/output.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
 
@@ -54,14 +54,14 @@ for language in arrayLanguages:
     linearCoefficients.append(linear.getlinearcoefficients(language, grams, maxNgram))
 
 max = 0;
-tweetEN = "Tomorrow is going to be a good day to go to the beach"
+tweetEN = "Tomorrow is going to be a good day to go to the beach."
 tweetPT = "Amanhã será um dia muito bom, como ir para a praia."
 tweetCA = "Demà farà un dia molt bo, com per anar a la platja."
 tweetEU = "Bihar egun oso ona egingo du, hondartzara joateko modukoa."
 tweetGL = "Mañá será un día moi bo, como ir á praia."
 tweetES = "Mañana hará un dia muy bueno, como para ir a la playa."
-
-text = preprocess.preprocessText(tweetGL)
+tweet = "hola caracola"
+text = preprocess.preprocessText(tweetEN)
 
 print text
 
@@ -74,6 +74,9 @@ for linearCoefficients in linearCoefficients:
         t = list()
         for g in xrange(0, maxNgram):
             t.append(text[i+g])
+            grams = []
+            for gram in xrange(1, maxNgram+1):
+                grams.append(corpusNgrams.get(str(gram)).get(linearCoefficients[0]))
         probability = linear.probability(grams, linearCoefficients, t, maxNgram)
         prob = prob * probability
 
@@ -82,7 +85,6 @@ for linearCoefficients in linearCoefficients:
         max = prob
 
     sys.stdout.write("Sequence probability in "+str(linearCoefficients[0])+": "+str(prob)+"\n")
-
 
 
 sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))

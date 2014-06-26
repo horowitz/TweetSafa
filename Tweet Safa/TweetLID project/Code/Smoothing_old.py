@@ -19,7 +19,7 @@ def getlinearcoefficients(language, unigrams, bigrams, trigrams):
 
         prob_tg = count_tg / count_bg
         # print prob_tg
-
+        caseli = list()
         if (count_tg > 0):
             case = 0;
             try:
@@ -37,18 +37,6 @@ def getlinearcoefficients(language, unigrams, bigrams, trigrams):
             except ZeroDivisionError:
                 case3 = 0;
 
-            # if(case1 > case2 and case1 > case3 ):#& case1 > case4):
-            #     case = 1
-            #
-            # elif(case2 > case1 and case2 > case3 ):#& case2 > case4):
-            #     case = 2
-            #
-            # elif(case3 > case1 and case3 > case2 ):#& case3 > case4):
-            #     case = 3
-
-            # if(case4 > case1 & case4 > case2 & case4 > case3):
-            #     case = 4
-            #
             if (case1 > case2):
                 if (case1 > case3):
                     case = 1;

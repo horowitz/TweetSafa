@@ -41,8 +41,6 @@ def getlinearcoefficients(language, grams, maxNgrams):
 
         lambdas[temp] = lambdas[temp] + maxCount
 
-    all(lambdas)/sum(lambdas)
-
     linearCoefficients = list()
 
     linearCoefficients.append(language)
@@ -69,7 +67,6 @@ def probability(grams, lic, text, maxNgrams):
         if a:
             count.append(0)
     count.append(totalCount)
-
     contador = 0
     probabilities = [0]*(maxNgrams)
 
