@@ -113,7 +113,7 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
                 break
     return totalDistance / (FDLenght * TTLenght)
 
-# returns confidence of each N-gram to be a good guesser.
+# returns confidence of each N-gram to be a good guesser for a single tweet.
 def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
     acc=0
     tot=0
@@ -135,3 +135,15 @@ def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
         print('True: '+label+' Predicted: '+predicted)
     print(str(acc/tot))
     return confidenceDict,tot
+
+# returns confidence of each N-gram to be a good guesser for a whole train set.
+def learnNgramConfidencefromData(trainSet,validationSet):
+    trainDist = obtainNgrams(trainSet,5)
+    confidenceDict=dict((el,0) for el in trainDist[0].keys())
+    tot=0
+    for tweet in validationSet:
+        confidenceDict , totAux = learnNgramConfidences(confidenceDict,trainDist[0],tweet,80,50)
+        print (confidenceDict)
+        tot=tot+totAux
+    confidenceDict = dict((el,confidenceDict.get(el)/tot) for el in confidenceDict.keys())
+    print(confidenceDict)

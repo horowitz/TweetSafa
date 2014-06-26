@@ -9,15 +9,8 @@ def nestedCrossValidation(tweetList, k, c,models):
         trainAndValidationSet,testSet = divideDataset(tweetList,k,i)
         for j in xrange(c-1):
             trainSet,validationSet = divideDataset(trainAndValidationSet,c,j)
-            trainDist = utils.obtainNgrams(trainSet,5)
-            confidenceDict=dict((el,0) for el in trainDist[0].keys())
+            confidenceDict=utils.learnNgramConfidencefromData(trainSet,validationSet)
             for tweet in validationSet:
-                confidenceDict , tot = utils.learnNgramConfidences(confidenceDict,trainDist[0],tweet,80,50)
-                print (confidenceDict)
-                pass
-
-            pass
-    pass
 
 
 # def divideDataset(dataset,k,index):
@@ -29,7 +22,6 @@ def nestedCrossValidation(tweetList, k, c,models):
 #     return (trainSet,testSet)
 
 def divideDataset(dataset,k,index):
-
     testSet = dataset[int(math.ceil(len(dataset)*index/k)):int(math.ceil(len(dataset)*(index+1)/k))]
     trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))] + dataset[int(math.ceil(len(dataset)*(index+1)/k)):len(dataset)]
     return (trainSet,testSet)
