@@ -104,3 +104,22 @@ sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:
 # cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
 # cv.crossValidation(tweetListPreProcessed,1,[0,0,0],arrayLanguagesFull)
 # 3.4-. Out-of-place Measure
+
+
+
+# EVALUATION:
+
+# PARA USAR EL tweetLID_eval.pl TENEMOS QUE CREAR UN FICHERO EN EL QUE LOS TWEETS ESTEN DE LA SIGUIENTE MANERA:
+
+#   tweet_id<TAB>language
+#
+#   HE PUESTO UN EJEMPLO COGIENDO TWEETS DE OUTPUT_COMPLETE LOS HE GUARDADO EN EL FICHERO result.txt
+#
+#   Para probar el codigo ejecutar la siguiente linea:
+#
+#    perl tweetLID_eval.pl -d ../Dataset/result.txt -r ../Dataset/output_complete.txt ->../Dataset/evaluation_ouput.txt
+#
+#   LO QUE HACE ESTA LINEA ES MIRAR EL RESULT.TXT CREADO POR NOSOTROS, COMPARARLO CON EL OUTPUT_COMPLETE.TXT Y GUARDAR LOS
+#       RESULTADOS EN EL EVALUATION_OUTPUT.TXT
+#
+#   AHI ESTA TODA LA INFORMACION DE LA PRECISION RECAL ETC... EXPLICADA.
