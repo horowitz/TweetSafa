@@ -99,5 +99,6 @@ arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
 
 # 3.3-. Algorithms: Ranking Methods
 print(arrayLanguagesFull)
-cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
+# cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
+cv.crossValidation(tweetListPreProcessed,1,[0,0,0],arrayLanguagesFull)
 # 3.4-. Out-of-place Measure
