@@ -48,7 +48,7 @@ arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
 
 linearCoefficients = list()
 for language in arrayLanguages:
-    grams = list()
+    grams = []
     for gram in xrange(1, maxNgram+1):
         grams.append(corpusNgrams.get(str(gram)).get(language))
     linearCoefficients.append(linear.getlinearcoefficients(language, grams, maxNgram))
@@ -84,11 +84,12 @@ for linearCoefficients in linearCoefficients:
     sys.stdout.write("Sequence probability in "+str(linearCoefficients[0])+": "+str(prob)+"\n")
 
 
+
 sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
 sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:  "+str(max)+"\n")
 
 # 3.3-. Algorithms: Ranking Methods
-print(arrayLanguagesFull)
+# print(arrayLanguagesFull)
 # cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
-cv.crossValidation(tweetListPreProcessed,1,[0,0,0],arrayLanguagesFull)
+# cv.crossValidation(tweetListPreProcessed,1,[0,0,0],arrayLanguagesFull)
 # 3.4-. Out-of-place Measure
