@@ -19,7 +19,7 @@ tweetList = read.read_tweets_dataset(dataset)
 # 2-. Pre-process state
 
 tweetListPreProcessed = preprocess.main(tweetList)
-corpusNgrams, arrayLanguages,arrayLanguagesFull=utils.obtainNgrams(tweetList,maxNgram)
+corpusNgrams, arrayLanguages,arrayLanguagesFull=utils.obtainNgrams(tweetListPreProcessed,maxNgram)
 arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
     # Raw data -> tweetList
     # Clean data -> tweetListPreProcessed
