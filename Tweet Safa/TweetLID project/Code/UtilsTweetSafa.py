@@ -4,9 +4,11 @@ import nltk as nk
 import PreprocessTweets as preprocess
 
 # This method concatenates tweets
+
 def concatenateLanguageTweets(List):
     corpus = dict()
     languageArray = list()
+
     for tweet in List:
         if ~corpus.has_key(tweet.language) & (corpus.get(tweet.language) is None):
             corpus[tweet.language] = tweet.text
@@ -16,9 +18,11 @@ def concatenateLanguageTweets(List):
     return corpus, languageArray
 
 # Separate by individual languages(en,es,eu,ca,gl,pt,und,other). Return a dictionary of individual languages
+
 def separateIndividualLanguages(List):
     individualCorpus = dict()
     languageArray = list()
+
     for key in List.keys():
         if (not '+' in key) and (not '/' in key):
             individualCorpus[key] = List.get(key)
@@ -26,6 +30,7 @@ def separateIndividualLanguages(List):
             for subKey in List.keys():
                 if key in subKey and not key is subKey:
                     individualCorpus[key] = individualCorpus[key] + List.get(subKey)
+
     return individualCorpus, languageArray
 
 # N-gram Frequency distributions for all N and for all Languages.
@@ -34,14 +39,19 @@ def separateIndividualLanguages(List):
 
 def freqDistributions(corpus, maxNgram):
     corpusNgrams = dict()
-    for N in xrange(1, maxNgram):
+
+    for N in xrange(1, maxNgram+1):
         auxCorpus = dict()
+
         for key in corpus.keys():
             auxCorpus[key] = getFreqDist(corpus.get(key), N)
+
         corpusNgrams[str(N)] = auxCorpus
+
     return corpusNgrams
 
 # returns N-gram distribution given a text
+
 def getFreqDist(text, n):
     ngramsObject = nk.ngrams(text, n)
     freqDist = nk.FreqDist(ngramsObject)
@@ -58,11 +68,14 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
     corpus, arrayLanguagesFull = concatenateLanguageTweets(tweetListPreProcessed)
     # individualLanguage=true:
     #       Only individual languages(en,es,..)
+
     # individualLanguage=false:
     #       Mixed languages(en+es,pt+gl,..)
+
     individualLanguage = True
     if individualLanguage:
         corpus, arrayLanguages = separateIndividualLanguages(corpus)
+
     # clean dictionary of double spaces from concatenation
     for key in corpus.keys():
         corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
@@ -71,13 +84,17 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
 
 # Calculates out of place measure
 def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
+    outofplaceResult = list()
+
     FDLenght = min(len(freqDist), FDLenght)
     TTLenght = min(len(freqDistTest), TTLenght)
     # Get m x n items
     topFDItems = freqDist.items()[:FDLenght]
     topTTItems = freqDistTest.items()[:TTLenght]
+
     totalDistance = 0
     for i in xrange(0, TTLenght):
+        # print(testText + "\t" + str(TTLenght) + "\t" +str(len(topTTItems)))
         lp = topTTItems[i]
         distance = FDLenght
         for j in xrange(0, FDLenght):
@@ -88,15 +105,19 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
                 break
     return totalDistance / (FDLenght * TTLenght)
 
-# returns confidence of each N-gram to be a good guesser for a single tweet.
+# returns confidence of each N-gram to be a good guesser.
 def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
     acc=0
     tot=0
     label=tweet.language
+    ngramPredictedLanguage=list()
     for key in corpusNgrams.keys():
         predictedLanguage=list()
+        languagesList= None
+        print('N: '+ key)
         languagesList=corpusNgrams.get(key).keys()
         for subkey in languagesList:
+            # print ('Length' + str(len(corpusNgrams.get(key).get(subkey)) ))
             predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),getFreqDist(tweet.text,int(float(key)))))
         predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
         if label == predicted:
@@ -182,3 +203,4 @@ def orderVector(arrayLanguagesFull):
         if('/' in el):
             orderedVector.append(el)
     return orderedVector
+
