@@ -69,6 +69,7 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
     corpusNgrams = freqDistributions(corpus, maxNgram)
     return corpusNgrams, arrayLanguages,arrayLanguagesFull
 
+
 # Calculates out of place measure
 def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
     FDLenght = min(len(freqDist), FDLenght)

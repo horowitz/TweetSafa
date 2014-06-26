@@ -1,209 +1,83 @@
 from __future__ import division
+import numpy as np
 
-def getlinearcoefficients(language, unigrams, bigrams, trigrams):
-    lambda1 = 0; lambda2 = 0; lambda3 = 0;
+def getlinearcoefficients(language, grams, maxNgrams):
+    lambdas = [0]*(maxNgrams)
+
+    totalCount = grams[0].N()
+
+    for maxgram in grams[maxNgrams-1].items():
+        count = []
+        count.append(maxgram[1])
+        maxCount = maxgram[1]
+        # print maxgram[0] # ngram
+        # print maxgram[1] # count
+
+        for gram in reversed(xrange(0, maxNgrams-1)):
+            # print grams[gram].items()
+            compare = maxgram[0][0:gram+1]
+
+            for g in grams[gram].items():
+                if g[0] == compare:
+                    count.append(g[1])
+                    break
+
+        count.append(totalCount)
+
+        cases = list()
+        max = 0.0
+        temp = 0
+        contador = 0
+        for c in reversed(xrange(0, len(count)-1)):
+            contador = contador + 1
+            try:
+                case = (count[c]-1)/(count[c+1]-1)
+                if case >= max:
+                    max = case
+                    temp = contador-1
+            except ZeroDivisionError:
+                case = 0.0
+            cases.append(case)
+
+        lambdas[temp] = lambdas[temp] + maxCount
+
+    all(lambdas)/sum(lambdas)
+
     linearCoefficients = list()
 
-    for tg in trigrams.items():
-        unigram = tg[0][0]
-        bigram = tg[0][0] + tg[0][1]
-        trigram = tg[0][0] + tg[0][1] + tg[0][2]
-        count_tg = tg[1]
-
-        for bg in bigrams.items():
-            if bigram == bg[0][0] + bg[0][1]:
-                count_bg = bg[1]
-                for ug in unigrams.items():
-                    if unigram == ug[0][0]:
-                        count_ug = ug[1]
-
-        prob_tg = count_tg / count_bg
-        # print prob_tg
-
-        if (count_tg > 0):
-            case = 0;
-            try:
-                case1 = (count_ug - 1) / (unigrams.N() - 1);
-            except ZeroDivisionError:
-                case1 = 0;
-
-            try:
-                case2 = (count_bg - 1) / (count_ug - 1);
-            except ZeroDivisionError:
-                case2 = 0;
-
-            try:
-                case3 = (count_tg - 1) / (count_bg - 1);
-            except ZeroDivisionError:
-                case3 = 0;
-
-            # if(case1 > case2 and case1 > case3 ):#& case1 > case4):
-            #     case = 1
-            #
-            # elif(case2 > case1 and case2 > case3 ):#& case2 > case4):
-            #     case = 2
-            #
-            # elif(case3 > case1 and case3 > case2 ):#& case3 > case4):
-            #     case = 3
-
-            # if(case4 > case1 & case4 > case2 & case4 > case3):
-            #     case = 4
-            #
-            if (case1 > case2):
-                if (case1 > case3):
-                    case = 1;
-                elif (case3 > case2):
-                    case = 3;
-            elif (case2 > case3):
-                case = 2;
-            else:
-                case = 3;
-
-            if (case == 1):
-                lambda1 = lambda1 + count_tg;
-            if (case == 2):
-                lambda2 = lambda2 + count_tg;
-            if (case == 3):
-                lambda3 = lambda3 + count_tg;
-
-
-    # print unigrams.N()  #samples
-    # print unigrams.B()  #outcomes
-    # print unigrams.items
-
-    normLambda1 = 0; normLambda2 = 0; normLambda3 = 0;
-
-    lambdaSum = lambda1+lambda2+lambda3;
-
-    normLambda1 = lambda1/lambdaSum;
-    normLambda2 = lambda2/lambdaSum;
-    normLambda3 = lambda3/lambdaSum;
-
     linearCoefficients.append(language)
-    linearCoefficients.append(normLambda1)
-    linearCoefficients.append(normLambda2)
-    linearCoefficients.append(normLambda3)
+
+    for l in lambdas:
+        linearCoefficients.append(l/sum(lambdas))
+
 
     return linearCoefficients
 
 
-# def getlinearcoefficients(language, ngrams, corpusNgrams):
-#     lambdas = list()
-#     linearCoefficients = list()
-#     counts = list()
-#
-#     for maxg in corpusNgrams.get(ngrams).get(language):
-#         counts.append(maxg[1])
-#         while (ngrams > 0):
-#
-#
-#
-#
-#     for tg in trigrams.items():
-#         unigram = tg[0][0]
-#         bigram = tg[0][0] + tg[0][1]
-#         trigram = tg[0][0] + tg[0][1] + tg[0][2]
-#         count_tg = tg[1]
-#
-#         for bg in bigrams.items():
-#             if bigram == bg[0][0] + bg[0][1]:
-#                 count_bg = bg[1]
-#                 for ug in unigrams.items():
-#                     if unigram == ug[0][0]:
-#                         count_ug = ug[1]
-#
-#         prob_tg = count_tg / count_bg
-#         # print prob_tg
-#
-#         if (count_tg > 0):
-#             case = 0;
-#             try:
-#                 case1 = (count_ug - 1) / (unigrams.N() - 1);
-#             except ZeroDivisionError:
-#                 case1 = 0;
-#
-#             try:
-#                 case2 = (count_bg - 1) / (count_ug - 1);
-#             except ZeroDivisionError:
-#                 case2 = 0;
-#
-#             try:
-#                 case3 = (count_tg - 1) / (count_bg - 1);
-#             except ZeroDivisionError:
-#                 case3 = 0;
-#
-#             if (case1 > case2):
-#                 if (case1 > case3):
-#                     case = 1;
-#                 elif (case3 > case2):
-#                     case = 3;
-#             elif (case2 > case3):
-#                 case = 2;
-#             else:
-#                 case = 3;
-#
-#             if (case == 1):
-#                 lambda1 = lambda1 + count_tg;
-#             if (case == 2):
-#                 lambda2 = lambda2 + count_tg;
-#             if (case == 3):
-#                 lambda3 = lambda3 + count_tg;
-#
-#
-#     # print unigrams.N()  #samples
-#     # print unigrams.B()  #outcomes
-#     # print unigrams.items
-#
-#     normLambda1 = 0; normLambda2 = 0; normLambda3 = 0;
-#
-#     lambdaSum = lambda1+lambda2+lambda3;
-#
-#     normLambda1 = lambda1/lambdaSum;
-#     normLambda2 = lambda2/lambdaSum;
-#     normLambda3 = lambda3/lambdaSum;
-#
-#     linearCoefficients.append(language)
-#     linearCoefficients.append(normLambda1)
-#     linearCoefficients.append(normLambda2)
-#     linearCoefficients.append(normLambda3)
-#
-#     return linearCoefficients
+def probability(grams, lic, text, maxNgrams):
+    text = tuple(text)
+    totalCount = grams[0].N()
+    count = []
+    for gram in reversed(xrange(0, maxNgrams)):
+        compare = text[0:gram + 1]
+        a = True
+        for g in grams[gram].items():
+            if g[0] == compare:
+                count.append(g[1])
+                a = False
+                break
+        if a:
+            count.append(0)
+    count.append(totalCount)
 
+    contador = 0
+    probabilities = [0]*(maxNgrams)
 
-def probability(corpusNgrams, lic, x, y, z):
-    trigrams = corpusNgrams.get('3').get(str(lic[0]))
-    bigrams = corpusNgrams.get('2').get(str(lic[0]))
-    unigrams = corpusNgrams.get('1').get(str(lic[0]))
-
-    for ug in unigrams.items():
-        if z == ug[0][0]:
-            count_ug = ug[1]
-    try:
-        px = (lic[1] * count_ug) / unigrams.N();
-    except ZeroDivisionError:
-        px = 0;
-    except UnboundLocalError:
-        px = 0;
-
-    for bg in bigrams.items():
-        if y+z == bg[0][0] + bg[0][1]:
-            count_bg = bg[1]
-    try:
-        pxy = (lic[2] * count_bg) / count_ug ;
-    except ZeroDivisionError:
-        pxy = 0;
-    except UnboundLocalError:
-        pxy = 0;
-
-    for tg in trigrams.items():
-        if x+y+z == tg[0][0] + tg[0][1] + tg[0][2]:
-            count_tg = tg[1]
-    try:
-        pxyz = (lic[3] * count_tg) / count_bg
-    except ZeroDivisionError:
-        pxyz = 0;
-    except UnboundLocalError:
-        pxyz = 0;
-
-
-    return px + pxy + pxyz + 0.000000000001;
+    for c in reversed(xrange(0, len(count)-1)):
+        contador = contador + 1
+        try:
+            prob = (lic[contador] * count[c])/(count[c+1])
+        except ZeroDivisionError:
+            prob = 0.0
+        probabilities[contador-1] = prob
+    return sum(probabilities)+0.000000000000000000001
