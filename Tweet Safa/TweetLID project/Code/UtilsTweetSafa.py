@@ -104,7 +104,6 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
                 totalDistance += distance
                 break
     return totalDistance / (FDLenght * TTLenght)
-
 # returns confidence of each N-gram to be a good guesser.
 def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
     acc=0

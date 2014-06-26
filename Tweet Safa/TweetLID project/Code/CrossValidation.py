@@ -4,7 +4,8 @@ __author__ = 'danielhorowitz'
 import math
 import UtilsTweetSafa as utils
 def nestedCrossValidation(tweetList, k, c,models,arrayLanguagesFull):
-    m,n=80,50
+    m=80
+    n=50
     for i in xrange(k-1):
         trainAndValidationSet,testSet = divideDataset(tweetList,k,i)
         for j in xrange(c-1):
@@ -18,15 +19,13 @@ def divideDataset(dataset,k,index):
     trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))] + dataset[int(math.ceil(len(dataset)*(index+1)/k)):len(dataset)]
     return (trainSet,testSet)
 
-def accuracy(true,predicted,order):
-    matrix=0
-    for i in xrange(0,len(predicted)):
-        if(not '+' in predicted[i] and not '/' in predicted[i]):
-            print (predicted[i])
-        else:
-            if('+' in predicted[i]):
-
-            else:
-
-
-    return matrix
+# def accuracy(true,predicted,order):
+#     matrix=0
+#     for i in xrange(0,len(predicted)):
+#         if(not '+' in predicted[i] and not '/' in predicted[i]):
+#             print (predicted[i])
+#         else:
+#             if('+' in predicted[i]):
+#
+#             else:
+#     return matrix
