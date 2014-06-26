@@ -5,6 +5,8 @@ import PreprocessTweets as preprocess
 import UtilsTweetSafa as utils
 import Smoothing as linear
 import numpy as np
+import CrossValidation as cv
+
 import sys
 
 maxNgram = 3
@@ -86,3 +88,7 @@ sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
 sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:  "+str(max)+"\n")
 
 # 3.3-. Algorithms: Ranking Methods
+print(arrayLanguagesFull)
+# cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
+cv.crossValidation(tweetListPreProcessed,1,[0,0,0],arrayLanguagesFull)
+# 3.4-. Out-of-place Measure

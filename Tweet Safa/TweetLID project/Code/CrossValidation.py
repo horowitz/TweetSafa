@@ -13,7 +13,19 @@ def nestedCrossValidation(tweetList, k, c,models,arrayLanguagesFull):
             trainDist = utils.obtainNgrams(trainSet,6)
             confidenceDict=utils.learnNgramConfidencefromData(trainDist,validationSet)
             predicted,true=utils.evaluateNgramRakingSet(validationSet,trainDist, confidenceDict,m,n)
+            print(predicted+true)
             # DANI PON AQUI EL SCRIPT. EL PREDICTED ES UN VECTOR QUE TIENE LAS PREDICTED LABELS I EL TRUE TIENE LOS VERDADEROS
+def crossValidation(tweetList, k,models,arrayLanguagesFull):
+    m=80
+    n=50
+    for i in xrange(k-1):
+        trainSet,testSet = divideDataset(tweetList,k,i)
+        trainDist = utils.obtainNgrams(trainSet,6)
+        confidenceDict=utils.learnNgramConfidencefromData(trainDist,testSet)
+        predicted,true=utils.evaluateNgramRakingSet(testSet,trainDist, confidenceDict,m,n)
+        print(predicted+true)
+            # DANI PON AQUI EL SCRIPT. EL PREDICTED ES UN VECTOR QUE TIENE LAS PREDICTED LABELS I EL TRUE TIENE LOS VERDADEROS
+
 def divideDataset(dataset,k,index):
     testSet = dataset[int(math.ceil(len(dataset)*index/k)):int(math.ceil(len(dataset)*(index+1)/k))]
     trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))] + dataset[int(math.ceil(len(dataset)*(index+1)/k)):len(dataset)]
