@@ -65,8 +65,9 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
     # clean dictionary of double spaces from concatenation
     for key in corpus.keys():
         corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
-    corpusNgrams = freqDistributions(corpus, maxNgram)
-    return corpusNgrams, arrayLanguages,arrayLanguagesFull
+    corpusNgrams = freqDistributions(corpus, maxNgram+1)
+
+    return corpusNgrams, arrayLanguages, arrayLanguagesFull
 
 
 # Calculates out of place measure
@@ -215,3 +216,8 @@ def printResults(testSet, predictedList, ind):
         f.write(tweet.id+'\t'+predictedList[index]+'\n') # python will convert \n to os.linesep
         index+=1
     f.close() # you c
+
+def printResultTXT(predictedLanguage, tweet):
+    file = open('../Results/resultLinearInterpolation.txt', 'a+')
+    file.write(tweet.id+'\t'+predictedLanguage+'\n')
+    file.close()

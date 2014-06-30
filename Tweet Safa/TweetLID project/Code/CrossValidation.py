@@ -1,6 +1,7 @@
 from __future__ import division
 import nltk as nk
 import math
+import Smoothing as linear
 import UtilsTweetSafa as utils
 
 # def nestedCrossValidation(tweetList, k, c,models,arrayLanguagesFull):
@@ -46,3 +47,20 @@ def divideDataset(dataset,k,index):
 #
 #             else:
 #     return matrix
+
+def crossValidationLinearInterpolation(tweetList, k, maxNgram):
+    for i in xrange(k):
+        trainSet, testSet = divideDataset(tweetList, k, i)
+        trainDist, arrayLanguages, languagesAll = utils.obtainNgrams(trainSet, maxNgram)
+        linearCoefficients = linear.getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, trainDist)
+        print linearCoefficients
+        count = 0
+        tot = 0
+        for tweet in testSet:
+            predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, tweet.text, maxNgram, trainDist)
+            # utils.printResultTXT(predictedLanguage, tweet)
+            # print(predictedLanguage + tweet.language)
+            if(predictedLanguage==tweet.language):
+                count = count + 1;
+            tot = tot +1
+        print 'correct tweets fold '+str(i)+' = '+str(count)+'/'+str(tot)

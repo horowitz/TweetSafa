@@ -30,8 +30,8 @@ shuffle(tweetListPreProcessed)
 #
 # 3.1-. OBTAIN N-GRAMS
 
-corpusNgrams, arrayLanguages,arrayLanguagesFull = utils.obtainNgrams(tweetListPreProcessed, maxNgram+1)
-arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
+# corpusNgrams, arrayLanguages, arrayLanguagesFull = utils.obtainNgrams(tweetListPreProcessed, maxNgram+1)
+# arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
 
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
 
@@ -41,33 +41,12 @@ arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
 #       Generate linear coefficients: input (n-grams and language)
 #       Smooth data
 
-
-tweetEN = "Tomorrow is going to be a good day to go to the beach."
-tweetPT = "Amanhã será um dia muito bom, como ir para a praia."
-tweetCA = "Demà farà un dia molt bo, com per anar a la platja."
-tweetEU = "Bihar egun oso ona egingo du, hondartzara joateko modukoa."
-tweetGL = "Mañá será un día moi bo, como ir á praia."
-tweetES = "Mañana hará un dia muy bueno, como para ir a la playa."
-
-realEN = "'Where is the moment when we need it the most' @ Salvador de Bahía, Brasil http://instagram.com/p/lX9he2CrnF/ "
-realPT = "Faltam 11 dias para fazer anos, hmm"
-realCA = "Comença al Centre Fraternal la Jornada de Cooperaciò i defensa dels DDHH al Sàhara Occidental pic.twitter.com/lmOEAfww7K"
-realEU = "@ErrealaAle @rnrjukebox hori ere pentsatu det, km mordoxka zegoen bukaera arte bakarrik juteko,... bestela oso erraz jun da,..."
-realGL = "Pouco frío tiña eu logo no carnaval en Abadín"
-realES = "#Lugo #a6 (amarillo) obras en #PedrafitaDoCebreiro carril izquierdo cerrado km431,3~430 decreciente #dgt #trafico http://tuitrafico.com/estado-del-trafico/galicia/lugo/pedrafita-do-cebreiro/199833/ …"
-realUND = "Hhhhhhhhhhhhjjhhhhhhhhhhhh"
-realOTHER = "Buongiorno ai nostri ascoltatori in Italia :)) pic.twitter.com/zfGpYc3oxo"
-
-text = preprocess.preprocessText(realES)
-
-linearCoefficients = linear.getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams)
+cv.crossValidationLinearInterpolation(tweetListPreProcessed, 3, maxNgram)
 
 
-predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgrams)
-
-
-sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
-sys.stdout.write("\n    Tweet language:   "+str(predictedLanguage)+"\n    Probability of:  "+str(probability)+"\n")
+# linearCoefficients = linear.getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams)
+# for tweet in tweetListPreProcessed:
+#     predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, tweet.text, maxNgram, corpusNgrams)
 
 # 3.3-. Algorithms: Ranking Methods
 # print(arrayLanguagesFull)
