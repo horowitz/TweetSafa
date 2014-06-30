@@ -3,31 +3,30 @@ import nltk as nk
 __author__ = 'danielhorowitz'
 import math
 import UtilsTweetSafa as utils
-def nestedCrossValidation(tweetList, k, c,models,arrayLanguagesFull):
-    m=80
-    n=50
-    for i in xrange(k-1):
-        trainAndValidationSet,testSet = divideDataset(tweetList,k,i)
-        for j in xrange(c-1):
-            trainSet,validationSet = divideDataset(trainAndValidationSet,c,j)
-            trainDist = utils.obtainNgrams(trainSet,6)
-            confidenceDict=utils.learnNgramConfidencefromData(trainDist,validationSet)
-            predicted,true=utils.evaluateNgramRakingSet(validationSet,trainDist, confidenceDict,m,n)
-            print(predicted+true)
-
-            # DANI PON AQUI EL SCRIPT. EL PREDICTED ES UN VECTOR QUE TIENE LAS PREDICTED LABELS I EL TRUE TIENE LOS VERDADEROS
+# def nestedCrossValidation(tweetList, k, c,models,arrayLanguagesFull):
+#     m=80
+#     n=50
+#     for i in xrange(k-1):
+#         trainAndValidationSet,testSet = divideDataset(tweetList,k,i)
+#         for j in xrange(c-1):
+#             trainSet,validationSet = divideDataset(trainAndValidationSet,c,j)
+#             trainDist = utils.obtainNgrams(trainSet,6)
+#             confidenceDict=utils.learnNgramConfidencefromData(trainDist,validationSet)
+#             predicted,true=utils.evaluateNgramRakingSet(validationSet,trainDist, confidenceDict,m,n)
+#             print(predicted+true)
+#
+#             # DANI PON AQUI EL SCRIPT. EL PREDICTED ES UN VECTOR QUE TIENE LAS PREDICTED LABELS I EL TRUE TIENE LOS VERDADEROS
 
 def crossValidation(tweetList, k,models,arrayLanguagesFull,maxNgram):
     m=80
-    n=50
+    n=80
     for i in xrange(k):
-
         trainSet,testSet = divideDataset(tweetList,k,i)
         trainDist = utils.obtainNgrams(trainSet,maxNgram)
         confidenceDict=utils.learnNgramConfidencefromData(trainDist,trainSet)
         predicted,true=utils.evaluateNgramRakingSet(testSet,trainDist, confidenceDict,m,n)
-        print(predicted+true)
-            # DANI PON AQUI EL SCRIPT. EL PREDICTED ES UN VECTOR QUE TIENE LAS PREDICTED LABELS I EL TRUE TIENE LOS VERDADEROS
+        # Print Script
+        utils.printTruePredicted(true, predicted,i)
         utils.printResults(testSet, predicted, i)
 
 

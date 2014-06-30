@@ -215,3 +215,10 @@ def printResults(testSet, predictedList, ind):
         f.write(tweet.id+'\t'+predictedList[index]+'\n') # python will convert \n to os.linesep
         index+=1
     f.close() # you c
+
+def printTruePredicted(true, predicted, ind):
+    ind=ind+1
+    f = open('../Dataset/JeroniProbaCheck%02d.txt' % ind, 'w')
+    for i in xrange(0,len(true)):
+        f.write('True: '+'\t'+true[i]+'\t'+'Predicted:'+'\t'+predicted[i]+'\n') # python will convert \n to os.linesep
+    f.close() # you c
