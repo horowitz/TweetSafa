@@ -70,7 +70,7 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
 
 
 # Calculates out of place measure
-def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
+def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest,tweet):
     FDLenght = min(len(freqDist), FDLenght)
     TTLenght = min(len(freqDistTest), TTLenght)
     # Get m x n items
@@ -86,6 +86,12 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest):
                 distance = abs(i - j)
                 totalDistance += distance
                 break
+    if FDLenght==0:
+        # print('Train')
+        FDLenght=1
+    if TTLenght==0:
+        # print('Test'+'\t'+ tweet.language+'\t'+tweet.text)
+        TTLenght=1
     return totalDistance / (FDLenght * TTLenght)
 
 
@@ -99,7 +105,7 @@ def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
         predictedLanguage=list()
         languagesList=corpusNgrams.get(key).keys()
         for subkey in languagesList:
-            predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),getFreqDist(tweet.text,int(float(key)))))
+            predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),getFreqDist(tweet.text,int(float(key))),tweet))
         predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
         if label == predicted:
             confidenceDict[key]=confidenceDict[key]+1
@@ -108,10 +114,10 @@ def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
     return confidenceDict,tot
 
 # returns confidence of each N-gram to be a good guesser for a whole train set.
-def learnNgramConfidencefromData(trainDist,validationSet):
+def learnNgramConfidencefromData(trainDist,trainSet):
     confidenceDict=dict((el,0) for el in trainDist[0].keys())
     tot=0
-    for tweet in validationSet:
+    for tweet in trainSet:
         confidenceDict , totAux = learnNgramConfidences(confidenceDict,trainDist[0],tweet,80,50)
         tot=tot+totAux
     confidenceDict = dict((el,confidenceDict.get(el)/tot) for el in confidenceDict.keys())
@@ -130,13 +136,15 @@ def evaluateNgramRakingSet(validationSet, trainFreq,confidenceNgrams,m,n):
 def evaluateNgramRanking(tweet,trainFreq,confidenceDict,m,n):
     acc=0
     tot=0
+    if len(tweet.text)<3:
+        return 'und'
     label=tweet.language
     predictedDict=dict()
     for key in trainFreq[0].keys():
         predictedLanguage=list()
         languagesList=trainFreq[0].get(key).keys()
         for subkey in languagesList:
-            predictedLanguage.append(outofplaceMeasure(m,n,trainFreq[0].get(key).get(subkey),getFreqDist(tweet.text,int(float(key)))))
+            predictedLanguage.append(outofplaceMeasure(m,n,trainFreq[0].get(key).get(subkey),getFreqDist(tweet.text,int(float(key))),tweet))
         predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
         if label == predicted:
             acc=acc+1
@@ -145,7 +153,7 @@ def evaluateNgramRanking(tweet,trainFreq,confidenceDict,m,n):
             predictedDict[predicted] = confidenceDict.get(key)
         else:
             predictedDict[predicted] = predictedDict.get(predicted) + confidenceDict.get(key)
-    predictedL=chooseLanguages(predictedDict,0.01)
+    predictedL=chooseLanguages(predictedDict,0.1)
     return predictedL
 
 # choose best languages
@@ -167,6 +175,19 @@ def chooseLanguages(predictedDict,threshold):
                         language = language+'+'+k
                 else:
                     break
+    else:
+        if language=='other':
+            for k,v in items:
+                count += 1
+                if count == 1:
+                    continue
+                else:
+                    if value-v < threshold and not count > 2 :
+                        if not k=='und':
+                            language = k
+                            break
+                    else:
+                        break
     return language
 
 # order vector
@@ -184,3 +205,13 @@ def orderVector(arrayLanguagesFull):
         if('/' in el):
             orderedVector.append(el)
     return orderedVector
+
+# Print results file
+def printResults(testSet, predictedList, ind):
+    ind=ind+1
+    f = open('../Dataset/results%02d.txt' % ind, 'w')
+    index=0
+    for tweet in testSet:
+        f.write(tweet.id+'\t'+predictedList[index]+'\n') # python will convert \n to os.linesep
+        index+=1
+    f.close() # you c
