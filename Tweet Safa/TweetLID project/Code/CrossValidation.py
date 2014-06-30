@@ -32,7 +32,7 @@ def crossValidation(tweetList, k,models,arrayLanguagesFull,maxNgram):
         utils.printResults(testSet, predicted, i)
 
 
-def divideDataset(dataset,k,index):
+def divideDataset(dataset, k, index):
     testSet = dataset[int(math.ceil(len(dataset)*index/k)):int(math.ceil(len(dataset)*(index+1)/k))]
     trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))] + dataset[int(math.ceil(len(dataset)*(index+1)/k)):len(dataset)]
     return (trainSet,testSet)
@@ -58,9 +58,10 @@ def crossValidationLinearInterpolation(tweetList, k, maxNgram):
         tot = 0
         for tweet in testSet:
             predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, tweet.text, maxNgram, trainDist)
-            # utils.printResultTXT(predictedLanguage, tweet)
+            utils.printResultTXT(predictedLanguage, tweet)
             # print(predictedLanguage + tweet.language)
             if(predictedLanguage==tweet.language):
                 count = count + 1;
+                print count
             tot = tot +1
         print 'correct tweets fold '+str(i)+' = '+str(count)+'/'+str(tot)

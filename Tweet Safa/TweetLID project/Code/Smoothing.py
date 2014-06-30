@@ -95,8 +95,8 @@ def languageProbability(text, maxNgram, corpusNgrams, linearCoefficients):
 
 def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgrams):
     maxProbability = 0
-    for linearCoefficients in linearCoefficients:
-        prob, language = languageProbability(text, maxNgram, corpusNgrams, linearCoefficients)
+    for linearCoefficient in linearCoefficients:
+        prob, language = languageProbability(text, maxNgram, corpusNgrams, linearCoefficient)
         if prob >= maxProbability:
             maxLanguage = language
             maxProbability = prob

@@ -10,7 +10,7 @@ import CrossValidation as cv
 
 import sys
 
-maxNgram = 3
+maxNgram = 5
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
@@ -66,7 +66,7 @@ cv.crossValidationLinearInterpolation(tweetListPreProcessed, 3, maxNgram)
 #
 #   Para probar el codigo ejecutar la siguiente linea:
 #
-#    perl tweetLID_eval.pl -d ../Dataset/result.txt -r ../Dataset/output_complete.txt ->../Dataset/evaluation_ouput.txt
+#    perl tweetLID_eval.pl -d ../Results/resultLinearInterpolation.txt -r ../Dataset/output_complete.txt ->../Evaluation/evaluation_ouput_linear.txt
 #
 #   LO QUE HACE ESTA LINEA ES MIRAR EL RESULT.TXT CREADO POR NOSOTROS, COMPARARLO CON EL OUTPUT_COMPLETE.TXT Y GUARDAR LOS
 #       RESULTADOS EN EL EVALUATION_OUTPUT.TXT
