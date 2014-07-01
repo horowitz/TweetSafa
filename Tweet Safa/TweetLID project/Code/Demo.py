@@ -66,3 +66,11 @@ predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoeff
 
 sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
 sys.stdout.write("\n    Tweet language:   "+str(predictedLanguage)+"\n    Probability of:  "+str(probability)+"\n")
+
+
+# 3.3-. Algorithms: Ranking Methods
+
+# cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
+# cv.crossValidation(tweetListPreProcessed, 3, [0,0,0], arrayLanguagesFull, maxNgram+1)
+
+# 3.4-. Out-of-place Measure
