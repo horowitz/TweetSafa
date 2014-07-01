@@ -108,7 +108,7 @@ def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
         for subkey in languagesList:
             predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),getFreqDist(tweet.text,int(float(key))),tweet))
         predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
-        if label == predicted:
+        if predicted in label:
             confidenceDict[key]=confidenceDict[key]+1
             acc=acc+1
         tot=tot+1

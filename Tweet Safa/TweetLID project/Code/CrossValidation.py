@@ -33,8 +33,12 @@ def crossValidation(tweetList, k,models,arrayLanguagesFull,maxNgram):
 
 
 def divideDataset(dataset, k, index):
-    testSet = dataset[int(math.ceil(len(dataset)*index/k)):int(math.ceil(len(dataset)*(index+1)/k))]
-    trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))] + dataset[int(math.ceil(len(dataset)*(index+1)/k)):len(dataset)]
+    if k==index:
+        testSet = dataset[int(math.ceil(len(dataset)*index/k)):len(dataset)]
+        trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))]
+    else:
+        testSet = dataset[int(math.ceil(len(dataset)*index/k)):int(math.ceil(len(dataset)*(index+1)/k))]
+        trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))] + dataset[int(math.ceil(len(dataset)*(index+1)/k)):len(dataset)]
     return (trainSet,testSet)
 
 # def accuracy(true,predicted,order):
