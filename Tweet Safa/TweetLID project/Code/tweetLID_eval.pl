@@ -5,8 +5,7 @@
 #
 # Author : Iñaki San Vicente (i.sanvicente@elhuyar.com)
 #
-# Last Update: 2014/06/30 
-#                     - line 260: Corrected bug when evaluating "lang1+lang2[+lang3]" type annotations.
+# Last Update: 2014/06/24
 #
 
 
@@ -22,12 +21,12 @@ my $usage = <<"_USAGE_";
 
         2. --data=|-d: User provided result file. 
                        Required file format is: \'tweetId<tab>language\' 
-                       where \'language\' accepts the folowing strings: 
+                       where \'language\' accepts the following strings: 
                                 - \'lang1\': single language. Possible values are: [es,en,gl,ca,eu,pt,und,other]
                                 - \'lang1+lang2[+lang3]\': multiple languages. Any combination of the abovementioned codes are allowed.
                        IMPORTANT: 
                           - \'lang1/lang2/lang3\' type answer is not allowed. If such notation is found only the first language will be taken into account.
-                          - When using multiple languages, \'lang1+lang2[+lang3]\' a maximun number of 3 languages may be included. If more are found only the first 3 languages will be taken into account.
+                          - When using multiple languages, \'lang1+lang2[+lang3]\' a maximum number of 3 languages may be included. If more are found only the first 3 languages will be taken into account.
  
         3. --help|-h : print this help.
 
@@ -256,34 +255,45 @@ while($l=<RUN>)
     # Third case: Multiple languages needed. Reference is lang1+lang2 or lang1+lang2::lang1+lang3::
     elsif ( $ref_hash{$tweetid} =~ /\+/)
     {	
-	my %ocurred = {};
-	my $TP = 0;
-	# evaluate languages given in the run
-	foreach my $lng (@langsPlusRun)
-	{		
-	    # Correct lang
-	    if (($ref_hash{$tweetid} =~ /${lng}\+/) && (!defined $ocurred{$lng}))
-	    {
-		$stats{$lng}{"TP"}++;
-		$ocurred{$lng}=1;
-		$TP++;
-	    }
-	    #wrong lang
-	    elsif  (!defined $ocurred{$lng})
-	    {
-		$stats{$lng}{"FP"}++;
-	    }	
-	}
-	# langs not given in the answer should be counted as FN  
-	# IMPORTANT! : es+gl/ca are not treated entirely, as only one of the two combinations is examined (either es+gl or es+ca)
-	if ($TP < (scalar @requiredLangs))
+	# Multiple language required and answer is correct.  Reference is (lang1+lang2+...)
+	if ($ref_hash{$tweetid} =~ /${langUser}::/)
 	{
-	    foreach my $ln (@requiredLangs)
-	    {
-		if  (!defined $ocurred{$ln})
+	    	foreach my $ln (@langsPlusRun)
 		{
-		    $stats{$ln}{"FN"}++;
-		    #print STDERR "Warning: @langsPlusRun  - $langUser -  vs. ref: $ref_hash{$tweetid} - unekoa: $ln\n";	
+		    $stats{$ln}{"TP"}++;
+		}
+	}
+	# Partial correct answer (e.g. 'es+ca' vs. 'es+en', or 'es' vs. 'en+es')
+	else 
+	{
+	    my $partAcc = 0;	    
+	    my %ocurred = {};
+	    my $TP = 0;
+	    foreach my $lng (@langsPlusRun)
+	    {		
+		if (($ref_hash{$tweetid} =~ /${lng}\+/) && (!defined $ocurred{$lng}))
+		{
+		    $stats{$lng}{"TP"}++;
+		    $ocurred{$lng}=1;
+		    $TP++;
+		}
+		#wrong lang
+		elsif  (!defined $ocurred{$lng})
+		{
+		    $stats{$lng}{"FP"}++;
+		}	
+	    }
+	    # langs not given in the answer should be counted as FN  
+	    # IMPORTANT! : es+gl/ca are not treated entirely, as only one of the two combinations is examined (either es+gl or es+ca)
+	    if ($TP < (scalar @requiredLangs))
+	    {
+		foreach my $ln (@requiredLangs)
+		{
+		    if  (!defined $ocurred{$ln})
+		    {
+			$stats{$ln}{"FN"}++;
+			#print STDERR "Warning: @langsPlusRun  - $langUser -  vs. ref: $ref_hash{$tweetid} - unekoa: $ln\n";	
+		    }
 		}
 	    }
 	}
