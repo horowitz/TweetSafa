@@ -32,12 +32,12 @@ shuffle(tweetListPreProcessed)
 #       Generate linear coefficients: input (n-grams and language)
 #       Smooth data
 
-cv.crossValidationLinearInterpolation(tweetListPreProcessed, 3, maxNgram)
+# cv.crossValidationLinearInterpolation(tweetListPreProcessed, 3, maxNgram)
 
 # 3.2-. Algorithms: Ranking Methods
 
 # print(arrayLanguagesFull)
 # cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
-# cv.crossValidation(tweetListPreProcessed, 3, [0,0,0], arrayLanguagesFull, maxNgram+1)
+cv.crossValidation(tweetListPreProcessed, 3, maxNgram+1)
 
 # 3.3-. Out-of-place Measure
