@@ -46,14 +46,13 @@ arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
 #   3.2.1-. Linear interpolation
 #       Generate linear coefficients: input (n-grams and language)
 #       Smooth data
-
 # linearCoefficients = list()
 # for language in arrayLanguages:
 #     grams = []
 #     for gram in xrange(1, maxNgram+1):
 #         grams.append(corpusNgrams.get(str(gram)).get(language))
 #     linearCoefficients.append(linear.getlinearcoefficients(language, grams, maxNgram))
-#
+
 # max = 0;
 # tweetEN = "Tomorrow is going to be a good day to go to the beach."
 # tweetPT = "Amanhã será um dia muito bom, como ir para a praia."
@@ -101,7 +100,7 @@ arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
 # sys.stdout.write("\n    Tweet language:   "+str(language)+"\n    Probability of:  "+str(max)+"\n")
 
 # 3.3-. Algorithms: Ranking Methods
-print(arrayLanguagesFull)
+# print(arrayLanguagesFull)
 # cv.nestedCrossValidation(tweetListPreProcessed,5,5,[0,0,0],arrayLanguagesFull)
 cv.crossValidation(tweetListPreProcessed, 3, [0,0,0], arrayLanguagesFull, maxNgram+1)
 # 3.4-. Out-of-place Measure
