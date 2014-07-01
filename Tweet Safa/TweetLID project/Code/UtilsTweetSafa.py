@@ -171,6 +171,8 @@ def chooseLanguages(predictedDict, threshold):
             if count == 1:
                 continue
             else:
+                print k
+                print value-v
                 if value-v < threshold and not count > 2:
                     if not k == 'other' and not k == 'und':
                         language = language+'+'+k
