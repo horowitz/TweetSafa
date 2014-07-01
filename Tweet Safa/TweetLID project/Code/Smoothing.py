@@ -2,6 +2,7 @@ from __future__ import division
 import numpy as np
 import UtilsTweetSafa as utils
 import sys
+import math
 
 def getlinearcoefficients(language, grams, maxNgrams):
     lambdas = [0]*(maxNgrams)
@@ -103,10 +104,13 @@ def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgram
         if prob >= maxProbability:
             maxLanguage = language
             maxProbability = prob
-        # sys.stdout.write("Sequence probability in "+str(language)+": "+str(prob)+"\n")
-    # languageSumed = utils.chooseLanguages(predicted, 0.1)
-    # print languageSumed
-    # print predicted
+        sys.stdout.write("Sequence probability in "+str(language)+": "+str(prob)+"\n")
+
+    a = 1 * math.exp(-22)
+    print a
+    languageSumed = utils.chooseLanguages(predicted, math.exp(-22))
+    print languageSumed
+    print predicted
     return maxLanguage, maxProbability
 
 def getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams):

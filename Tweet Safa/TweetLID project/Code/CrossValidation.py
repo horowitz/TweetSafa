@@ -56,11 +56,12 @@ def crossValidationLinearInterpolation(tweetList, k, maxNgram):
         print linearCoefficients
         count = 0
         tot = 0
+
         for tweet in testSet:
             predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, tweet.text, maxNgram, trainDist)
             utils.printResultTXT(predictedLanguage, tweet)
 
-            if(predictedLanguage==tweet.language):
+            if(predictedLanguage == tweet.language):
                 count = count + 1;
             tot = tot +1
             print count+'/'+tot
