@@ -1,5 +1,8 @@
 from __future__ import division
 import numpy as np
+import UtilsTweetSafa as utils
+import sys
+import math
 
 def getlinearcoefficients(language, grams, maxNgrams):
     lambdas = [0]*(maxNgrams)
@@ -52,7 +55,7 @@ def getlinearcoefficients(language, grams, maxNgrams):
     return linearCoefficients
 
 
-def probability(grams, lic, text, maxNgrams):
+def getProbability(grams, lic, text, maxNgrams):
     text = tuple(text)
     totalCount = grams[0].N()
     count = []
@@ -78,3 +81,43 @@ def probability(grams, lic, text, maxNgrams):
             prob = 0.0
         probabilities[contador-1] = prob
     return sum(probabilities)+0.0000000001
+
+def languageProbability(text, maxNgram, corpusNgrams, linearCoefficients):
+    prob = 1.0
+    for i in range(0, len(text)-maxNgram):
+        t = list()
+        for g in xrange(0, maxNgram):
+            t.append(text[i+g])
+            grams = []
+            for gram in xrange(1, maxNgram+1):
+                grams.append(corpusNgrams.get(str(gram)).get(linearCoefficients[0]))
+        probability = getProbability(grams, linearCoefficients, t, maxNgram)
+        prob = prob * probability
+    return prob, linearCoefficients[0]
+
+def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgrams):
+    maxProbability = 0
+    predicted = dict()
+    for linearCoefficient in linearCoefficients:
+        prob, language = languageProbability(text, maxNgram, corpusNgrams, linearCoefficient)
+        predicted[language] = prob
+        if prob >= maxProbability:
+            maxLanguage = language
+            maxProbability = prob
+        sys.stdout.write("Sequence probability in "+str(language)+": "+str(prob)+"\n")
+
+    threshold = 0.0000001
+    print threshold
+    languageSumed = utils.chooseLanguages(predicted, threshold)
+    print languageSumed
+    print predicted
+    return maxLanguage, maxProbability
+
+def getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams):
+    linearCoefficients = list()
+    for language in arrayLanguages:
+        grams = []
+        for gram in xrange(1, maxNgram+1):
+            grams.append(corpusNgrams.get(str(gram)).get(language))
+        linearCoefficients.append(getlinearcoefficients(language, grams, maxNgram))
+    return linearCoefficients
