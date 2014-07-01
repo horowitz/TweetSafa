@@ -106,9 +106,9 @@ def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgram
             maxProbability = prob
         sys.stdout.write("Sequence probability in "+str(language)+": "+str(prob)+"\n")
 
-    a = 1 * math.exp(-22)
+    a = 1 * math.exp(-24)
     print a
-    languageSumed = utils.chooseLanguages(predicted, math.exp(-22))
+    languageSumed = utils.chooseLanguages(predicted, math.exp(-3))
     print languageSumed
     print predicted
     return maxLanguage, maxProbability
