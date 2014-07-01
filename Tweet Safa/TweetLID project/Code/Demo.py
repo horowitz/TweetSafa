@@ -58,7 +58,8 @@ realES = "#Lugo #a6 (amarillo) obras en #PedrafitaDoCebreiro carril izquierdo ce
 realUND = "Hhhhhhhhhhhhjjhhhhhhhhhhhh"
 realOTHER = "Buongiorno ai nostri ascoltatori in Italia :)) pic.twitter.com/zfGpYc3oxo"
 
-text = preprocess.preprocessText(realES)
+a = 'Primer sorteo del stream @Dimegioclub http://www.twitch.tv/miicrocs'
+text = preprocess.preprocessText(realGL)
 
 linearCoefficients = linear.getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams)
 predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgrams)

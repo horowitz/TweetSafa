@@ -134,7 +134,7 @@ def evaluateNgramRakingSet(validationSet, trainFreq,confidenceNgrams,m,n):
     return predictedLanguage, trueLanguage
 
 # evaluate single tweet
-def evaluateNgramRanking(tweet,trainFreq,confidenceDict,m,n):
+def evaluateNgramRanking(tweet, trainFreq, confidenceDict, m, n):
     acc=0
     tot=0
     if len(tweet.text)<3:
@@ -142,49 +142,49 @@ def evaluateNgramRanking(tweet,trainFreq,confidenceDict,m,n):
     label=tweet.language
     predictedDict=dict()
     for key in trainFreq[0].keys():
-        predictedLanguage=list()
-        languagesList=trainFreq[0].get(key).keys()
+        predictedLanguage = list()
+        languagesList = trainFreq[0].get(key).keys()
         for subkey in languagesList:
-            predictedLanguage.append(outofplaceMeasure(m,n,trainFreq[0].get(key).get(subkey),getFreqDist(tweet.text,int(float(key))),tweet))
-        predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
+            predictedLanguage.append(outofplaceMeasure(m, n, trainFreq[0].get(key).get(subkey), getFreqDist(tweet.text, int(float(key))), tweet))
+        predicted = languagesList[predictedLanguage.index(min(predictedLanguage))]
         if label == predicted:
-            acc=acc+1
-        tot=tot+1
+            acc = acc + 1
+        tot = tot + 1
         if not predictedDict.has_key(predicted):
             predictedDict[predicted] = confidenceDict.get(key)
         else:
             predictedDict[predicted] = predictedDict.get(predicted) + confidenceDict.get(key)
-    predictedL=chooseLanguages(predictedDict,0.1)
+    predictedL = chooseLanguages(predictedDict, 0.1)
     return predictedL
 
 # choose best languages
-def chooseLanguages(predictedDict,threshold):
+def chooseLanguages(predictedDict, threshold):
     items = [(v, k) for k, v in predictedDict.items()]
     items.sort()
     items.reverse()
     items = [(k, v) for v, k in items]
-    language,value = items.pop(0)
+    language, value = items.pop(0)
     count = 0
-    if not language=='other' or not language=='und':
-        for k,v in items:
+    if not language == 'other' or not language == 'und':
+        for k, v in items:
             count += 1
             if count == 1:
                 continue
             else:
-                if value-v < threshold and not count > 2 :
-                    if not k=='other' and not k=='und':
+                if value-v < threshold and not count > 2:
+                    if not k == 'other' and not k == 'und':
                         language = language+'+'+k
                 else:
                     break
     else:
-        if language=='other':
-            for k,v in items:
+        if language == 'other':
+            for k, v in items:
                 count += 1
                 if count == 1:
                     continue
                 else:
-                    if value-v < threshold and not count > 2 :
-                        if not k=='und':
+                    if value-v < threshold and not count > 2:
+                        if not k == 'und':
                             language = k
                             break
                     else:
