@@ -106,12 +106,11 @@ def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgram
             maxProbability = prob
         sys.stdout.write("Sequence probability in "+str(language)+": "+str(prob)+"\n")
 
-    threshold = 0.0000001
+    threshold = maxProbability * 0.1
     print threshold
-    languageSumed = utils.chooseLanguages(predicted, threshold)
+    languageSumed = utils.chooseLanguagesLin(predicted, threshold)
     print languageSumed
-    print predicted
-    return maxLanguage, maxProbability
+    return languageSumed, maxProbability
 
 def getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams):
     linearCoefficients = list()
