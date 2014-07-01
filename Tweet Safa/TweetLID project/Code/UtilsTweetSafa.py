@@ -191,6 +191,18 @@ def chooseLanguages(predictedDict, threshold):
                             break
                     else:
                         break
+        elif language == 'und':
+            for k, v in items:
+                    count += 1
+                    if count == 1:
+                        continue
+                    else:
+                        if value-v < threshold and not count > 2:
+                            if not k == 'other':
+                                language = k
+                                break
+                        else:
+                            break
     return language
 
 # order vector
