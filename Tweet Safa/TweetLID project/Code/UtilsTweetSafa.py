@@ -163,8 +163,11 @@ def chooseLanguages(predictedDict, threshold):
     items.sort()
     items.reverse()
     items = [(k, v) for v, k in items]
+    print items
+    print str(v)+k
     language, value = items.pop(0)
     count = 0
+    print 'language '+k
     if not language == 'other' or not language == 'und':
         for k, v in items:
             count += 1
@@ -185,6 +188,8 @@ def chooseLanguages(predictedDict, threshold):
                 if count == 1:
                     continue
                 else:
+                    print k
+                    print value-v
                     if value-v < threshold and not count > 2:
                         if not k == 'und':
                             language = k
@@ -204,6 +209,41 @@ def chooseLanguages(predictedDict, threshold):
                         else:
                             break
     return language
+
+
+def chooseLanguagesLin(predictedDict, threshold):
+    items = [(v, k) for k, v in predictedDict.items()]
+    items.sort()
+    items.reverse()
+    items = [(k, v) for v, k in items]
+    language, value = items.pop(0)
+    count = 0
+    if not language == 'other' or not language == 'und':
+        languageNext, valueNext = items.pop(0)
+        print languageNext+' '+str(valueNext)
+        print language+' '+str(value)
+        print value-valueNext
+        print value-valueNext < threshold
+        if value-valueNext > threshold and not count > 2:
+            if not languageNext == 'other' and not languageNext == 'und':
+                language = language+'+'+languageNext
+    else:
+        if language == 'other':
+            for k, v in items:
+                count += 1
+                if count == 1:
+                    continue
+                else:
+                    print k
+                    print value-v
+                    if value-v < threshold and not count > 2:
+                        if not k == 'und':
+                            language = k
+                            break
+                    else:
+                        break
+    return language
+
 
 # order vector
 def orderVector(arrayLanguagesFull):
