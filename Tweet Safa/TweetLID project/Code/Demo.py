@@ -61,7 +61,9 @@ realOTHER = "Buongiorno ai nostri ascoltatori in Italia :)) pic.twitter.com/zfGp
 a = 'Primer sorteo del stream @Dimegioclub http://www.twitch.tv/miicrocs' #en+es
 
 b = 'Hau ez dakit zer den estamos hablando en un idioma edo beste batean'
-text = preprocess.preprocessText(b)
+
+c = '"En Cada Lucha Aquel Que Va A Muerte Es El Que Gana" Goazen @PasaiaRegional!! #aupaekipo #aupapasaia pic.twitter.com/BQ1ikdE2Qt'
+text = preprocess.preprocessText(c)
 
 linearCoefficients = linear.getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams)
 predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgrams)
