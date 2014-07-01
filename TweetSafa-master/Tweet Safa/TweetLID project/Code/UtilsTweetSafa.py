@@ -147,7 +147,7 @@ def evaluateNgramRanking(tweet, trainFreq, confidenceDict, m, n):
         for subkey in languagesList:
             predictedLanguage.append(outofplaceMeasure(m, n, trainFreq[0].get(key).get(subkey), getFreqDist(tweet.text, int(float(key))), tweet))
         predicted = languagesList[predictedLanguage.index(min(predictedLanguage))]
-        if label == predicted:
+        if predicted in label:
             acc = acc + 1
         tot = tot + 1
         if not predictedDict.has_key(predicted):
