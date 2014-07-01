@@ -166,11 +166,10 @@ def chooseLanguages(predictedDict, threshold):
     print items
     print str(v)+k
     language, value = items.pop(0)
-    count = 0
+    count=1
     print 'language '+k
     if not language == 'other' or not language == 'und':
         for k, v in items:
-            count += 1
             if count == 1:
                 continue
             else:
@@ -179,12 +178,12 @@ def chooseLanguages(predictedDict, threshold):
                 if value-v < threshold and not count > 2:
                     if not k == 'other' and not k == 'und':
                         language = language+'+'+k
+                        count += 1
                 else:
                     break
     else:
         if language == 'other':
             for k, v in items:
-                count += 1
                 if count == 1:
                     continue
                 else:
@@ -198,7 +197,6 @@ def chooseLanguages(predictedDict, threshold):
                         break
         elif language == 'und':
             for k, v in items:
-                    count += 1
                     if count == 1:
                         continue
                     else:
@@ -217,7 +215,7 @@ def chooseLanguagesLin(predictedDict, threshold):
     items.reverse()
     items = [(k, v) for v, k in items]
     language, value = items.pop(0)
-    count = 0
+    count = 1
     if not language == 'other' or not language == 'und':
         languageNext, valueNext = items.pop(0)
         print languageNext+' '+str(valueNext)
@@ -227,10 +225,11 @@ def chooseLanguagesLin(predictedDict, threshold):
         if value-valueNext < threshold and not count > 2:
             if not languageNext == 'other' and not languageNext == 'und':
                 language = language+'+'+languageNext
+                count+=1
     else:
         if language == 'other':
             for k, v in items:
-                count += 1
+
                 if count == 1:
                     continue
                 else:
