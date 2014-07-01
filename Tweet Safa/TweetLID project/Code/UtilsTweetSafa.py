@@ -224,7 +224,7 @@ def chooseLanguagesLin(predictedDict, threshold):
         print language+' '+str(value)
         print value-valueNext
         print value-valueNext < threshold
-        if value-valueNext > threshold and not count > 2:
+        if value-valueNext < threshold and not count > 2:
             if not languageNext == 'other' and not languageNext == 'und':
                 language = language+'+'+languageNext
     else:

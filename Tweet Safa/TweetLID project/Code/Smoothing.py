@@ -110,9 +110,8 @@ def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgram
     for lang in predicted.items():
         sumProb = sumProb + lang[1]
     average = sumProb / len(predicted)
-    print average
-    threshold = maxProbability * 0.1
-    print threshold
+    threshold = (maxProbability-average)/10
+    print 'threshold '+ str(threshold)
     languageSumed = utils.chooseLanguagesLin(predicted, threshold)
     print languageSumed
     return languageSumed, maxProbability
