@@ -179,8 +179,6 @@ def chooseLanguages(predictedDict, threshold):
                     if not k == 'other' and not k == 'und':
                         language = language+'+'+k
                         count += 1
-                else:
-                    break
     else:
         if language == 'other':
             for k, v in items:
@@ -193,8 +191,6 @@ def chooseLanguages(predictedDict, threshold):
                         if not k == 'und':
                             language = k
                             break
-                    else:
-                        break
         elif language == 'und':
             for k, v in items:
                     if count == 1:
@@ -204,8 +200,6 @@ def chooseLanguages(predictedDict, threshold):
                             if not k == 'other':
                                 language = k
                                 break
-                        else:
-                            break
     return language
 
 
@@ -239,8 +233,6 @@ def chooseLanguagesLin(predictedDict, threshold):
                         if not k == 'und':
                             language = k
                             break
-                    else:
-                        break
     return language
 
 
