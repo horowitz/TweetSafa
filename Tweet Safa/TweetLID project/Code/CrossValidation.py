@@ -14,7 +14,6 @@ def crossValidation(tweetList, k,maxNgram):
         confidenceDict=utils.learnNgramConfidencefromData(trainDist,trainSet)
         predicted,true=utils.evaluateNgramRakingSet(testSet,trainDist, confidenceDict,m,n)
         print(predicted+true)
-            # DANI PON AQUI EL SCRIPT. EL PREDICTED ES UN VECTOR QUE TIENE LAS PREDICTED LABELS I EL TRUE TIENE LOS VERDADEROS
         utils.printResults(testSet, predicted, i)
 
 
@@ -26,17 +25,6 @@ def divideDataset(dataset, k, index):
         testSet = dataset[int(math.ceil(len(dataset)*index/k)):int(math.ceil(len(dataset)*(index+1)/k))]
         trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))] + dataset[int(math.ceil(len(dataset)*(index+1)/k)):len(dataset)]
     return (trainSet,testSet)
-
-# def accuracy(true,predicted,order):
-#     matrix=0
-#     for i in xrange(0,len(predicted)):
-#         if(not '+' in predicted[i] and not '/' in predicted[i]):
-#             print (predicted[i])
-#         else:
-#             if('+' in predicted[i]):
-#
-#             else:
-#     return matrix
 
 def crossValidationLinearInterpolation(tweetList, k, maxNgram):
     for i in xrange(k):
