@@ -107,12 +107,26 @@ def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
         for subkey in languagesList:
             predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),getFreqDist(tweet.text,int(float(key))),tweet))
         predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
-        if label == predicted:
-            confidenceDict[key]=confidenceDict[key]+1
-            acc=acc+1
+        aug=comparePredictedVsTrue(predicted,label)
+        confidenceDict[key]=confidenceDict[key]+aug
+        acc=acc+aug
         tot=tot+1
-    return confidenceDict,tot
+    return confidenceDict, tot
 
+def comparePredictedVsTrue(predicted, true):
+    if predicted==true:
+        return 1
+    else:
+        if '+' in true:
+            if predicted in true:
+                return 0.5
+        else:
+            if '/' in true:
+                if predicted in true:
+                    return 1
+    return 0
+
+    return  value
 # returns confidence of each N-gram to be a good guesser for a whole train set.
 def learnNgramConfidencefromData(trainDist,trainSet):
     confidenceDict=dict((el,0) for el in trainDist[0].keys())
@@ -176,14 +190,14 @@ def chooseLanguages(predictedDict,threshold):
                 else:
                     break
     else:
-        if language=='other':
+        if language=='other' or language=='und':
             for k,v in items:
                 count += 1
                 if count == 1:
                     continue
                 else:
                     if value-v < threshold and not count > 2 :
-                        if not k=='und':
+                        if not k=='und' and not k== 'other':
                             language = k
                             break
                     else:
