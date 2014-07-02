@@ -35,3 +35,5 @@ perl tweetLID_eval.pl -d $RESULT_PATH -r $DATASET_PATH -> $EVALUATION_PATH
 mkdir '../../Results/'$DESCRIPTION
 
 mv $RESULT_PATH '../../Results/'$DESCRIPTION'/'
+
+echo 'Done'

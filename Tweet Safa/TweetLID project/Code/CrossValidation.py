@@ -42,5 +42,5 @@ def crossValidationLinearInterpolation(tweetList, k, maxNgram):
             if(predictedLanguage == tweet.language):
                 count = count + 1;
             tot = tot +1
-            print count+'/'+tot
+            # print str(count)+'/'+str(tot)
         print 'correct tweets fold '+str(i)+' = '+str(count)+'/'+str(tot)

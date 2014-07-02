@@ -163,18 +163,13 @@ def chooseLanguages(predictedDict, threshold):
     items.sort()
     items.reverse()
     items = [(k, v) for v, k in items]
-    print items
-    print str(v)+k
     language, value = items.pop(0)
     count=1
-    print 'language '+k
     if not language == 'other' or not language == 'und':
         for k, v in items:
             if count == 1:
                 continue
             else:
-                print k
-                print value-v
                 if value-v < threshold and not count > 2:
                     if not k == 'other' and not k == 'und':
                         language = language+'+'+k
@@ -187,8 +182,6 @@ def chooseLanguages(predictedDict, threshold):
                 if count == 1:
                     continue
                 else:
-                    print k
-                    print value-v
                     if value-v < threshold and not count > 2:
                         if not k == 'und':
                             language = k
@@ -208,55 +201,21 @@ def chooseLanguages(predictedDict, threshold):
                             break
     return language
 
-
-# def chooseLanguagesLin(predictedDict, threshold):
-#     items = [(v, k) for k, v in predictedDict.items()]
-#     items.sort()
-#     items.reverse()
-#     items = [(k, v) for v, k in items]
-#     language, value = items.pop(0)
-#     count = 1
-#     if not language == 'other' or not language == 'und':
-#         languageNext, valueNext = items.pop(0)
-#         print languageNext+' '+str(valueNext)
-#         print language+' '+str(value)
-#         print value-valueNext
-#         print valueNext > threshold
-#         print valueNext/(valueNext+threshold)
-#         print threshold/(valueNext+threshold)
-#         if valueNext > threshold and not count > 2:
-#             if not languageNext == 'other' and not languageNext == 'und':
-#                 language = language+'+'+languageNext
-#                 count+=1
-#     else:
-#         if language == 'other':
-#             for k, v in items:
-#
-#                 if count == 1:
-#                     continue
-#                 else:
-#                     print k
-#                     print value-v
-#                     if value-v < threshold and not count > 2:
-#                         if not k == 'und':
-#                             language = k
-#                             break
-#                     else:
-#                         break
-#     return language
-
 def chooseLanguagesLin(predictedDict, threshold):
     items = [(prob, language) for language, prob in predictedDict.items()]
     items.sort()
     items.reverse()
     prob, language = items.pop(0)
-    if not language == 'other' or not language == 'und':
+    if not language == 'other' and not language == 'und':
         probNext, languageNext = items.pop(0)
         # print 'probnext '+str(probNext)+' threshold '+str(threshold)
-        normProb = probNext/(probNext+threshold)
-        normThres = threshold/(probNext+threshold)
+        try:
+            normProb = probNext/(probNext+threshold)
+            normThres = threshold/(probNext+threshold)
+        except:
+            normProb = 0
         # print 'normprobnext '+str(normProb)+' normthreshold '+str(normThres)
-        if normProb > 0.45:
+        if normProb > 0.98:
             if not languageNext == 'other' and not languageNext == 'und':
                 language = language+'+'+languageNext
     return language
