@@ -24,8 +24,8 @@ import urllib
 import re
 import json
 
-from bs4 import BeautifulSoup
-
+import BeautifulSoup
+# from bs4 import BeautifulSoup
 cache = {}
 
 for line in open(sys.argv[1]):

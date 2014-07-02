@@ -12,13 +12,13 @@ def crossValidation(tweetList, k,maxNgram):
         trainSet,testSet = divideDataset(tweetList,k,i)
         trainDist = utils.obtainNgrams(trainSet,maxNgram)
         confidenceDict=utils.learnNgramConfidencefromData(trainDist,trainSet)
-        predicted,true=utils.evaluateNgramRakingSet(testSet,trainDist, confidenceDict,m,n)
+        predicted, true=utils.evaluateNgramRakingSet(testSet,trainDist, confidenceDict,m,n)
         utils.printJeroni(true,predicted,i)
         utils.printResults(testSet, predicted, i)
 
 
 def divideDataset(dataset, k, index):
-    if k==index-1:
+    if k == index-1:
         testSet = dataset[int(math.ceil(len(dataset)*index/k)):len(dataset)]
         trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))]
     else:

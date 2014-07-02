@@ -10,7 +10,7 @@ import CrossValidation as cv
 
 import sys
 
-maxNgram = 3
+maxNgram = 5
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
