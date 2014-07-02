@@ -163,20 +163,14 @@ def chooseLanguages(predictedDict, threshold):
     items.sort()
     items.reverse()
     items = [(k, v) for v, k in items]
-    print items
-    print str(v)+k
     language, value = items.pop(len(items)-1)
     count=0
-    print 'language '+language
     if not language == 'other' and not language == 'und':
         for k, v in items:
             if count == 0:
                 count+=1
-                print('continue')
                 continue
             else:
-                print k
-                print value-v
                 if v-value < threshold and count < 4:
                     if not k == 'other' and not k == 'und':
                         language = language+'+'+k
@@ -188,9 +182,6 @@ def chooseLanguages(predictedDict, threshold):
                     count += 1
                     continue
                 else:
-                    print k
-                    print ('Hola '+ str(count) + ':\t '+ str(value) + str(v) + str(value-v))
-                    print value-v
                     if v-value < threshold and count < 4 and not 'und':
                         if count==1:
                             language=k
@@ -208,7 +199,7 @@ def chooseLanguages(predictedDict, threshold):
                             else:
                                 language = language + '+' + k
                             count += 1
-    print('Decided Language: '+language)
+    # print('Decided Language: '+language)
     return language
 
 # def chooseLanguagesLin(predictedDict, threshold):
@@ -296,7 +287,7 @@ def orderVector(arrayLanguagesFull):
 # Print results file
 def printResults(testSet, predictedList, ind):
     ind=ind+1
-    f = open('../Dataset/results%02d.txt' % ind, 'w')
+    f = open('../Results/results.txt', 'a+')
     index=0
     for tweet in testSet:
         f.write(tweet.id+'\t'+predictedList[index]+'\n') # python will convert \n to os.linesep
