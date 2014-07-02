@@ -163,25 +163,19 @@ def chooseLanguages(predictedDict, threshold):
     items.sort()
     items.reverse()
     items = [(k, v) for v, k in items]
-<<<<<<< HEAD
     language, value = items.pop(0)
     count=1
     if not language == 'other' or not language == 'und':
-=======
     language, value = items.pop(len(items)-1)
     count=0
     if not language == 'other' and not language == 'und':
->>>>>>> FETCH_HEAD
         for k, v in items:
             if count == 0:
                 count+=1
                 continue
             else:
-<<<<<<< HEAD
                 if value-v < threshold and not count > 2:
-=======
                 if v-value < threshold and count < 4:
->>>>>>> FETCH_HEAD
                     if not k == 'other' and not k == 'und':
                         language = language+'+'+k
                         count += 1
@@ -192,21 +186,18 @@ def chooseLanguages(predictedDict, threshold):
                     count += 1
                     continue
                 else:
-<<<<<<< HEAD
                     if value-v < threshold and not count > 2:
                         if not k == 'und':
                             language = k
                             break
                     else:
                         break
-=======
                     if v-value < threshold and count < 4 and not 'und':
                         if count==1:
                             language=k
                         else:
                             language = language + '+' + k
                         count += 1
->>>>>>> FETCH_HEAD
         elif language == 'und':
             for k, v in items:
                     if count == 0:
@@ -221,45 +212,6 @@ def chooseLanguages(predictedDict, threshold):
     # print('Decided Language: '+language)
     return language
 
-<<<<<<< HEAD
-=======
-# def chooseLanguagesLin(predictedDict, threshold):
-#     items = [(v, k) for k, v in predictedDict.items()]
-#     items.sort()
-#     items.reverse()
-#     items = [(k, v) for v, k in items]
-#     language, value = items.pop(0)
-#     count = 1
-#     if not language == 'other' or not language == 'und':
-#         languageNext, valueNext = items.pop(0)
-#         print languageNext+' '+str(valueNext)
-#         print language+' '+str(value)
-#         print value-valueNext
-#         print valueNext > threshold
-#         print valueNext/(valueNext+threshold)
-#         print threshold/(valueNext+threshold)
-#         if valueNext > threshold and not count > 2:
-#             if not languageNext == 'other' and not languageNext == 'und':
-#                 language = language+'+'+languageNext
-#                 count+=1
-#     else:
-#         if language == 'other':
-#             for k, v in items:
-#
-#                 if count == 1:
-#                     continue
-#                 else:
-#                     print k
-#                     print value-v
-#                     if value-v < threshold and not count > 2:
-#                         if not k == 'und':
-#                             language = k
-#                             break
-#                     else:
-#                         break
-#     return language
-
->>>>>>> FETCH_HEAD
 def chooseLanguagesLin(predictedDict, threshold):
     items = [(prob, language) for language, prob in predictedDict.items()]
     items.sort()
@@ -277,20 +229,6 @@ def chooseLanguagesLin(predictedDict, threshold):
         if normProb > 0.98:
             if not languageNext == 'other' and not languageNext == 'und':
                 language = language+'+'+languageNext
-                count+=1
-    else:
-        if language == 'other':
-            for k, v in items:
-
-                if count == 1:
-                    continue
-                else:
-                    print k
-                    print value-v
-                    if value-v < threshold and not count > 2:
-                        if not k == 'und':
-                            language = k
-                            break
     return language
 
 # order vector
