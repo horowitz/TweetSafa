@@ -14,7 +14,7 @@ maxNgram = 5
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
-dataset = "../Dataset/output.txt"
+dataset = "../Dataset/output_complete.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
 
