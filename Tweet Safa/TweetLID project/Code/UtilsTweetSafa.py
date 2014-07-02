@@ -137,24 +137,24 @@ def evaluateNgramRakingSet(validationSet, trainFreq,confidenceNgrams,m,n):
 def evaluateNgramRanking(tweet, trainFreq, confidenceDict, m, n):
     acc=0
     tot=0
-    if len(tweet.text)<3:
+    if len(tweet.text) < 3:
         return 'und'
-    label=tweet.language
-    predictedDict=dict()
+    label = tweet.language
+    predictedDict = dict()
     for key in trainFreq[0].keys():
         predictedLanguage = list()
         languagesList = trainFreq[0].get(key).keys()
         for subkey in languagesList:
             predictedLanguage.append(outofplaceMeasure(m, n, trainFreq[0].get(key).get(subkey), getFreqDist(tweet.text, int(float(key))), tweet))
         predicted = languagesList[predictedLanguage.index(min(predictedLanguage))]
-        if label == predicted:
+        if predicted in label:
             acc = acc + 1
         tot = tot + 1
         if not predictedDict.has_key(predicted):
             predictedDict[predicted] = confidenceDict.get(key)
         else:
             predictedDict[predicted] = predictedDict.get(predicted) + confidenceDict.get(key)
-    predictedL = chooseLanguages(predictedDict, 0.1)
+    predictedL = chooseLanguages(predictedDict, 0.05)
     return predictedL
 
 # choose best languages
@@ -165,43 +165,51 @@ def chooseLanguages(predictedDict, threshold):
     items = [(k, v) for v, k in items]
     print items
     print str(v)+k
-    language, value = items.pop(0)
-    count=1
-    print 'language '+k
-    if not language == 'other' or not language == 'und':
+    language, value = items.pop(len(items)-1)
+    count=0
+    print 'language '+language
+    if not language == 'other' and not language == 'und':
         for k, v in items:
-            if count == 1:
+            if count == 0:
+                count+=1
+                print('continue')
                 continue
             else:
                 print k
                 print value-v
-                if value-v < threshold and not count > 2:
+                if v-value < threshold and count < 4:
                     if not k == 'other' and not k == 'und':
                         language = language+'+'+k
                         count += 1
     else:
         if language == 'other':
             for k, v in items:
-                if count == 1:
+                if count == 0:
+                    count += 1
                     continue
                 else:
                     print k
+                    print ('Hola '+ str(count) + ':\t '+ str(value) + str(v) + str(value-v))
                     print value-v
-                    if value-v < threshold and not count > 2:
-                        if not k == 'und':
-                            language = k
-                            break
+                    if v-value < threshold and count < 4 and not 'und':
+                        if count==1:
+                            language=k
+                        else:
+                            language = language + '+' + k
+                        count += 1
         elif language == 'und':
             for k, v in items:
-                    if count == 1:
-                        continue
+                    if count == 0:
+                        count += 1
                     else:
-                        if value-v < threshold and not count > 2:
-                            if not k == 'other':
+                        if v-value < threshold and count < 4 and not 'other':
+                            if count == 1:
                                 language = k
-                                break
+                            else:
+                                language = language + '+' + k
+                            count += 1
+    print('Decided Language: '+language)
     return language
-
 
 # def chooseLanguagesLin(predictedDict, threshold):
 #     items = [(v, k) for k, v in predictedDict.items()]
@@ -299,3 +307,10 @@ def printResultTXT(predictedLanguage, tweet):
     file = open('../Results/resultLinearInterpolation.txt', 'a+')
     file.write(tweet.id+'\t'+predictedLanguage+'\n')
     file.close()
+
+def printJeroni(true,predicted,ind):
+    ind=ind+1
+    f = open('../DatasetJeroni/resultsJeroni%02d.txt' % ind, 'w')
+    for i in xrange(0, len(true)):
+        f.write('True:' +'\t'+true[i]+'\t'+'Predicted;'+'\t'+predicted[i]+'\n') # python will convert \n to os.linesep
+    f.close() # you c
