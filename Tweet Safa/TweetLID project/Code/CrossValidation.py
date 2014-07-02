@@ -18,7 +18,7 @@ def crossValidation(tweetList, k,maxNgram):
 
 
 def divideDataset(dataset, k, index):
-    if k==index:
+    if k==index-1:
         testSet = dataset[int(math.ceil(len(dataset)*index/k)):len(dataset)]
         trainSet = dataset[0:int(math.ceil(len(dataset)*index/k))]
     else:
