@@ -13,7 +13,7 @@ def crossValidation(tweetList, k,maxNgram):
         trainDist = utils.obtainNgrams(trainSet,maxNgram)
         confidenceDict=utils.learnNgramConfidencefromData(trainDist,trainSet)
         predicted, true=utils.evaluateNgramRakingSet(testSet,trainDist, confidenceDict,m,n)
-        utils.printJeroni(true,predicted,i)
+        # utils.printJeroni(true,predicted,i)
         utils.printResults(testSet, predicted, i)
 
 
