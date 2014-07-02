@@ -14,6 +14,7 @@ def concatenateLanguageTweets(List):
             corpus[tweet.language] = corpus.get(tweet.language) + tweet.text
     return corpus, languageArray
 
+
 # Separate by individual languages(en,es,eu,ca,gl,pt,und,other). Return a dictionary of individual languages
 def separateIndividualLanguages(List):
     individualCorpus = dict()
@@ -26,6 +27,7 @@ def separateIndividualLanguages(List):
                 if key in subKey and not key is subKey:
                     individualCorpus[key] = individualCorpus[key] + List.get(subKey)
     return individualCorpus, languageArray
+
 
 # N-gram Frequency distributions for all N and for all Languages.
 # Returns Dictionary of maxNgrams dictionaries of each language.
@@ -40,23 +42,26 @@ def freqDistributions(corpus, maxNgram):
         corpusNgrams[str(N)] = auxCorpus
     return corpusNgrams
 
+
 # returns N-gram distribution given a text
 def getFreqDist(text, n):
     ngramsObject = nk.ngrams(text, n)
     freqDist = nk.FreqDist(ngramsObject)
     return freqDist
 
+
 # Print tweets from an input list
 def printTweets(tweetList):
     for tweet in tweetList:
         print tweet.text
 
+
 # Obtain N-Grams from the tweet list
-def obtainNgrams(tweetListPreProcessed,maxNgram):
+def obtainNgrams(tweetListPreProcessed, maxNgram):
     # Join all the tweets in one language. Return one dictionary of languages
     corpus, arrayLanguagesFull = concatenateLanguageTweets(tweetListPreProcessed)
     # individualLanguage=true:
-    #       Only individual languages(en,es,..)
+    # Only individual languages(en,es,..)
     # individualLanguage=false:
     #       Mixed languages(en+es,pt+gl,..)
     individualLanguage = True
@@ -65,13 +70,13 @@ def obtainNgrams(tweetListPreProcessed,maxNgram):
     # clean dictionary of double spaces from concatenation
     for key in corpus.keys():
         corpus[key] = preprocess.remove_multiple_spaces(corpus.get(key))
-    corpusNgrams = freqDistributions(corpus, maxNgram+1)
+    corpusNgrams = freqDistributions(corpus, maxNgram + 1)
 
     return corpusNgrams, arrayLanguages, arrayLanguagesFull
 
 
 # Calculates out of place measure
-def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest,tweet):
+def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest, tweet):
     FDLenght = min(len(freqDist), FDLenght)
     TTLenght = min(len(freqDistTest), TTLenght)
     # Get m x n items
@@ -87,56 +92,61 @@ def outofplaceMeasure(FDLenght, TTLenght, freqDist, freqDistTest,tweet):
                 distance = abs(i - j)
                 totalDistance += distance
                 break
-    if FDLenght==0:
+    if FDLenght == 0:
         # print('Train')
-        FDLenght=1
-    if TTLenght==0:
+        FDLenght = 1
+    if TTLenght == 0:
         # print('Test'+'\t'+ tweet.language+'\t'+tweet.text)
-        TTLenght=1
+        TTLenght = 1
     return totalDistance / (FDLenght * TTLenght)
 
 
 # returns confidence of each N-gram to be a good guesser for a single tweet.
 
-def learnNgramConfidences(confidenceDict,corpusNgrams,tweet,m,n):
-    acc=0
-    tot=0
-    label=tweet.language
+def learnNgramConfidences(confidenceDict, corpusNgrams, tweet, m, n):
+    acc = 0
+    tot = 0
+    label = tweet.language
     for key in corpusNgrams.keys():
-        predictedLanguage=list()
-        languagesList=corpusNgrams.get(key).keys()
+        predictedLanguage = list()
+        languagesList = corpusNgrams.get(key).keys()
         for subkey in languagesList:
-            predictedLanguage.append(outofplaceMeasure(m,n,corpusNgrams.get(key).get(subkey),getFreqDist(tweet.text,int(float(key))),tweet))
-        predicted=languagesList[predictedLanguage.index(min(predictedLanguage))]
+            predictedLanguage.append(
+                outofplaceMeasure(m, n, corpusNgrams.get(key).get(subkey), getFreqDist(tweet.text, int(float(key))),
+                                  tweet))
+        predicted = languagesList[predictedLanguage.index(min(predictedLanguage))]
         if predicted in label:
-            confidenceDict[key]=confidenceDict[key]+1
-            acc=acc+1
-        tot=tot+1
-    return confidenceDict,tot
+            confidenceDict[key] = confidenceDict[key] + 1
+            acc = acc + 1
+        tot = tot + 1
+    return confidenceDict, tot
+
 
 # returns confidence of each N-gram to be a good guesser for a whole train set.
-def learnNgramConfidencefromData(trainDist,trainSet):
-    confidenceDict=dict((el,0) for el in trainDist[0].keys())
-    tot=0
+def learnNgramConfidencefromData(trainDist, trainSet):
+    confidenceDict = dict((el, 0) for el in trainDist[0].keys())
+    tot = 0
     for tweet in trainSet:
-        confidenceDict , totAux = learnNgramConfidences(confidenceDict,trainDist[0],tweet,80,50)
-        tot=tot+totAux
-    confidenceDict = dict((el,confidenceDict.get(el)/tot) for el in confidenceDict.keys())
+        confidenceDict, totAux = learnNgramConfidences(confidenceDict, trainDist[0], tweet, 80, 50)
+        tot = tot + totAux
+    confidenceDict = dict((el, confidenceDict.get(el) / tot) for el in confidenceDict.keys())
     return confidenceDict
 
+
 # evaluate test Set
-def evaluateNgramRakingSet(validationSet, trainFreq,confidenceNgrams,m,n):
-    predictedLanguage=list()
-    trueLanguage=list()
+def evaluateNgramRakingSet(validationSet, trainFreq, confidenceNgrams, m, n):
+    predictedLanguage = list()
+    trueLanguage = list()
     for tweet in validationSet:
         trueLanguage.append(tweet.language)
-        predictedLanguage.append(evaluateNgramRanking(tweet, trainFreq,confidenceNgrams,m,n))
+        predictedLanguage.append(evaluateNgramRanking(tweet, trainFreq, confidenceNgrams, m, n))
     return predictedLanguage, trueLanguage
+
 
 # evaluate single tweet
 def evaluateNgramRanking(tweet, trainFreq, confidenceDict, m, n):
-    acc=0
-    tot=0
+    acc = 0
+    tot = 0
     if len(tweet.text) < 3:
         return 'und'
     label = tweet.language
@@ -145,7 +155,9 @@ def evaluateNgramRanking(tweet, trainFreq, confidenceDict, m, n):
         predictedLanguage = list()
         languagesList = trainFreq[0].get(key).keys()
         for subkey in languagesList:
-            predictedLanguage.append(outofplaceMeasure(m, n, trainFreq[0].get(key).get(subkey), getFreqDist(tweet.text, int(float(key))), tweet))
+            predictedLanguage.append(
+                outofplaceMeasure(m, n, trainFreq[0].get(key).get(subkey), getFreqDist(tweet.text, int(float(key))),
+                                  tweet))
         predicted = languagesList[predictedLanguage.index(min(predictedLanguage))]
         if predicted in label:
             acc = acc + 1
@@ -157,6 +169,7 @@ def evaluateNgramRanking(tweet, trainFreq, confidenceDict, m, n):
     predictedL = chooseLanguages(predictedDict, 0.05)
     return predictedL
 
+
 # choose best languages
 def chooseLanguages(predictedDict, threshold):
     items = [(v, k) for k, v in predictedDict.items()]
@@ -164,20 +177,16 @@ def chooseLanguages(predictedDict, threshold):
     items.reverse()
     items = [(k, v) for v, k in items]
     language, value = items.pop(0)
-    count=1
-    if not language == 'other' or not language == 'und':
-    language, value = items.pop(len(items)-1)
-    count=0
+    count = 0
     if not language == 'other' and not language == 'und':
         for k, v in items:
             if count == 0:
-                count+=1
+                count += 1
                 continue
             else:
-                if value-v < threshold and not count > 2:
-                if v-value < threshold and count < 4:
+                if value-v < threshold and count < 3:
                     if not k == 'other' and not k == 'und':
-                        language = language+'+'+k
+                        language = language + '+' + k
                         count += 1
     else:
         if language == 'other':
@@ -186,15 +195,9 @@ def chooseLanguages(predictedDict, threshold):
                     count += 1
                     continue
                 else:
-                    if value-v < threshold and not count > 2:
-                        if not k == 'und':
+                    if value-v < threshold and count < 3 and not 'und':
+                        if count == 1:
                             language = k
-                            break
-                    else:
-                        break
-                    if v-value < threshold and count < 4 and not 'und':
-                        if count==1:
-                            language=k
                         else:
                             language = language + '+' + k
                         count += 1
@@ -203,7 +206,7 @@ def chooseLanguages(predictedDict, threshold):
                     if count == 0:
                         count += 1
                     else:
-                        if v-value < threshold and count < 4 and not 'other':
+                        if value-v < threshold and count < 3 and not 'other':
                             if count == 1:
                                 language = k
                             else:
@@ -221,50 +224,55 @@ def chooseLanguagesLin(predictedDict, threshold):
         probNext, languageNext = items.pop(0)
         # print 'probnext '+str(probNext)+' threshold '+str(threshold)
         try:
-            normProb = probNext/(probNext+threshold)
-            normThres = threshold/(probNext+threshold)
+            normProb = probNext / (probNext + threshold)
+            normThres = threshold / (probNext + threshold)
         except:
             normProb = 0
         # print 'normprobnext '+str(normProb)+' normthreshold '+str(normThres)
         if normProb > 0.98:
             if not languageNext == 'other' and not languageNext == 'und':
-                language = language+'+'+languageNext
+                language = language + '+' + languageNext
     return language
+
 
 # order vector
 def orderVector(arrayLanguagesFull):
-    orderedVector=list()
+    orderedVector = list()
     for el in arrayLanguagesFull:
-        if(not '+' in el and not '/' in el and not 'other' in el and not 'und' in el):
+        if (not '+' in el and not '/' in el and not 'other' in el and not 'und' in el):
             orderedVector.append(el)
     orderedVector.append('other')
     orderedVector.append('und')
     for el in arrayLanguagesFull:
-        if('+' in el):
+        if ('+' in el):
             orderedVector.append(el)
     for el in arrayLanguagesFull:
-        if('/' in el):
+        if ('/' in el):
             orderedVector.append(el)
     return orderedVector
 
+
 # Print results file
 def printResults(testSet, predictedList, ind):
-    ind=ind+1
+    ind = ind + 1
     f = open('../Results/results.txt', 'a+')
-    index=0
+    index = 0
     for tweet in testSet:
-        f.write(tweet.id+'\t'+predictedList[index]+'\n') # python will convert \n to os.linesep
-        index+=1
-    f.close() # you c
+        f.write(tweet.id + '\t' + predictedList[index] + '\n')  # python will convert \n to os.linesep
+        index += 1
+    f.close()  # you c
+
 
 def printResultTXT(predictedLanguage, tweet):
     file = open('../Results/resultLinearInterpolation.txt', 'a+')
-    file.write(tweet.id+'\t'+predictedLanguage+'\n')
+    file.write(tweet.id + '\t' + predictedLanguage + '\n')
     file.close()
 
-def printJeroni(true,predicted,ind):
-    ind=ind+1
+
+def printJeroni(true, predicted, ind):
+    ind = ind + 1
     f = open('../DatasetJeroni/resultsJeroni%02d.txt' % ind, 'w')
     for i in xrange(0, len(true)):
-        f.write('True:' +'\t'+true[i]+'\t'+'Predicted;'+'\t'+predicted[i]+'\n') # python will convert \n to os.linesep
-    f.close() # you c
+        f.write('True:' + '\t' + true[i] + '\t' + 'Predicted;' + '\t' + predicted[
+            i] + '\n')  # python will convert \n to os.linesep
+    f.close()  # you c
