@@ -172,49 +172,49 @@ def evaluateNgramRanking(tweet, trainFreq, confidenceDict, m, n):
 
 # choose best languages
 def chooseLanguages(predictedDict, threshold):
-    items = [(v, k) for k, v in predictedDict.items()]
-    items.sort()
-    items.reverse()
-    items = [(k, v) for v, k in items]
-    language, value = items.pop(0)
-    count = 0
-    if not language == 'other' and not language == 'und':
-        for k, v in items:
-            if count == 0:
-                count += 1
-                continue
-            else:
-                if value-v < threshold and count < 3:
-                    if not k == 'other' and not k == 'und':
-                        language = language + '+' + k
-                        count += 1
-    else:
-        if language == 'other':
-            for k, v in items:
-                if count == 0:
-                    count += 1
-                    continue
-                else:
-                    if value-v < threshold and count < 3 and not 'und':
-                        if count == 1:
-                            language = k
-                        else:
-                            language = language + '+' + k
-                        count += 1
-        elif language == 'und':
-            for k, v in items:
-                    if count == 0:
-                        count += 1
-                    else:
-                        if value-v < threshold and count < 3 and not 'other':
-                            if count == 1:
-                                language = k
-                            else:
-                                language = language + '+' + k
-                            count += 1
-    # print('Decided Language: '+language)
-    return language
+   items = [(v, k) for k, v in predictedDict.items()]
+   items.sort()
+   items.reverse()
+   items = [(k, v) for v, k in items]
+   language, value = items.pop(0)
+   count = 0
 
+   # if not language == 'other' and not language == 'und':
+   for k, v in items:
+       if count == 0:
+           count += 1
+           continue
+       else:
+           if value-v < threshold and count < 3:
+               # if not k == 'other' and not k == 'und':
+               language = language + '+' + k
+               count += 1
+   # else:
+   #     if language == 'other':
+   #         for k, v in items:
+   #             if count == 0:
+   #                 count += 1
+   #                 continue
+   #             else:
+   #                 if value-v < threshold and count < 3 and not 'und':
+   #                     if count == 1:
+   #                         language = k
+   #                     else:
+   #                         language = language + '+' + k
+   #                     count += 1
+   #     elif language == 'und':
+   #         for k, v in items:
+   #                 if count == 0:
+   #                     count += 1
+   #                 else:
+   #                     if value-v < threshold and count < 3 and not 'other':
+   #                         if count == 1:
+   #                             language = k
+   #                         else:
+   #                             language = language + '+' + k
+   #                         count += 1
+   # print('Decided Language: '+language)
+   return language
 def chooseLanguagesLin(predictedDict, threshold):
     items = [(prob, language) for language, prob in predictedDict.items()]
     items.sort()
