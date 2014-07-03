@@ -56,7 +56,7 @@ def main(tweetList):
     tweetPreprocessed = ""
 
     for tweet in tweetList:
-        # if (tweet.text != 'Not Available'):
+        if (tweet.text != 'Not Available'):
             tweetPreprocessed = preprocessText(tweet.text)
 
             # Save in new object
