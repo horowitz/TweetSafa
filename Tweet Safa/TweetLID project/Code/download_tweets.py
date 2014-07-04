@@ -24,8 +24,8 @@ import urllib
 import re
 import json
 
-import BeautifulSoup
-# from bs4 import BeautifulSoup
+# import BeautifulSoup
+from bs4 import BeautifulSoup
 cache = {}
 
 for line in open(sys.argv[1]):
@@ -36,7 +36,7 @@ for line in open(sys.argv[1]):
     lang = fields[2]
 
     #url = 'http://twitter.com/%s/status/%s' % (uid, sid)
-    #print "debug: "+uid+"  "+sid+"\n"
+    # print "debug: "+uid+"  "+sid+"\n"
 
     tweet = None
     text = "Not Available"
@@ -69,4 +69,9 @@ for line in open(sys.argv[1]):
     text = text.replace('\n', ' ', )
     text = re.sub(r'\s+', ' ', text)
     #print json.dumps(tweet, indent=2)
-    print "\t".join(fields + [text]).encode('utf-8')
+    # print "\t".join(fields + [text]).encode('utf-8')
+
+    file = open(sys.argv[2], 'a+')
+    file.write("\t".join(fields + [text]).encode('utf-8')+"\n")
+
+file.close()

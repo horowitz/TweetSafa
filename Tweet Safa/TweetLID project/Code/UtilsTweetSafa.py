@@ -228,8 +228,11 @@ def chooseLanguagesLin(predictedDict, threshold):
             normThres = threshold / (probNext + threshold)
         except:
             normProb = 0
+
         # print 'normprobnext '+str(normProb)+' normthreshold '+str(normThres)
-        if normProb > 0.98:
+        if normProb > 0.99:
+
+        # if prob - threshold > probNext:
             if not languageNext == 'other' and not languageNext == 'und':
                 language = language + '+' + languageNext
     return language
@@ -260,19 +263,18 @@ def printResults(testSet, predictedList, ind):
     for tweet in testSet:
         f.write(tweet.id + '\t' + predictedList[index] + '\n')  # python will convert \n to os.linesep
         index += 1
-    f.close()  # you c
+    f.close()
 
-
-def printResultTXT(predictedLanguage, tweet):
-    file = open('../Results/resultLinearInterpolation.txt', 'a+')
+def printResultTXT(predictedLanguage, tweet, count):
+    file = open('../Results/resultLI-'+str(count)+'gramsDobleIdioma.txt', 'a+')
     file.write(tweet.id + '\t' + predictedLanguage + '\n')
     file.close()
 
 
-def printJeroni(true, predicted, ind):
-    ind = ind + 1
-    f = open('../DatasetJeroni/resultsJeroni%02d.txt' % ind, 'w')
-    for i in xrange(0, len(true)):
-        f.write('True:' + '\t' + true[i] + '\t' + 'Predicted;' + '\t' + predicted[
-            i] + '\n')  # python will convert \n to os.linesep
-    f.close()  # you c
+# def printJeroni(true, predicted, ind):
+#     ind = ind + 1
+#     f = open('../DatasetJeroni/resultsJeroni%02d.txt' % ind, 'w')
+#     for i in xrange(0, len(true)):
+#         f.write('True:' + '\t' + true[i] + '\t' + 'Predicted;' + '\t' + predicted[
+#             i] + '\n')  # python will convert \n to os.linesep
+#     f.close()  # you c

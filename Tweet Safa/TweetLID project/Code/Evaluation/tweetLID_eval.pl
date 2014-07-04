@@ -3,7 +3,7 @@
 #
 # tweetLID_eval.pl : tweetLID 2014 Twitter Language Identification shared task evaluation script. Computes the P/R/F values per category of a result file against a reference.
 #
-# Author : IÃ±aki San Vicente (i.sanvicente@elhuyar.com)
+# Author : Iñaki San Vicente (i.sanvicente@elhuyar.com)
 #
 # Last Update: 2014/06/30 
 #                     - line 260: Corrected bug when evaluating "lang1+lang2[+lang3]" type annotations.
@@ -301,7 +301,7 @@ while($l=<RUN>)
 close(RUN);
 
 # compute P/R/F per category according to :
-# Stefanie Nowak, Hanna Lukashevich, Peter Dunker, and Stefan RÃ¼ger. 2010. Performance measures for multilabel evaluation: a case study in the area of image classification. In Proceedings of the international conference on Multimedia information retrieval (MIR '10). ACM, New York, NY, USA, 35-44. DOI=10.1145/1743384.1743398 http://doi.acm.org/10.1145/1743384.1743398 
+# Stefanie Nowak, Hanna Lukashevich, Peter Dunker, and Stefan Rüger. 2010. Performance measures for multilabel evaluation: a case study in the area of image classification. In Proceedings of the international conference on Multimedia information retrieval (MIR '10). ACM, New York, NY, USA, 35-44. DOI=10.1145/1743384.1743398 http://doi.acm.org/10.1145/1743384.1743398 
 
 my $err = &computePRFperCategory(\%stats);
 
@@ -390,7 +390,7 @@ sub initializeStats()
 }
 
 # compute P/R/F per category according to :
-# Stefanie Nowak, Hanna Lukashevich, Peter Dunker, and Stefan RÃ¼ger. 2010. Performance measures for multilabel evaluation: a case study in the area of image classification. In Proceedings of the international conference on Multimedia information retrieval (MIR '10). ACM, New York, NY, USA, 35-44. DOI=10.1145/1743384.1743398 http://doi.acm.org/10.1145/1743384.1743398 
+# Stefanie Nowak, Hanna Lukashevich, Peter Dunker, and Stefan Rüger. 2010. Performance measures for multilabel evaluation: a case study in the area of image classification. In Proceedings of the international conference on Multimedia information retrieval (MIR '10). ACM, New York, NY, USA, 35-44. DOI=10.1145/1743384.1743398 http://doi.acm.org/10.1145/1743384.1743398 
 sub computePRFperCategory()
 {
     my $hash_ref = shift;

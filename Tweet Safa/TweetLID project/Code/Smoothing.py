@@ -19,12 +19,8 @@ def getlinearcoefficients(language, grams, maxNgrams):
         for gram in reversed(xrange(0, maxNgrams-1)):
             # print grams[gram].items()
             compare = maxgram[0][0:gram+1]
-
-            for g in grams[gram].items():
-                if g[0] == compare:
-                    count.append(g[1])
-                    break
-
+            if compare in grams[gram]:
+                count.append(grams[gram].get(compare))
         count.append(totalCount)
 
         cases = list()
@@ -61,14 +57,19 @@ def getProbability(grams, lic, text, maxNgrams):
     count = []
     for gram in reversed(xrange(0, maxNgrams)):
         compare = text[0:gram + 1]
-        a = True
-        for g in grams[gram].items():
-            if g[0] == compare:
-                count.append(g[1])
-                a = False
-                break
-        if a:
+
+        if compare in grams[gram]:
+            count.append(grams[gram].get(compare))
+            # print 'compare number '+str(b)
+            # for g in grams[gram].items():
+            #     # print g[0]
+            #     if g[0] == compare:
+            #         count.append(g[1])
+            #         print 'anterior cuenta de gram '+str(g[1])
+            #         break
+        else:
             count.append(0)
+
     count.append(totalCount)
     contador = 0
     probabilities = [0]*(maxNgrams)
@@ -80,7 +81,7 @@ def getProbability(grams, lic, text, maxNgrams):
         except ZeroDivisionError:
             prob = 0.0
         probabilities[contador-1] = prob
-    return sum(probabilities)+0.0000000001
+    return sum(probabilities)+0.00000000000001
 
 def languageProbability(text, maxNgram, corpusNgrams, linearCoefficients):
     prob = 1.0
@@ -99,6 +100,9 @@ def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgram
     maxProbability = 0
     average = 0
     predicted = dict()
+    # import time
+    # t0 = time.time()
+
     for linearCoefficient in linearCoefficients:
         prob, language = languageProbability(text, maxNgram, corpusNgrams, linearCoefficient)
         predicted[language] = prob
@@ -106,13 +110,13 @@ def getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgram
             maxLanguage = language
             maxProbability = prob
         # sys.stdout.write("Sequence probability in "+str(language)+": "+str(prob)+"\n")
-    sumProb = 0
-    for lang in predicted.items():
-        sumProb = sumProb + lang[1]
-    average = sumProb / len(predicted)
-    threshold = (maxProbability-average)/100
-    # print 'threshold '+ str(threshold)
+    # print "time for 1 probability= "+str(time.time()-t0)
+
+    average = np.mean(predicted.values())
+    threshold = (maxProbability-average)/10
+    # print 'threshold '+str(threshold)
     languageSumed = utils.chooseLanguagesLin(predicted, threshold)
+    # languageSumed = maxLanguage
     return languageSumed, maxProbability
 
 def getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams):
@@ -123,3 +127,5 @@ def getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams
             grams.append(corpusNgrams.get(str(gram)).get(language))
         linearCoefficients.append(getlinearcoefficients(language, grams, maxNgram))
     return linearCoefficients
+
+

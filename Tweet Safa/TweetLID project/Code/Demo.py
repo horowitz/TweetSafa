@@ -10,16 +10,20 @@ import CrossValidation as cv
 
 import sys
 
-maxNgram = 3
+maxNgram = 5
 
 # 1-. Read dataset and create tweetList fullfilled of Tweet object*
 
 dataset = "../Dataset/output_complete.txt"
+test = "../Dataset/mezclado.txt"
+LI_Coefficients = "../Dataset/LICoefficients_5gram_for-output_complete.txt"
 
 tweetList = read.read_tweets_dataset(dataset)
+tweetListtest = read.read_tweets_dataset(test)
 # 2-. Pre-process state
 
 tweetListPreProcessed = preprocess.main(tweetList)
+tweetListPreProcessedtest= preprocess.main(tweetListtest)
 shuffle(tweetListPreProcessed)
     # Raw data -> tweetList
     # Clean data -> tweetListPreProcessed
@@ -30,7 +34,7 @@ shuffle(tweetListPreProcessed)
 #
 # 3.1-. OBTAIN N-GRAMS
 
-corpusNgrams, arrayLanguages,arrayLanguagesFull = utils.obtainNgrams(tweetListPreProcessed, maxNgram+1)
+corpusNgrams, arrayLanguages, arrayLanguagesFull = utils.obtainNgrams(tweetListPreProcessed, maxNgram+1)
 arrayLanguagesFull = utils.orderVector(arrayLanguagesFull)
 
 # Example:  print(corpusNgrams.get(str(3)).get('pt'))
@@ -63,14 +67,27 @@ a = 'Primer sorteo del stream @Dimegioclub http://www.twitch.tv/miicrocs' #en+es
 b = 'Hau ez dakit zer den estamos hablando en un idioma edo beste batean'
 
 c = '"En Cada Lucha Aquel Que Va A Muerte Es El Que Gana" Goazen @PasaiaRegional!! #aupaekipo #aupapasaia pic.twitter.com/BQ1ikdE2Qt'
-text = preprocess.preprocessText(c)
-
-linearCoefficients = linear.getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams)
-predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, text, maxNgram, corpusNgrams)
 
 
-sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
-sys.stdout.write("\n    Tweet language:   "+str(predictedLanguage)+"\n    Probability of:  "+str(probability)+"\n")
+text = preprocess.preprocessText(tweetEU)
+
+# linearCoefficients = linear.getlinearcoefficientsForLanguageArray(arrayLanguages, maxNgram, corpusNgrams)
+linearCoefficientsALL = read.readLinearCoefficients(LI_Coefficients)
+
+linearCoefficients = linearCoefficientsALL[maxNgram-1]
+import time
+t1 = time.time()
+for tweet in tweetListPreProcessedtest:
+    t0 = time.time()
+
+    predictedLanguage, probability = linear.getPredictedLanguageForTweet(linearCoefficients, tweet.text, maxNgram, corpusNgrams)
+    utils.printResultTXT(predictedLanguage, tweet, 5)
+
+    print "time for tweet= "+str(time.time()-t0)
+print "time total= "+str(time.time()-t1)
+
+# sys.stdout.write("\n    Tweet:  "+str(text.encode("utf-8")))
+# sys.stdout.write("\n    Tweet language:   "+str(predictedLanguage)+"\n    Probability of:  "+str(probability)+"\n")
 
 
 # 3.3-. Algorithms: Ranking Methods

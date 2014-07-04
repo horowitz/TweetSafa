@@ -28,7 +28,8 @@ def remove_pic_twitter(tweet):
     return re.sub('pic.twitter[^\s|,]+', '', tweet)
 
 def remove_vowel_repetitions(tweet):
-    return re.sub(r'(.)\1\1+', r'\1\1', tweet)
+    # return re.sub(r'(.)\1\1+', r'\1\1', tweet) #dos
+    return re.sub(r'(.)\1\1+', r'\1', tweet) #uno
 
 def remove_numbers(tweet):
     return re.sub('[0-9]', '', tweet)
@@ -52,7 +53,6 @@ def preprocessText(tweet):
 
 def main(tweetList):
     tweetListPreprocessed = []
-
     tweetPreprocessed = ""
 
     for tweet in tweetList:
