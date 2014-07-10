@@ -21,7 +21,7 @@ DATASET_NAME=$2
 DESCRIPTION=$3
 
 RESULT_PATH='../../Results/'$1'.txt'
-DATASET_PATH='../../Dataset/'$2'.txt'
+DATASET_PATH='../../Dataset/'$2'.tsv'
 
 FOLDER='../../Evaluation/'$DESCRIPTION
 mkdir $FOLDER
