@@ -31,9 +31,11 @@ def read_tweets_dataset(dataset):
     # Read TweetLID dataset
     tweetList = []
     with open(dataset) as file:
-        for line in csv.reader(file, dialect="excel-tab"):
+        for l in file.readlines():
+            line = l.strip().split("\t")
             tweet = make_tweet(line[0], line[1], line[2], line[3])
             tweetList.append(tweet)
+        file.close()
     return tweetList
 
 def readLinearCoefficients(LIC_file):

@@ -60,13 +60,6 @@ def getProbability(grams, lic, text, maxNgrams):
 
         if compare in grams[gram]:
             count.append(grams[gram].get(compare))
-            # print 'compare number '+str(b)
-            # for g in grams[gram].items():
-            #     # print g[0]
-            #     if g[0] == compare:
-            #         count.append(g[1])
-            #         print 'anterior cuenta de gram '+str(g[1])
-            #         break
         else:
             count.append(0)
 

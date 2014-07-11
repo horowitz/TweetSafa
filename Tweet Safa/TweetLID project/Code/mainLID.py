@@ -50,9 +50,9 @@ print linearCoefficientsAll
 # linearCoefficientsALL = read.readLinearCoefficients(LI_Coefficients)
 
 
-count = 0
+count = 4
 
-for i in xrange(0, maxNgram):
+for i in xrange(count, maxNgram):
     count = count + 1
     t0 = time.time()
 
