@@ -50,7 +50,7 @@ print linearCoefficientsAll
 # linearCoefficientsALL = read.readLinearCoefficients(LI_Coefficients)
 
 
-count = 4
+count = 4 # Desde que gram empezar
 
 for i in xrange(count, maxNgram):
     count = count + 1
